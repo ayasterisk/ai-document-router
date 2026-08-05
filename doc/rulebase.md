@@ -1,6 +1,6 @@
 # RULEBASE PHÂN LUỒNG, CHUYỂN VĂN BẢN ĐẾN
 ### Sở Nông nghiệp và Môi trường tỉnh Gia Lai
-*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; Sơ đồ luồng văn bản; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ.*
+*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; Sơ đồ luồng văn bản; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai).*
 
 ---
 
@@ -95,14 +95,30 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | **PGĐ Trần Quốc Khánh** | Thủy sản; quản lý tài nguyên, bảo vệ môi trường biển và hải đảo; ứng phó biến đổi khí hậu; ứng phó sự cố tràn dầu, hóa chất độc hại trên biển; dự án tồn đọng đất đai (Gia Lai cũ) | Chi cục Thủy sản, BQL cảng cá, BQL cảng cá Tam Quan, VP Điều phối về BĐKH, BQL dự án cộng đồng ven biển thông minh |
 | **PGĐ Nguyễn Thị Thế Vy** | Phát triển nông thôn, giảm nghèo; nông thôn mới | Chi cục Phát triển nông thôn, VP Điều phối xây dựng NTM |
 
+### III.1. Nhân sự Chi cục Quản lý đất đai (bổ sung chức vụ)
+
+*Nguồn: QĐ-UBND tỉnh Gia Lai về kiện toàn Hội đồng thẩm định, xử lý vướng mắc trong công tác bồi thường, hỗ trợ và tái định cư khi Nhà nước thu hồi đất — trong đó liệt kê thành viên Hội đồng thuộc Chi cục Quản lý đất đai, Sở NN&MT kèm chức vụ.*
+
+| Họ tên | Chức vụ |
+|---|---|
+| Lê Công Bình | Chi cục trưởng Chi cục Quản lý đất đai |
+| Văn Anh Việt | Phó Chi cục trưởng Chi cục Quản lý đất đai |
+| Nguyễn Hồng Hà | Quyền Trưởng phòng Phòng Kinh tế đất, Chi cục Quản lý đất đai |
+| Nguyễn Thị Ngọc Ánh | Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai |
+| **Trần Thị Bảo Chi** | Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai |
+| Đặng Thái Cường | Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai |
+| Trương Đình Sang | Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai |
+
+> Chi cục Quản lý đất đai thuộc lĩnh vực phụ trách của **Giám đốc Cao Thanh Thương** (xem bảng trên).
+
 ---
 
 ## IV. NGOẠI LỆ ĐẶC BIỆT (áp dụng trước quy tắc chung)
 
 | STT | Nội dung / nguồn văn bản | Chuyển đến |
 |---|---|---|
-| 1 | Đối thoại giải quyết khiếu nại | Nhóm: **Quý Phương – Bảo Chi** |
-| 2 | Giải quyết đơn, khiếu nại, tố cáo, kiến nghị | Nhóm: **Quý Phương – Bảo Chi** |
+| 1 | Đối thoại giải quyết khiếu nại | Nhóm: **Quý Phương – Bảo Chi**¹ |
+| 2 | Giải quyết đơn, khiếu nại, tố cáo, kiến nghị | Nhóm: **Quý Phương – Bảo Chi**¹ |
 | 3 | TB cơ quan Thuế: thu hồi đất; nộp tiền thuê đất (trả 1 lần hoặc hàng năm); ngăn chặn chuyển dịch/thế chấp tài sản do chậm/nợ thuế; không thực hiện nghĩa vụ nộp tiền thuê đất | Chuyển trực tiếp **Chi cục Quản lý đất đai** |
 | 4 | TB cơ quan Thuế: nộp tiền cấp quyền khai thác khoáng sản; kê khai, nộp thuế tài nguyên; phí bảo vệ môi trường | **PGĐ Trần Đình Chương** + **Phòng Địa chất Khoáng sản** |
 | 5 | Sở NN&MT tỉnh khác thông báo mất phôi Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất | **Văn phòng Đăng ký đất đai** |
@@ -112,6 +128,8 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | 9 | Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án | **Phòng KH-TC** (xử lý chính) + **CVP Sở** (phối hợp xử lý) |
 | 10 | Nội dung: thủy lợi, ao/hồ/đầm/phá, xây dựng công trình thủy lợi, thiên tai, phòng chống lụt bão, khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào | **PGĐ Vũ Ngọc An** tự bút phê chuyển đơn vị |
 | 11 | Nội dung: thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU, cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá | **PGĐ Trần Quốc Khánh** tự bút phê chuyển đơn vị |
+
+¹ **Bảo Chi** = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai (xem Mục III.1) — phù hợp vì các dòng ngoại lệ 1–2 liên quan khiếu nại/tố cáo về đất đai thường gắn với Chi cục Quản lý đất đai. **Quý Phương** hiện chưa xác định được đơn vị/phòng cụ thể — cần bổ sung khi có thông tin.
 
 ---
 
@@ -132,7 +150,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 Trong quá trình tổng hợp, có một số điểm các nguồn tài liệu **chưa quy định rõ**, nên rà soát lại với đơn vị trước khi vận hành rulebase này:
 
-1. Nhóm **"Quý Phương – Bảo Chi"** (mục IV.1–2) là tên cá nhân/tổ xử lý, chưa rõ thuộc phòng/ban nào (có thể là Ban Tiếp công dân hoặc Thanh tra Sở) — nên bổ sung để tra cứu đầy đủ.
+1. Nhóm **"Quý Phương – Bảo Chi"** (mục IV.1–2): đã xác định **Bảo Chi = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai** (theo QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định bồi thường, hỗ trợ, TĐC — xem Mục III.1). Riêng **"Quý Phương"** vẫn chưa xác định được thuộc phòng/ban nào — cần bổ sung.
 2. Bảng ngoại lệ (Mục IV) chủ yếu liệt kê các trường hợp thuộc lĩnh vực đất đai, khoáng sản, thủy lợi/TNN, thủy sản. Các lĩnh vực khác (trồng trọt, chăn nuôi, lâm nghiệp, môi trường, nông thôn mới…) hiện áp dụng quy tắc chung ở Mục II — chưa có ngoại lệ riêng được cung cấp.
 
 > ✅ **Đã chốt:** văn bản "Giao Sở NN&MT chủ trì" / "Thông báo kết luận UBND, HĐND tỉnh" luôn qua Giám đốc bút phê trước, không phân biệt lĩnh vực — quy tắc này đã được áp dụng xuyên suốt tại Mục I và Mục II.1.
