@@ -111,6 +111,16 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 > Chi cục Quản lý đất đai thuộc lĩnh vực phụ trách của **Giám đốc Cao Thanh Thương** (xem bảng trên).
 
+### III.2. Nhân sự Văn phòng Sở (bổ sung chức vụ)
+
+| Họ tên | Chức vụ | Email |
+|---|---|---|
+| Hồ Đắc Khánh | Phó Chánh Văn phòng | — |
+| **Phạm Quý Phương** | **Phó Chánh Văn phòng** | phuongpq@snnmt.gialai.gov.vn |
+| Đặng Phi Trường | Công chức xếp lịch công tác | — |
+
+> Văn phòng Sở thuộc lĩnh vực phụ trách của **PGĐ Nguyễn Thị Tố Trân** (xem Mục III). Văn phòng có nhiều Phó Chánh Văn phòng phụ trách các mảng khác nhau: ông **Hồ Đắc Khánh** phụ trách giấy mời/lịch công tác (Mục II.4); ông **Phạm Quý Phương** phụ trách tiếp công dân, giải quyết khiếu nại/tố cáo/kiến nghị (Mục IV.1–2).
+
 ---
 
 ## IV. NGOẠI LỆ ĐẶC BIỆT (áp dụng trước quy tắc chung)
@@ -129,7 +139,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | 10 | Nội dung: thủy lợi, ao/hồ/đầm/phá, xây dựng công trình thủy lợi, thiên tai, phòng chống lụt bão, khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào | **PGĐ Vũ Ngọc An** tự bút phê chuyển đơn vị |
 | 11 | Nội dung: thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU, cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá | **PGĐ Trần Quốc Khánh** tự bút phê chuyển đơn vị |
 
-¹ **Bảo Chi** = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai (xem Mục III.1) — phù hợp vì các dòng ngoại lệ 1–2 liên quan khiếu nại/tố cáo về đất đai thường gắn với Chi cục Quản lý đất đai. **Quý Phương** hiện chưa xác định được đơn vị/phòng cụ thể — cần bổ sung khi có thông tin.
+¹ **Quý Phương** = Phạm Quý Phương, **Phó Chánh Văn phòng** Sở NN&MT (email: phuongpq@snnmt.gialai.gov.vn). **Bảo Chi** = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai (xem Mục III.1). Nhóm xử lý khiếu nại/tố cáo/kiến nghị gồm 1 đại diện Văn phòng Sở (phụ trách tiếp công dân) + 1 chuyên viên Chi cục Quản lý đất đai (do phần lớn đơn thư liên quan đất đai).
 
 ---
 
@@ -150,7 +160,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 Trong quá trình tổng hợp, có một số điểm các nguồn tài liệu **chưa quy định rõ**, nên rà soát lại với đơn vị trước khi vận hành rulebase này:
 
-1. Nhóm **"Quý Phương – Bảo Chi"** (mục IV.1–2): đã xác định **Bảo Chi = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai** (theo QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định bồi thường, hỗ trợ, TĐC — xem Mục III.1). Riêng **"Quý Phương"** vẫn chưa xác định được thuộc phòng/ban nào — cần bổ sung.
-2. Bảng ngoại lệ (Mục IV) chủ yếu liệt kê các trường hợp thuộc lĩnh vực đất đai, khoáng sản, thủy lợi/TNN, thủy sản. Các lĩnh vực khác (trồng trọt, chăn nuôi, lâm nghiệp, môi trường, nông thôn mới…) hiện áp dụng quy tắc chung ở Mục II — chưa có ngoại lệ riêng được cung cấp.
+1. Bảng ngoại lệ (Mục IV) chủ yếu liệt kê các trường hợp thuộc lĩnh vực đất đai, khoáng sản, thủy lợi/TNN, thủy sản. Các lĩnh vực khác (trồng trọt, chăn nuôi, lâm nghiệp, môi trường, nông thôn mới…) hiện áp dụng quy tắc chung ở Mục II — chưa có ngoại lệ riêng được cung cấp.
 
 > ✅ **Đã chốt:** văn bản "Giao Sở NN&MT chủ trì" / "Thông báo kết luận UBND, HĐND tỉnh" luôn qua Giám đốc bút phê trước, không phân biệt lĩnh vực — quy tắc này đã được áp dụng xuyên suốt tại Mục I và Mục II.1.
+> ✅ **Đã xác định:** nhóm "Quý Phương – Bảo Chi" = **Phạm Quý Phương** (Phó Chánh Văn phòng) + **Trần Thị Bảo Chi** (Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai) — xem Mục III.1, III.2 và chú thích tại Mục IV.
