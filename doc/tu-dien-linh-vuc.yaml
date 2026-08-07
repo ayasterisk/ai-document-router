@@ -1,0 +1,119 @@
+# Từ điển lĩnh vực — phiên bản máy đọc của van-phong-reference.md
+# Nguồn: 10 văn bản đi thật trong source/ + source/Book1.xlsx
+# Mục đích: nạp vào context Claude (few-shot) khi rule cứng trong rules.yaml
+#           không match rõ ràng trên trích yếu văn bản đến.
+# LƯU Ý: đây là tín hiệu hỗ trợ suy luận (soft signal), KHÔNG phải rule cứng
+#        thay thế rulebase.md — không dùng để tự động quyết định nếu confidence thấp.
+
+ma_ky_hieu:
+  KL:
+    don_vi: "Chi cục Kiểm lâm"
+    linh_vuc: "Lâm nghiệp, Kiểm lâm"
+    lanh_dao: "PGĐ Nguyễn Văn Hoan"
+    cap: "PGĐ"
+  QLDD:
+    don_vi: "Chi cục Quản lý đất đai"
+    linh_vuc: "Quản lý đất đai"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    cap: "GĐ"
+  CNTY:
+    don_vi: "Chi cục Chăn nuôi và Thú y"
+    linh_vuc: "Chăn nuôi và Thú y"
+    lanh_dao: "PGĐ Đoàn Ngọc Có"
+    cap: "PGĐ"
+  TNN:
+    don_vi: "Phòng Tài nguyên nước và KTTV"
+    linh_vuc: "Tài nguyên nước, khí tượng thủy văn"
+    lanh_dao: "PGĐ Vũ Ngọc An"
+    cap: "PGĐ"
+  VPDK:
+    don_vi: "Văn phòng Đăng ký đất đai"
+    linh_vuc: "Đăng ký đất đai"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    cap: "GĐ"
+  TTr-SNNMT:
+    ghi_chu: "Loại văn bản (Tờ trình), không phải mã đơn vị cố định — lĩnh vực xác định theo nội dung"
+  KH-SNNMT:
+    ghi_chu: "Loại văn bản (Kế hoạch), không phải mã đơn vị cố định — lĩnh vực xác định theo nội dung"
+
+linh_vuc_few_shot:
+  - linh_vuc: "Chăn nuôi và Thú y"
+    lanh_dao: "PGĐ Đoàn Ngọc Có"
+    tin_hieu_ngu_nghia:
+      - "dịch bệnh động vật"
+      - "thuốc thú y"
+      - "vệ sinh thú y"
+      - "chất cấm trong chăn nuôi"
+      - "an toàn thực phẩm (nguồn gốc chăn nuôi)"
+    vi_du_trich_yeu:
+      - text: "V/v tăng cường quản lý hoạt động nhập khẩu, buôn bán, sử dụng thuốc thú y trên địa bàn tỉnh"
+        nguon: "8682/SNNMT-CNTY"
+      - text: "V/v tăng cường kiểm tra, giám sát dịch bệnh động vật, vệ sinh thú y, an toàn thực phẩm và chất cấm trong chăn nuôi trên địa bàn tỉnh"
+        nguon: "8680/SNNMT-CNTY"
+
+  - linh_vuc: "Quản lý đất đai"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    tin_hieu_ngu_nghia:
+      - "giao đất"
+      - "cho thuê đất"
+      - "thửa đất"
+      - "Giấy chứng nhận quyền sử dụng đất"
+      - "tài sản gắn liền với đất"
+    phan_biet_voi: "Văn phòng Đăng ký đất đai — nội dung kê khai/đăng ký đất đai thuộc VPĐK, nội dung giao/cho thuê/cấp GCN thuộc Chi cục QLĐĐ; cả hai cùng thuộc Giám đốc nhưng khác đơn vị tham mưu"
+    vi_du_trich_yeu:
+      - text: "Triển khai thực hiện Quyết định số 118/2026/QĐ-UBND ... rà soát, công bố công khai, lập danh mục các thửa đất nhỏ hẹp, nằm xen kẹt và việc giao đất, cho thuê đất đối với các thửa đất nhỏ hẹp, nằm xen kẹt"
+        nguon: "8708/SNNMT-QLĐĐ"
+      - text: "Giải quyết cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất theo Phương án số 05/PA-UBND"
+        nguon: "8622/SNNMT-QLĐĐ"
+
+  - linh_vuc: "Văn phòng Đăng ký đất đai"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    tin_hieu_ngu_nghia:
+      - "kê khai đất đai"
+      - "đăng ký đất đai lần đầu"
+      - "đăng ký biến động"
+    vi_du_trich_yeu:
+      - text: "báo cáo khó khăn, vướng mắc trong công tác tổ chức thực hiện kê khai, đăng ký đất đai lần đầu"
+        nguon: "8609/SNNMT-VPĐK"
+
+  - linh_vuc: "Tài nguyên nước, thủy lợi, nước sạch nông thôn"
+    lanh_dao: "PGĐ Vũ Ngọc An"
+    tin_hieu_ngu_nghia:
+      - "dòng chảy tối thiểu"
+      - "đập, hồ chứa"
+      - "cấp nước an toàn"
+      - "nước sạch nông thôn"
+    vi_du_trich_yeu:
+      - text: "V/v triển khai thực hiện Quyết định số 2839/QĐ-BNNMT ... công bố giá trị dòng chảy tối thiểu ở hạ lưu các đập, hồ chứa"
+        nguon: "8544/SNNMT-TNN"
+      - text: "TỜ TRÌNH: Phê duyệt Kế hoạch cấp nước an toàn khu vực nông thôn trên địa bàn tỉnh Gia Lai giai đoạn 2026 - 2030"
+        nguon: "1126/TTr-SNNMT"
+
+  - linh_vuc: "Lâm nghiệp, Kiểm lâm"
+    lanh_dao: "PGĐ Nguyễn Văn Hoan"
+    tin_hieu_ngu_nghia:
+      - "rừng trồng"
+      - "rừng sản xuất, gỗ lớn"
+      - "chính sách hỗ trợ phát triển rừng"
+    vi_du_trich_yeu:
+      - text: "V/v phúc đáp Công văn của Công ty TNHH Trồng rừng Quy Nhơn (đăng ký tham gia Chính sách hỗ trợ phát triển rừng trồng cây gỗ lớn)"
+        nguon: "8795/SNNMT-KL"
+
+  - linh_vuc: "Cải cách hành chính / tổng hợp toàn ngành"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    tin_hieu_ngu_nghia:
+      - "kỷ luật, kỷ cương hành chính"
+      - "lề lối làm việc"
+      - "hiệu quả hoạt động của cơ quan, đơn vị"
+    ghi_chu: "Văn bản mang tính tổng hợp, áp dụng toàn ngành, không thuộc riêng một PGĐ -> về GĐ theo rulebase.md Mục II.1"
+    vi_du_trich_yeu:
+      - text: "Thực hiện Chỉ thị số 7883/CT-BNNMT ... tăng cường kỷ luật, kỷ cương hành chính; chấn chỉnh lề lối làm việc và nâng cao hiệu quả hoạt động"
+        nguon: "115/KH-SNNMT"
+
+linh_vuc_chua_co_vi_du:
+  - "Trồng trọt và bảo vệ thực vật"
+  - "Khuyến nông"
+  - "Địa chất khoáng sản"
+  - "Bảo vệ môi trường"
+  - "Thủy sản"
+  - "Phát triển nông thôn, giảm nghèo, nông thôn mới"
