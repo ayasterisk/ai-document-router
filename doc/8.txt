@@ -1,6 +1,0 @@
-- [ ] **Loại PDF đầu vào**: chủ yếu là PDF gốc (text-based).
-- [ ] **Độ phức tạp của rule**: phức tạp/chồng chéo cần suy luận ngữ nghĩa nội dung văn bản.
-- [ ] **Khối lượng xử lý dự kiến**: khoảng 600 văn bản/ngày, yêu cầu độ trễ (có thể xử lý theo batch).
-- [ ] **Output chi tiết**: cần tên cơ quan, thêm mức ưu tiên, người xử lý cụ thể.
-- [ ] **Cơ chế xác nhận thủ công**: trước mắt chỉ cần có Output với độ chính xác cao, sẽ review lại kết quả bằng cách thủ công.
-- [ ] **Bảo mật dữ liệu**: văn bản thuộc loại nhạy cảm/mật cần kiểm soát không rời khỏi mạng nội bộ.
