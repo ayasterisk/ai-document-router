@@ -32,6 +32,7 @@ RAG phù hợp khi cần tìm kiếm trong kho tài liệu lớn, không biết 
 - **Rule engine dạng code thuần** (deterministic) cho các điều kiện rõ ràng — nhanh, rẻ, dễ audit, dự đoán được.
 - **Claude reasoning** chỉ can thiệp cho phần "mờ" — khi rule cứng không match rõ ràng và cần hiểu ngữ nghĩa nội dung văn bản (ví dụ trích yếu nói về nội dung không có từ khóa khớp chính xác với rule).
 - Toàn bộ rule set (nếu không quá lớn) được **load thẳng vào context** của Claude khi cần reasoning, không qua bước retrieval/embedding.
+- Với khối lượng dự kiến ~600 văn bản/ngày (Mục 8), nên dùng **prompt caching** cho phần rule set/system prompt cố định — rule set không đổi giữa các văn bản trong cùng phiên xử lý, cache giúp giảm đáng kể chi phí và độ trễ so với việc gửi lại toàn bộ rule set cho từng văn bản.
 
 ---
 
@@ -73,6 +74,14 @@ Client (payload 6 field + PDF)
 | **Orchestration** | Điều phối nhiều skill theo trình tự có điều kiện (nếu verify_metadata phát hiện sai lệch → dừng, yêu cầu xác nhận thay vì tự động routing) |
 | **Agent Skills** | Đóng gói từng nghiệp vụ độc lập, dễ bảo trì/version riêng: `extract-pdf-metadata`, `apply-routing-rules`, `explain-decision`, `flag-ambiguous-cases` |
 | **Rule Engine (code, không phải Claude)** | Xử lý phần rule tường minh, tách khỏi model để: nhanh, admin sửa rule không cần đụng prompt, audit dễ, dự đoán được |
+
+### Kết nối mạng & bảo mật dữ liệu
+
+Văn bản đến của Sở có thể thuộc loại nhạy cảm/mật, cần **không rời khỏi mạng nội bộ** (yêu cầu đã xác nhận ở Mục 8). Để vẫn dùng được Claude reasoning mà đáp ứng ràng buộc này:
+
+- **Model access qua Amazon Bedrock hoặc Google Cloud Vertex AI**, triển khai trong **VPC riêng** của đơn vị, kết nối tới Bedrock/Vertex qua **PrivateLink (AWS)** hoặc **Private Service Connect (GCP)** — request/response không đi qua Internet công cộng, toàn bộ traffic nằm trong hạ tầng cloud riêng.
+- Hệ quả kiến trúc: **Harness / Agent Loop** và **Rule Engine** cần chạy trong cùng VPC (hoặc VPC peering) với endpoint Bedrock/Vertex; **API Layer** (nhận request từ client nội bộ) cũng nằm trong mạng nội bộ, không expose ra Internet công cộng ở giai đoạn có xử lý văn bản mật.
+- Việc này thay thế giả định "server luôn cần Internet để gọi Claude API" ở Mục 7 — kết nối vẫn cần thiết nhưng là kết nối **private** tới cloud provider, không phải Internet công cộng.
 
 ---
 
@@ -122,6 +131,7 @@ ai-doc-router/
 - **PDF extraction**: `pdfplumber` / `pypdf` cho PDF text-based; Tesseract hoặc Claude vision cho bản scan (fallback khi text extract ra rỗng/quá ít)
 - **Rule storage**: file YAML/JSON ban đầu, sau này có thể chuyển sang SQLite/Postgres + admin UI
 - **Orchestration**: Claude Agent SDK hoặc Messages API tự viết harness với tool use
+- **Model access**: Claude qua **Amazon Bedrock** hoặc **Google Cloud Vertex AI**, kết nối private trong VPC (không qua Internet công cộng) — xem "Kết nối mạng & bảo mật dữ liệu" ở Mục 3
 - **Audit/log**: SQLite (demo) → Postgres (production)
 
 ---
@@ -141,10 +151,11 @@ ai-doc-router/
 ### Giai đoạn 2 — Triển khai VM chạy 24/24
 
 8. Đóng gói Docker + docker-compose, quản lý secret qua `.env`.
-9. Reverse proxy (Nginx) nếu cần expose HTTPS.
+9. Reverse proxy (Nginx) nếu cần expose HTTPS **trong mạng nội bộ** — không expose endpoint ra Internet công cộng đối với luồng xử lý văn bản mật.
 10. Giám sát uptime, backup cấu hình rule, xử lý restart tự động (systemd/docker restart policy).
+11. Thiết lập kết nối private tới Bedrock/Vertex (PrivateLink / Private Service Connect), đưa VM vào cùng VPC hoặc VPC peering với endpoint model — xem Mục 3 "Kết nối mạng & bảo mật dữ liệu".
 
-> Lưu ý: Server luôn cần kết nối Internet để gọi Claude API (không có bản chạy offline hoàn toàn). Việc chuyển từ máy cá nhân sang VM chỉ thay đổi hạ tầng, không cần sửa logic nghiệp vụ nếu giai đoạn 1 được thiết kế tốt.
+> Lưu ý: Server vẫn cần kết nối mạng để gọi Claude (không có bản chạy offline hoàn toàn), nhưng là kết nối **private tới Bedrock/Vertex trong VPC riêng**, không phải Internet công cộng — đáp ứng yêu cầu bảo mật dữ liệu ở Mục 8. Việc chuyển từ máy cá nhân sang VM chỉ thay đổi hạ tầng, không cần sửa logic nghiệp vụ nếu giai đoạn 1 được thiết kế tốt.
 
 ---
 
@@ -152,12 +163,14 @@ ai-doc-router/
 
 Những thông tin sau sẽ giúp tinh chỉnh kiến trúc chính xác hơn (rule engine đơn giản hay cần Claude reasoning nhiều, có cần OCR hay không):
 
-- [ ] **Loại PDF đầu vào**: chủ yếu là PDF gốc (text-based), bản scan/ảnh (cần OCR), hay cả hai xen kẽ?
-- [ ] **Độ phức tạp của rule**: đơn giản dạng bảng quyết định (điều kiện rõ ràng → cơ quan cụ thể), hay phức tạp/chồng chéo cần suy luận ngữ nghĩa nội dung văn bản?
-- [ ] **Khối lượng xử lý dự kiến**: bao nhiêu văn bản/ngày, yêu cầu độ trễ (real-time từng văn bản hay có thể xử lý theo batch)?
-- [ ] **Output chi tiết**: chỉ cần tên cơ quan, hay cần thêm mức ưu tiên, người xử lý cụ thể, thời hạn xử lý?
-- [ ] **Cơ chế xác nhận thủ công**: có cần người dùng duyệt lại kết quả trước khi coi là chính thức không, đặc biệt với case confidence thấp?
-- [ ] **Bảo mật dữ liệu**: văn bản có thuộc loại nhạy cảm/mật cần kiểm soát không rời khỏi mạng nội bộ không? (Ảnh hưởng đến việc có được gọi Claude API qua Internet hay không)
+- [x] **Loại PDF đầu vào**: chủ yếu là PDF gốc (text-based).
+- [x] **Độ phức tạp của rule**: phức tạp/chồng chéo, cần suy luận ngữ nghĩa nội dung văn bản.
+- [x] **Khối lượng xử lý dự kiến**: khoảng 600 văn bản/ngày; có thể xử lý theo batch.
+- [x] **Output chi tiết**: cần tên cơ quan + mức ưu tiên + người xử lý cụ thể.
+- [x] **Cơ chế xác nhận thủ công**: trước mắt chỉ cần output độ chính xác cao, review kết quả bằng thủ công sau (chưa cần cơ chế duyệt tự động trong hệ thống).
+- [x] **Bảo mật dữ liệu**: văn bản thuộc loại nhạy cảm/mật, cần kiểm soát không rời khỏi mạng nội bộ. **Quyết định:** dùng Claude qua Amazon Bedrock/Google Vertex AI trong VPC riêng, kết nối private (PrivateLink/Private Service Connect), không qua Internet công cộng — xem Mục 3 "Kết nối mạng & bảo mật dữ liệu".
+
+> Nguồn trả lời: `doc/8.txt`.
 
 ---
 

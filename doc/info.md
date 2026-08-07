@@ -10,9 +10,9 @@
 |   2 | Nguyễn Thị Tố Trân | Phó Giám đốc |               | tranntt@snnmt.gialai.gov.vn  |
 |   3 | Trần Đình Chương  | Phó Giám đốc |               | chuongtd@snnmt.gialai.gov.vn |
 |   4 | Hà Thị Thanh Hương | Phó Giám đốc |               | huonghtt@snnmt.gialai.gov.vn |
-|   5 | Nguyễn Văn Hoan      | Phó Giám đốc |               | vyntt@snnmt.gialai.gov.vn    |
-|   6 | Nguyễn Thị Thế Vy   | Phó Giám đốc |               | khanhtq@snnmt.gialai.gov.vn  |
-|   7 | Trần Quốc Khánh     | Phó Giám đốc |               | hoannv@snnmt.gialai.gov.vn   |
+|   5 | Nguyễn Văn Hoan      | Phó Giám đốc |               | hoannv@snnmt.gialai.gov.vn   |
+|   6 | Nguyễn Thị Thế Vy   | Phó Giám đốc |               | vyntt@snnmt.gialai.gov.vn    |
+|   7 | Trần Quốc Khánh     | Phó Giám đốc |               | khanhtq@snnmt.gialai.gov.vn  |
 |   8 | Đoàn Ngọc Có       | Phó Giám đốc |               | codn@snnmt.gialai.gov.vn     |
 |   9 | Vũ Ngọc An           | Phó Giám đốc |               | anvn@snnmt.gialai.gov.vn     |
 
