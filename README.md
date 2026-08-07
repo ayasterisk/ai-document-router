@@ -8,17 +8,16 @@ Thiết kế một server AI nhận payload (6 trường thông tin văn bản) 
 
 ## Nội dung thư mục `doc/`
 
-| File | Nội dung |
-|---|---|
-| `thiet-ke-ai-document-router.md` | Thiết kế kiến trúc tổng thể: bài toán, kiến trúc, tech stack, lộ trình xây dựng |
-| `rulebase.md` | Rulebase phân luồng văn bản đã chuẩn hóa — **nguồn chính** dùng để nạp vào context khi triển khai |
-| `rule.txt` | Rule thô ban đầu (nguồn tham khảo, đã được chuẩn hóa vào `rulebase.md`) |
-| `info.md` | Danh bạ nhân sự/đơn vị trực thuộc Sở |
-| `8.txt` | Trả lời các câu hỏi mở về yêu cầu hệ thống (khối lượng, bảo mật, output...) |
-| `HUONG DAN CHUYEN VAN BAN DEN.docx` | Văn bản nguồn quy trình chuyển văn bản đến |
-| `QĐ 899...pdf` | Quyết định phân công nhiệm vụ Giám đốc, các Phó Giám đốc Sở |
-| `file_17695872361.pdf` | Quyết định kiện toàn Hội đồng thẩm định (nguồn nhân sự Chi cục Quản lý đất đai) |
-| `luongvb.jpg` | Sơ đồ luồng xử lý văn bản đến |
+| File                                  | Nội dung                                                                                                               |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `thiet-ke-ai-document-router.md`    | Thiết kế kiến trúc tổng thể: bài toán, kiến trúc, tech stack, lộ trình xây dựng                           |
+| `rulebase.md`                       | Rulebase phân luồng văn bản đã chuẩn hóa —**nguồn chính** dùng để nạp vào context khi triển khai |
+| `rule.txt`                          | Rule thô ban đầu (nguồn tham khảo, đã được chuẩn hóa vào`rulebase.md`)                                   |
+| `info.md`                           | Danh bạ nhân sự/đơn vị trực thuộc Sở                                                                           |
+| `HUONG DAN CHUYEN VAN BAN DEN.docx` | Văn bản nguồn quy trình chuyển văn bản đến                                                                     |
+| `QĐ 899...pdf`                     | Quyết định phân công nhiệm vụ Giám đốc, các Phó Giám đốc Sở                                             |
+| `file_17695872361.pdf`              | Quyết định kiện toàn Hội đồng thẩm định (nguồn nhân sự Chi cục Quản lý đất đai)                     |
+| `luongvb.jpg`                       | Sơ đồ luồng xử lý văn bản đến                                                                                 |
 
 ## Quyết định kiến trúc quan trọng
 

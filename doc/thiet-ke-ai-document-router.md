@@ -7,6 +7,7 @@
 ## 1. Bài toán
 
 Xây dựng một server AI cho văn phòng, nhận request gồm:
+
 - **Payload JSON** chứa 6 trường quan trọng của văn bản:
   1. Số hiệu văn bản
   2. Loại văn bản
@@ -21,6 +22,7 @@ Xây dựng một server AI cho văn phòng, nhận request gồm:
 Kết quả được suy ra từ: đọc payload + đọc nội dung PDF + áp dụng **Rule** do admin cấu hình.
 
 **Ràng buộc kỹ thuật:**
+
 - Sử dụng Claude Orchestration, Harness, Agent Skills
 - **Không sử dụng RAG** — rule quản lý dạng rule engine tường minh, không phải retrieval ngữ nghĩa
 
@@ -29,6 +31,7 @@ Kết quả được suy ra từ: đọc payload + đọc nội dung PDF + áp d
 ## 2. Vì sao không dùng RAG
 
 RAG phù hợp khi cần tìm kiếm trong kho tài liệu lớn, không biết trước phần nào liên quan. Ở đây rule do admin set là tập hữu hạn, có cấu trúc rõ ràng (điều kiện → cơ quan nhận). Nên xử lý bằng:
+
 - **Rule engine dạng code thuần** (deterministic) cho các điều kiện rõ ràng — nhanh, rẻ, dễ audit, dự đoán được.
 - **Claude reasoning** chỉ can thiệp cho phần "mờ" — khi rule cứng không match rõ ràng và cần hiểu ngữ nghĩa nội dung văn bản (ví dụ trích yếu nói về nội dung không có từ khóa khớp chính xác với rule).
 - Toàn bộ rule set (nếu không quá lớn) được **load thẳng vào context** của Claude khi cần reasoning, không qua bước retrieval/embedding.
@@ -68,12 +71,12 @@ Client (payload 6 field + PDF)
 
 ### Vai trò từng thành phần
 
-| Thành phần | Vai trò |
-|---|---|
-| **Harness** | Vòng lặp điều phối: gọi tool, xử lý lỗi/retry, giới hạn số bước, timeout khi PDF lớn/OCR chậm |
-| **Orchestration** | Điều phối nhiều skill theo trình tự có điều kiện (nếu verify_metadata phát hiện sai lệch → dừng, yêu cầu xác nhận thay vì tự động routing) |
-| **Agent Skills** | Đóng gói từng nghiệp vụ độc lập, dễ bảo trì/version riêng: `extract-pdf-metadata`, `apply-routing-rules`, `explain-decision`, `flag-ambiguous-cases` |
-| **Rule Engine (code, không phải Claude)** | Xử lý phần rule tường minh, tách khỏi model để: nhanh, admin sửa rule không cần đụng prompt, audit dễ, dự đoán được |
+| Thành phần                                      | Vai trò                                                                                                                                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Harness**                                 | Vòng lặp điều phối: gọi tool, xử lý lỗi/retry, giới hạn số bước, timeout khi PDF lớn/OCR chậm                                                            |
+| **Orchestration**                           | Điều phối nhiều skill theo trình tự có điều kiện (nếu verify_metadata phát hiện sai lệch → dừng, yêu cầu xác nhận thay vì tự động routing)       |
+| **Agent Skills**                            | Đóng gói từng nghiệp vụ độc lập, dễ bảo trì/version riêng:`extract-pdf-metadata`, `apply-routing-rules`, `explain-decision`, `flag-ambiguous-cases` |
+| **Rule Engine (code, không phải Claude)** | Xử lý phần rule tường minh, tách khỏi model để: nhanh, admin sửa rule không cần đụng prompt, audit dễ, dự đoán được                                 |
 
 ### Kết nối mạng & bảo mật dữ liệu
 
@@ -88,6 +91,7 @@ Văn bản đến của Sở có thể thuộc loại nhạy cảm/mật, cần 
 ## 4. Explainability & Human review
 
 Vì đây là hệ thống ra quyết định hành chính (định tuyến sai có thể gây hậu quả):
+
 - Mỗi kết quả có **độ tin cậy** (rule match rõ ràng vs Claude suy luận)
 - Trường hợp confidence thấp hoặc nhiều rule mâu thuẫn → **flag để người dùng xác nhận** thay vì tự động gửi
 - Log đầy đủ lý do (rule nào match, hoặc Claude giải thích gì) để admin audit và tinh chỉnh rule theo thời gian
@@ -163,14 +167,12 @@ ai-doc-router/
 
 Những thông tin sau sẽ giúp tinh chỉnh kiến trúc chính xác hơn (rule engine đơn giản hay cần Claude reasoning nhiều, có cần OCR hay không):
 
-- [x] **Loại PDF đầu vào**: chủ yếu là PDF gốc (text-based).
-- [x] **Độ phức tạp của rule**: phức tạp/chồng chéo, cần suy luận ngữ nghĩa nội dung văn bản.
-- [x] **Khối lượng xử lý dự kiến**: khoảng 600 văn bản/ngày; có thể xử lý theo batch.
-- [x] **Output chi tiết**: cần tên cơ quan + mức ưu tiên + người xử lý cụ thể.
-- [x] **Cơ chế xác nhận thủ công**: trước mắt chỉ cần output độ chính xác cao, review kết quả bằng thủ công sau (chưa cần cơ chế duyệt tự động trong hệ thống).
-- [x] **Bảo mật dữ liệu**: văn bản thuộc loại nhạy cảm/mật, cần kiểm soát không rời khỏi mạng nội bộ. **Quyết định:** dùng Claude qua Amazon Bedrock/Google Vertex AI trong VPC riêng, kết nối private (PrivateLink/Private Service Connect), không qua Internet công cộng — xem Mục 3 "Kết nối mạng & bảo mật dữ liệu".
-
-> Nguồn trả lời: `doc/8.txt`.
+- [X] **Loại PDF đầu vào**: chủ yếu là PDF gốc (text-based).
+- [X] **Độ phức tạp của rule**: phức tạp/chồng chéo, cần suy luận ngữ nghĩa nội dung văn bản.
+- [X] **Khối lượng xử lý dự kiến**: khoảng 600 văn bản/ngày; có thể xử lý theo batch.
+- [X] **Output chi tiết**: cần tên cơ quan + mức ưu tiên + người xử lý cụ thể.
+- [X] **Cơ chế xác nhận thủ công**: trước mắt chỉ cần output độ chính xác cao, review kết quả bằng thủ công sau (chưa cần cơ chế duyệt tự động trong hệ thống).
+- [X] **Bảo mật dữ liệu**: văn bản thuộc loại nhạy cảm/mật, cần kiểm soát không rời khỏi mạng nội bộ. **Quyết định:** dùng Claude qua Amazon Bedrock/Google Vertex AI trong VPC riêng, kết nối private (PrivateLink/Private Service Connect), không qua Internet công cộng — xem Mục 3 "Kết nối mạng & bảo mật dữ liệu".
 
 ---
 
