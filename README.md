@@ -18,6 +18,8 @@ Thiết kế một server AI nhận payload (6 trường thông tin văn bản) 
 | `QĐ 899...pdf`                     | Quyết định phân công nhiệm vụ Giám đốc, các Phó Giám đốc Sở                                             |
 | `file_17695872361.pdf`              | Quyết định kiện toàn Hội đồng thẩm định (nguồn nhân sự Chi cục Quản lý đất đai)                     |
 | `luongvb.jpg`                       | Sơ đồ luồng xử lý văn bản đến                                                                                 |
+| `van-phong-reference.md`            | Phụ lục văn phong: cấu trúc thể thức, mã ký hiệu → đơn vị/lãnh đạo, thư viện cụm từ trích yếu theo lĩnh vực (rút từ `source/`) |
+| `tu-dien-linh-vuc.yaml`             | Phiên bản máy đọc của `van-phong-reference.md` — dùng nạp vào context Claude reasoning khi rule cứng không match |
 
 ## Quyết định kiến trúc quan trọng
 
