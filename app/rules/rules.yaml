@@ -1,0 +1,233 @@
+# =====================================================================
+# RULES.YAML — Rule engine "phân luồng văn bản đến" của Sở NN&MT tỉnh Gia Lai
+# Nguồn chuẩn hóa: doc/rulebase.md (bản chính)
+# Bổ trợ suy luận:  doc/tu-dien-linh-vuc.yaml, doc/van-phong-reference.md
+#
+# QUY ƯỚC KHI SỬA:
+#  - keyword viết chữ thường, KHÔNG DẤU. Engine tự chuẩn hóa văn bản đầu vào
+#    (bỏ dấu, lowercase, nén khoảng trắng, "&" -> " va ") trước khi so khớp.
+#  - Thứ tự ưu tiên do engine thực thi theo "Nguyên tắc áp dụng" của rulebase:
+#      1. Văn bản khẩn (Mục V)  (*)    4. Giao chủ trì / TB kết luận (Mục I, II.1)
+#      2. Ngoại lệ đặc biệt (Mục IV)   5. Quy tắc chung theo nguồn (Mục II.1-II.3)
+#      3. Giấy mời (Mục II.4)         + lĩnh vực phụ trách (Mục III)
+#  (*) Lệch so với thứ tự ghi trong rulebase: khẩn được kiểm tra TRƯỚC ngoại lệ
+#      IV.10/IV.11 vì keyword trùng nhau; nếu ngược lại thì Mục V (chuyển song
+#      song) sẽ không bao giờ có hiệu lực cho thủy lợi/thủy sản.
+#  - Mỗi mục dừng ở quy tắc ĐẦU TIÊN khớp (trừ lĩnh vực Mục III chạy điểm tín hiệu).
+# =====================================================================
+version: "0.1.0"
+nguon: ["doc/rulebase.md", "doc/tu-dien-linh-vuc.yaml", "doc/van-phong-reference.md"]
+
+# ---------- 1. NGOẠI LỆ ĐẶC BIỆT (Mục IV) — ưu tiên cao nhất ----------
+exceptions:
+  - id: "IV.1"
+    name: "Đối thoại giải quyết khiếu nại"
+    keywords: ["doi thoai giai quyet khieu nai"]
+    recipients:
+      - { ten: "Phạm Quý Phương - Phó Chánh Văn phòng", vai_tro: "xử lý chính" }
+      - { ten: "Trần Thị Bảo Chi - Phòng Kinh tế đất", vai_tro: "xử lý chính" }
+    confidence: 0.97
+
+  - id: "IV.2"
+    name: "Giải quyết đơn, khiếu nại, tố cáo, kiến nghị"
+    keywords: ["khieu nai", "to cao", "kien nghi", "don thu", "giai quyet don", "tiep cong dan", "tiep dan"]
+    recipients:
+      - { ten: "Phạm Quý Phương - Phó Chánh Văn phòng", vai_tro: "xử lý chính" }
+      - { ten: "Trần Thị Bảo Chi - Phòng Kinh tế đất", vai_tro: "xử lý chính" }
+    confidence: 0.95
+    ghi_chu: "Nhóm xử lý khiếu nại/tố cáo/kiến nghị: 1 đại diện Văn phòng Sở + 1 chuyên viên Chi cục Quản lý đất đai."
+
+  - id: "IV.3"
+    name: "Thông báo cơ quan Thuế: nộp tiền thuê đất / thu hồi đất / chậm nợ thuế"
+    keywords: ["nop tien thue dat", "ngan chan chuyen dich", "the chap tai san", "cham nop thue", "no thue dat", "khong thuc hien nghia vu nop tien thue"]
+    recipients:
+      - { ten: "Chi cục Quản lý đất đai", vai_tro: "xử lý chính" }
+    confidence: 0.96
+
+  - id: "IV.4"
+    name: "Thông báo cơ quan Thuế: nộp tiền cấp quyền khai thác khoáng sản / thuế tài nguyên"
+    keywords: ["nop tien cap quyen khai thac khoang san", "ke khai, nop thue tai nguyen", "thue tai nguyen"]
+    recipients:
+      - { ten: "PGĐ Trần Đình Chương", vai_tro: "xử lý chính" }
+      - { ten: "Phòng Địa chất Khoáng sản", vai_tro: "xử lý chính" }
+    confidence: 0.96
+
+  - id: "IV.5"
+    name: "Sở NN&MT tỉnh khác thông báo mất phôi Giấy chứng nhận QSDĐ"
+    keywords: ["mat phoi"]
+    recipients:
+      - { ten: "Văn phòng Đăng ký đất đai", vai_tro: "xử lý chính" }
+    confidence: 0.95
+
+  - id: "IV.6"
+    name: "TT Dữ liệu đất đai yêu cầu cung cấp thông tin phục vụ điều tra vụ án"
+    keywords: ["cung cap thong tin phuc vu dieu tra", "dieu tra vu an", "chuyen nhuong bat dong san"]
+    recipients:
+      - { ten: "Văn phòng Đăng ký đất đai", vai_tro: "xử lý chính" }
+    confidence: 0.95
+
+  - id: "IV.7"
+    name: "TT Phát triển quỹ đất thông báo kết quả đấu giá QSDĐ"
+    keywords: ["dau gia quyen su dung dat", "dau gia dat", "ket qua dau gia"]
+    recipients:
+      - { ten: "Chi cục Quản lý đất đai", vai_tro: "xử lý chính" }
+    confidence: 0.95
+
+  - id: "IV.8"
+    name: "Nội dung liên quan tàu cá, nghề cá trên biển, vi phạm IUU"
+    keywords: ["tau ca", "nghe ca tren bien", "vi pham iuu", "chong khai thac iuu", "khai thac bat hop phap"]
+    recipients:
+      - { ten: "PGĐ Trần Quốc Khánh", vai_tro: "xử lý chính" }
+      - { ten: "Chi cục Thủy sản", vai_tro: "xử lý chính" }
+    confidence: 0.95
+
+  - id: "IV.9"
+    name: "Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án"
+    sender_keywords: ["so tai chinh", "sct", "so tai chinh tinh gia lai"]
+    keywords: ["tham dinh"]
+    recipients:
+      - { ten: "Phòng KH-TC", vai_tro: "xử lý chính" }
+      - { ten: "Chánh Văn phòng Sở", vai_tro: "phối hợp" }
+    confidence: 0.97
+
+  - id: "IV.10"
+    name: "Nội dung thủy lợi, tài nguyên nước, thiên tai"
+    keywords: ["thuy loi", "cong trinh thuy loi", "thien tai", "phong chong lut bao", "khai thac tai nguyen nuoc", "nuoc duoi dat", "nuoc mat", "gieng khoan", "gieng dao", "ao ho dam pha"]
+    recipients:
+      - { ten: "PGĐ Vũ Ngọc An", vai_tro: "bút phê chuyển đơn vị" }
+    confidence: 0.94
+
+  - id: "IV.11"
+    name: "Nội dung thủy sản, sự cố tràn dầu, cảng cá"
+    keywords: ["thuy san", "nuoi trong thuy san", "khai thac thuy san", "su co tran dau", "nhan chim vat chat", "cang ca", "ben ca", "khu neo dau"]
+    recipients:
+      - { ten: "PGĐ Trần Quốc Khánh", vai_tro: "bút phê chuyển đơn vị" }
+    confidence: 0.94
+
+
+# ---------- 2. VĂN BẢN KHẨN (Mục V) — chuyển SONG SONG ----------
+urgent:
+  detect_tokens: ["khan", "hoa toc", "khan cap", "nguy cap"]  # so khớp TOÀN TỪ (vd "Công văn khẩn")
+  routes:
+    - id: "V.1"
+      keywords: ["thuy loi", "cong trinh thuy loi", "thien tai", "phong chong lut bao", "ao ho dam pha"]
+      recipients:
+        - { ten: "PGĐ Vũ Ngọc An", vai_tro: "xử lý chính (song song)" }
+        - { ten: "Chi cục Thủy lợi", vai_tro: "xử lý chính (song song)" }
+      confidence: 0.96
+    - id: "V.2"
+      keywords: ["khai thac tai nguyen nuoc", "nuoc duoi dat", "nuoc mat", "gieng khoan", "gieng dao"]
+      recipients:
+        - { ten: "PGĐ Vũ Ngọc An", vai_tro: "xử lý chính (song song)" }
+        - { ten: "Phòng Tài nguyên nước", vai_tro: "xử lý chính (song song)" }
+      confidence: 0.96
+    - id: "V.3"
+      keywords: ["thuy san", "tau ca", "su co tran dau", "nhan chim vat chat", "chong khai thac iuu"]
+      recipients:
+        - { ten: "PGĐ Trần Quốc Khánh", vai_tro: "xử lý chính (song song)" }
+        - { ten: "Chi cục Thủy sản", vai_tro: "xử lý chính (song song)" }
+      confidence: 0.96
+    - id: "V.4"
+      keywords: ["cang ca", "ben ca", "khu neo dau tran tru bao"]
+      recipients:
+        - { ten: "PGĐ Trần Quốc Khánh", vai_tro: "xử lý chính (song song)" }
+        - { ten: "BQL cảng cá Tam Quan", vai_tro: "xử lý chính (song song)" }
+      confidence: 0.96
+
+# ---------- 3. GIẤY MỜI / NỘI DUNG NHƯ GIẤY MỜI (Mục II.4) ----------
+invitation:
+  keywords: ["giay moi", "kinh moi", "moi hop", "du hop", "cuoc hop", "tham du", "du ky hop", "to chuc hop"]
+  recipients:
+    - { ten: "Chánh Văn phòng (Hồ Đình Phương)", vai_tro: "xử lý chính" }
+    - { ten: "Phó Chánh Văn phòng (Hồ Đắc Khánh)", vai_tro: "xử lý chính" }
+    - { ten: "Đặng Phi Trường (xếp lịch công tác)", vai_tro: "xử lý chính" }
+  confidence: 0.95
+
+# ---------- 4. GIAO CHỦ TRÌ / THÔNG BÁO KẾT LUẬN (Mục I, II.1) ----------
+# Luôn qua Giám đốc Sở BÚT PHÊ TRƯỚC, sau đó mới theo lĩnh vực.
+central_directive:
+  keywords: ["giao so nong nghiep va moi truong chu tri", "giao so nn va mt chu tri", "thong bao ket luan", "ket luan cua thuong truc ubnd", "ket luan cua chu tich", "thong bao ket luan cua ubnd tinh", "thong bao ket luan cua hdnd"]
+  recipients:
+    - { ten: "Giám đốc Sở (Cao Thanh Thương)", vai_tro: "bút phê trước" }
+  confidence: 0.90
+
+# ---------- 5. MÃ KÝ HIỆU SỐ VĂN BẢN -> ĐƠN VỊ/LÃNH ĐẠO (tu-dien-linh-vuc.yaml) ----------
+# Tín hiệu phụ: nếu số văn bản chứa mã đơn vị, tăng điểm cho lĩnh vực tương ứng.
+ma_ky_hieu:
+  KL:    { don_vi: "Chi cục Kiểm lâm", lanh_dao: "PGĐ Nguyễn Văn Hoan", linh_vuc: "Lâm nghiệp, Kiểm lâm" }
+  QLDD:  { don_vi: "Chi cục Quản lý đất đai", lanh_dao: "Giám đốc Cao Thanh Thương", linh_vuc: "Quản lý đất đai" }
+  CNTY:  { don_vi: "Chi cục Chăn nuôi và Thú y", lanh_dao: "PGĐ Đoàn Ngọc Có", linh_vuc: "Chăn nuôi và Thú y" }
+  TNN:   { don_vi: "Phòng Tài nguyên nước và KTTV", lanh_dao: "PGĐ Vũ Ngọc An", linh_vuc: "Tài nguyên nước, KTTV" }
+  VPDK:  { don_vi: "Văn phòng Đăng ký đất đai", lanh_dao: "Giám đốc Cao Thanh Thương", linh_vuc: "Đăng ký đất đai" }
+
+# ---------- 6. LĨNH VỰC PHỤ TRÁCH (Mục III — QĐ 899/QĐ-SNNMT) ----------
+# Engine chấm điểm: keyword dài (cụ thể) hơn -> trọng số cao hơn.
+# Nhiều lãnh đạo cùng điểm -> "tổng hợp nhiều lĩnh vực" -> theo quy tắc Mục II.
+field_routes:
+  - id: "III.gd"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    cap: "GĐ"
+    keywords: ["quy hoach", "ke hoach chung", "chinh sach chung", "to chuc can bo", "can bo", "thi dua", "khen thuong", "ky luat", "phong chong tham nhung", "thuc hanh tiet kiem", "dan van", "cai cach hanh chinh", "chuyen doi so", "cong tac van phong"]
+    don_vi: ["Phòng TCCB", "Phòng KH-TC", "TT Chuyển đổi số NN&MT", "Quỹ Phòng chống thiên tai"]
+
+  - id: "III.gd_datdai"
+    lanh_dao: "Giám đốc Cao Thanh Thương"
+    cap: "GĐ"
+    keywords: ["dat dai", "giay chung nhan", "thua dat", "giao dat", "cho thue dat", "thu hoi dat", "dang ky dat dai", "ke khai dat dai", "quyen su dung dat"]
+    don_vi: ["Chi cục Quản lý đất đai", "Văn phòng Đăng ký đất đai"]
+    sub_routes:
+      - id: "III.gd_datdai_qldd"
+        keywords: ["giao dat", "cho thue dat", "thua dat", "giay chung nhan quyen su dung dat", "thu hoi dat", "dau gia quyen su dung dat", "tach thua", "bien dong dat dai"]
+        don_vi: ["Chi cục Quản lý đất đai"]
+      - id: "III.gd_datdai_vpdk"
+        keywords: ["dang ky dat dai", "ke khai dat dai", "dang ky lan dau", "mat phoi", "dang ky bien dong", "dat dang ky"]
+        don_vi: ["Văn phòng Đăng ký đất đai"]
+
+  - id: "III.tran"
+    lanh_dao: "PGĐ Nguyễn Thị Tố Trân"
+    cap: "PGĐ"
+    keywords: ["trong trot", "bao ve thuc vat", "khuyen nong", "chat luong nong san", "chat luong lam san", "chat luong thuy san", "giong cay trong", "phong chong dich hai"]
+    don_vi: ["Chi cục Trồng trọt và BVTV", "Chi cục QL chất lượng NLTS", "TT Khuyến nông"]
+
+  - id: "III.co"
+    lanh_dao: "PGĐ Đoàn Ngọc Có"
+    cap: "PGĐ"
+    keywords: ["chan nuoi", "thu y", "dich benh dong vat", "thuoc thu y", "ve sinh thu y", "chat cam trong chan nuoi", "giong vat nuoi", "quy hoach nong nghiep va moi truong", "giong nong nghiep", "an toan thuc pham nguon goc chan nuoi"]
+    don_vi: ["Chi cục Chăn nuôi và Thú y", "TT Quy hoạch NN&MT", "TT Giống Nông nghiệp"]
+
+  - id: "III.hoan"
+    lanh_dao: "PGĐ Nguyễn Văn Hoan"
+    cap: "PGĐ"
+    keywords: ["lam nghiep", "kiem lam", "rung phong ho", "rung dac dung", "rung trong", "rung san xuat", "go lon", "bao ton thien nhien", "khu bao ton", "ho tro phat trien rung"]
+    don_vi: ["Chi cục Kiểm lâm", "BQL rừng phòng hộ", "BQL Rừng đặc dụng An Toàn", "BQL Khu bảo tồn thiên nhiên Kon Chư Răng"]
+
+  - id: "III.huong"
+    lanh_dao: "PGĐ Hà Thị Thanh Hương"
+    cap: "PGĐ"
+    keywords: ["bao ve moi truong", "da dang sinh hoc", "o nhiem moi truong", "quan ly chat thai", "nuoc thai", "khi thai", "bien doi khi hau", "quan trac moi truong"]
+    don_vi: ["Chi cục Bảo vệ môi trường", "TT Quan trắc tài nguyên và môi trường"]
+
+  - id: "III.chuong"
+    lanh_dao: "PGĐ Trần Đình Chương"
+    cap: "PGĐ"
+    keywords: ["dia chat", "khoang san", "khai thac khoang san", "mo da", "cat soi", "giay phep khoang san", "tai nguyen dia chat"]
+    don_vi: ["Phòng Địa chất và Khoáng sản"]
+
+  - id: "III.an"
+    lanh_dao: "PGĐ Vũ Ngọc An"
+    cap: "PGĐ"
+    keywords: ["thuy loi", "ao ho dam pha", "cong trinh thuy loi", "thien tai", "phong chong lut bao", "khai thac tai nguyen nuoc", "nuoc duoi dat", "nuoc mat", "gieng khoan", "gieng dao", "dong chay toi thieu", "dap ho chua", "cap nuoc an toan", "nuoc sach nong thon"]
+    don_vi: ["Chi cục Thủy lợi", "TT Nước sạch nông thôn", "Phòng Tài nguyên nước và KTTV", "VP thường trực PCTT"]
+
+  - id: "III.khanh"
+    lanh_dao: "PGĐ Trần Quốc Khánh"
+    cap: "PGĐ"
+    keywords: ["thuy san", "tau ca", "nghe ca", "su co tran dau", "nhan chim vat chat", "cang ca", "ben ca", "khu neo dau", "bao ve moi truong bien", "hai dao", "ung pho bien doi khi hau"]
+    don_vi: ["Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan", "VP Điều phối về BĐKH"]
+
+  - id: "III.vy"
+    lanh_dao: "PGĐ Nguyễn Thị Thế Vy"
+    cap: "PGĐ"
+    keywords: ["phat trien nong thon", "giam ngheo", "nong thon moi", "ntm", "xay dung nong thon moi"]
+    don_vi: ["Chi cục Phát triển nông thôn", "VP Điều phối xây dựng NTM"]
+
