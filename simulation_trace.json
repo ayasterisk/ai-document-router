@@ -1,0 +1,985 @@
+[
+  {
+    "id": "S1",
+    "name": "Khiếu nại của công dân -> Ngoại lệ IV.2",
+    "payload": {
+      "so_van_ban": "",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "Công dân Nguyễn Văn A",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "Đơn đề nghị giải quyết khiếu nại về đất đai"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "b6bd97ef1c8b",
+      "method": "rule_engine",
+      "confidence": 0.95,
+      "recipients": [
+        {
+          "ten": "Phạm Quý Phương - Phó Chánh Văn phòng",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "IV.2"
+        },
+        {
+          "ten": "Trần Thị Bảo Chi - Phòng Kinh tế đất",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "IV.2"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "IV.2",
+          "name": "Giải quyết đơn, khiếu nại, tố cáo, kiến nghị",
+          "confidence": 0.95,
+          "reason": "Khớp keyword: khieu nai"
+        }
+      ],
+      "reasoning": "[IV.2] Giải quyết đơn, khiếu nại, tố cáo, kiến nghị: Khớp keyword: khieu nai",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "b6bd97ef1c8b",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.95,
+        "matched_rules": [
+          "IV.2"
+        ],
+        "recipients": [
+          "Phạm Quý Phương - Phó Chánh Văn phòng",
+          "Trần Thị Bảo Chi - Phòng Kinh tế đất"
+        ],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": false,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "Công dân Nguyễn Văn A",
+            "nguoi_ky": "",
+            "trich_yeu": "Đơn đề nghị giải quyết khiếu nại về đất đai",
+            "pdf_chars": 0,
+            "combined_norm": "don de nghi giai quyet khieu nai ve dat dai",
+            "sender_norm": "cong dan nguyen van a",
+            "so_norm": ""
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": true,
+            "rule": [
+              "IV.2"
+            ],
+            "recipients": [
+              "Phạm Quý Phương - Phó Chánh Văn phòng",
+              "Trần Thị Bảo Chi - Phòng Kinh tế đất"
+            ],
+            "confidence": 0.95
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.95,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.95,
+        "recipients": [
+          "Phạm Quý Phương - Phó Chánh Văn phòng",
+          "Trần Thị Bảo Chi - Phòng Kinh tế đất"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 24.0
+  },
+  {
+    "id": "S2",
+    "name": "Giấy mời họp -> Mục II.4",
+    "payload": {
+      "so_van_ban": "",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "Giấy mời tham dự cuộc họp triển khai nhiệm vụ 6 tháng cuối năm"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "f3576c0845de",
+      "method": "rule_engine",
+      "confidence": 0.95,
+      "recipients": [
+        {
+          "ten": "Chánh Văn phòng (Hồ Đình Phương)",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "II.4"
+        },
+        {
+          "ten": "Phó Chánh Văn phòng (Hồ Đắc Khánh)",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "II.4"
+        },
+        {
+          "ten": "Đặng Phi Trường (xếp lịch công tác)",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "II.4"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "II.4",
+          "name": "Giấy mời / nội dung như giấy mời",
+          "confidence": 0.95,
+          "reason": "Khớp keyword: giay moi, cuoc hop, tham du"
+        }
+      ],
+      "reasoning": "[II.4] Giấy mời / nội dung như giấy mời: Khớp keyword: giay moi, cuoc hop, tham du",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "f3576c0845de",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.95,
+        "matched_rules": [
+          "II.4"
+        ],
+        "recipients": [
+          "Chánh Văn phòng (Hồ Đình Phương)",
+          "Phó Chánh Văn phòng (Hồ Đắc Khánh)",
+          "Đặng Phi Trường (xếp lịch công tác)"
+        ],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": false,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+            "nguoi_ky": "",
+            "trich_yeu": "Giấy mời tham dự cuộc họp triển khai nhiệm vụ 6 tháng cuối năm",
+            "pdf_chars": 0,
+            "combined_norm": "giay moi tham du cuoc hop trien khai nhiem vu 6 thang cuoi nam",
+            "sender_norm": "ubnd tinh gia lai",
+            "so_norm": ""
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "3_invitation(II.4)",
+            "matched": true,
+            "rule": [
+              "II.4"
+            ],
+            "recipients": [
+              "Chánh Văn phòng (Hồ Đình Phương)",
+              "Phó Chánh Văn phòng (Hồ Đắc Khánh)",
+              "Đặng Phi Trường (xếp lịch công tác)"
+            ],
+            "confidence": 0.95
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.95,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.95,
+        "recipients": [
+          "Chánh Văn phòng (Hồ Đình Phương)",
+          "Phó Chánh Văn phòng (Hồ Đắc Khánh)",
+          "Đặng Phi Trường (xếp lịch công tác)"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 27.1
+  },
+  {
+    "id": "S3",
+    "name": "Giao Sở chủ trì -> Giám đốc bút phê trước (Mục I/II.1)",
+    "payload": {
+      "so_van_ban": "",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "V/v giao Sở Nông nghiệp và Môi trường chủ trì xử lý, phối hợp với các sở ngành liên quan"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "ada62eba7f12",
+      "method": "rule_engine",
+      "confidence": 0.82,
+      "recipients": [
+        {
+          "ten": "Giám đốc Sở (Cao Thanh Thương)",
+          "vai_tro": "bút phê trước",
+          "muc_uu_tien": 0,
+          "nguon": "II.1.chutri"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "II.1.chutri",
+          "name": "Giao chủ trì / Thông báo kết luận — Giám đốc bút phê trước",
+          "confidence": 0.9,
+          "reason": "Khớp keyword: giao so nong nghiep va moi truong chu tri"
+        }
+      ],
+      "reasoning": "[II.1.chutri] Giao chủ trì / Thông báo kết luận — Giám đốc bút phê trước: Khớp keyword: giao so nong nghiep va moi truong chu tri",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "ada62eba7f12",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.82,
+        "matched_rules": [
+          "II.1.chutri"
+        ],
+        "recipients": [
+          "Giám đốc Sở (Cao Thanh Thương)"
+        ],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": true,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+            "nguoi_ky": "",
+            "trich_yeu": "V/v giao Sở Nông nghiệp và Môi trường chủ trì xử lý, phối hợp với các sở ngành liên quan",
+            "pdf_chars": 0,
+            "combined_norm": "v/v giao so nong nghiep va moi truong chu tri xu ly, phoi hop voi cac so nganh lien quan",
+            "sender_norm": "ubnd tinh gia lai",
+            "so_norm": ""
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "3_invitation(II.4)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "4_central_directive(I/II.1)",
+            "matched": true,
+            "keywords": [
+              "giao so nong nghiep va moi truong chu tri"
+            ]
+          },
+          {
+            "event": "step",
+            "step": "5_field(Muc_III)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "4b_central_only",
+            "matched": true,
+            "recipients": [
+              "Giám đốc Sở (bút phê trước)"
+            ],
+            "confidence": 0.82
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.82,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.82,
+        "recipients": [
+          "Giám đốc Sở (Cao Thanh Thương)"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 27.5
+  },
+  {
+    "id": "S4",
+    "name": "Công văn khẩn phòng chống lụt bão -> Mục V (song song)",
+    "payload": {
+      "so_van_ban": "",
+      "loai_van_ban": "Công văn khẩn",
+      "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "V/v ứng phó mưa lũ, phòng chống lụt bão trên địa bàn tỉnh"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "d369c4927f5c",
+      "method": "rule_engine",
+      "confidence": 0.96,
+      "recipients": [
+        {
+          "ten": "PGĐ Vũ Ngọc An",
+          "vai_tro": "xử lý chính (song song)",
+          "muc_uu_tien": 1,
+          "nguon": "V.1"
+        },
+        {
+          "ten": "Chi cục Thủy lợi",
+          "vai_tro": "xử lý chính (song song)",
+          "muc_uu_tien": 1,
+          "nguon": "V.1"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "V.1",
+          "name": "Văn bản khẩn — chuyển song song",
+          "confidence": 0.96,
+          "reason": "Khớp keyword: phong chong lut bao"
+        }
+      ],
+      "reasoning": "[V.1] Văn bản khẩn — chuyển song song: Khớp keyword: phong chong lut bao",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "d369c4927f5c",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.96,
+        "matched_rules": [
+          "V.1"
+        ],
+        "recipients": [
+          "PGĐ Vũ Ngọc An",
+          "Chi cục Thủy lợi"
+        ],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": false,
+        "urgent": true,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "",
+            "loai_van_ban": "Công văn khẩn",
+            "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+            "nguoi_ky": "",
+            "trich_yeu": "V/v ứng phó mưa lũ, phòng chống lụt bão trên địa bàn tỉnh",
+            "pdf_chars": 0,
+            "combined_norm": "v/v ung pho mua lu, phong chong lut bao tren dia ban tinh",
+            "sender_norm": "ubnd tinh gia lai",
+            "so_norm": ""
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": true,
+            "rule": [
+              "V.1"
+            ],
+            "recipients": [
+              "PGĐ Vũ Ngọc An",
+              "Chi cục Thủy lợi"
+            ],
+            "confidence": 0.96
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.96,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.96,
+        "recipients": [
+          "PGĐ Vũ Ngọc An",
+          "Chi cục Thủy lợi"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 24.5
+  },
+  {
+    "id": "S5",
+    "name": "Giao đất, cho thuê đất -> Mục III (Chi cục QLĐĐ) + mã ký hiệu QLDD",
+    "payload": {
+      "so_van_ban": "8708/SNNMT-QLDD",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "V/v giao đất, cho thuê đất đối với các thửa đất nhỏ hẹp, nằm xen kẹt"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "613ed7efa9cf",
+      "method": "rule_engine",
+      "confidence": 0.93,
+      "recipients": [
+        {
+          "ten": "Giám đốc Cao Thanh Thương",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "II.1"
+        },
+        {
+          "ten": "Chi cục Quản lý đất đai",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "II.1"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "III.gd_datdai_qldd",
+          "name": "Lĩnh vực phụ trách (Giám đốc Cao Thanh Thương)",
+          "confidence": 0.93,
+          "reason": "Khớp keyword: thua dat, giao dat, cho thue dat; mã ký hiệu: snnmt-qldd"
+        }
+      ],
+      "reasoning": "[III.gd_datdai_qldd] Lĩnh vực phụ trách (Giám đốc Cao Thanh Thương): Khớp keyword: thua dat, giao dat, cho thue dat; mã ký hiệu: snnmt-qldd",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "613ed7efa9cf",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.93,
+        "matched_rules": [
+          "III.gd_datdai_qldd"
+        ],
+        "recipients": [
+          "Giám đốc Cao Thanh Thương",
+          "Chi cục Quản lý đất đai"
+        ],
+        "source_category": "II.1",
+        "field_leader": "Giám đốc Cao Thanh Thương",
+        "central_directive": false,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "8708/SNNMT-QLDD",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "UBND tỉnh Gia Lai",
+            "nguoi_ky": "",
+            "trich_yeu": "V/v giao đất, cho thuê đất đối với các thửa đất nhỏ hẹp, nằm xen kẹt",
+            "pdf_chars": 0,
+            "combined_norm": "v/v giao dat, cho thue dat doi voi cac thua dat nho hep, nam xen ket",
+            "sender_norm": "ubnd tinh gia lai",
+            "so_norm": "8708/snnmt-qldd"
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "3_invitation(II.4)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "4_central_directive(I/II.1)",
+            "matched": false,
+            "keywords": []
+          },
+          {
+            "event": "step",
+            "step": "5_field(Muc_III)",
+            "matched": true,
+            "rule": [
+              "III.gd_datdai_qldd"
+            ],
+            "source_category": "II.1",
+            "field_leader": "Giám đốc Cao Thanh Thương",
+            "recipients": [
+              "Giám đốc Cao Thanh Thương",
+              "Chi cục Quản lý đất đai"
+            ],
+            "confidence": 0.93,
+            "notes": []
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.93,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.93,
+        "recipients": [
+          "Giám đốc Cao Thanh Thương",
+          "Chi cục Quản lý đất đai"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 24.0
+  },
+  {
+    "id": "S6",
+    "name": "PDF THẬT source/8682_SNNMT-CNTY -> Mục III (Chăn nuôi & Thú y)",
+    "payload": {
+      "so_van_ban": "8682/SNNMT-CNTY",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "Sở Nông nghiệp và Môi trường tỉnh Gia Lai",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "V/v tăng cường quản lý hoạt động nhập khẩu, buôn bán, sử dụng thuốc thú y trên địa bàn tỉnh"
+    },
+    "pdf_name": "8682_SNNMT-CNTY_04082026-signed.pdf",
+    "response": {
+      "job_id": "ab85d26cbf05",
+      "method": "rule_engine",
+      "confidence": 0.94,
+      "recipients": [
+        {
+          "ten": "PGĐ Trần Quốc Khánh",
+          "vai_tro": "bút phê chuyển đơn vị",
+          "muc_uu_tien": 1,
+          "nguon": "IV.11"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "IV.11",
+          "name": "Nội dung thủy sản, sự cố tràn dầu, cảng cá",
+          "confidence": 0.94,
+          "reason": "Khớp keyword: thuy san, nuoi trong thuy san"
+        }
+      ],
+      "reasoning": "[IV.11] Nội dung thủy sản, sự cố tràn dầu, cảng cá: Khớp keyword: thuy san, nuoi trong thuy san",
+      "metadata_verified": false,
+      "metadata_notes": [
+        "Không tìm thấy số văn bản trong nội dung PDF"
+      ],
+      "needs_human_review": true,
+      "warning": null,
+      "llm_reasoning_preview": null
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "ab85d26cbf05",
+        "pdf_name": "8682_SNNMT-CNTY_04082026-signed.pdf",
+        "allow_llm": true,
+        "model": "deepseek-reasoner",
+        "llm_available": false
+      },
+      {
+        "event": "verify_metadata",
+        "verified": false,
+        "notes": [
+          "Không tìm thấy số văn bản trong nội dung PDF"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.94,
+        "matched_rules": [
+          "IV.11"
+        ],
+        "recipients": [
+          "PGĐ Trần Quốc Khánh"
+        ],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": false,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "8682/SNNMT-CNTY",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "Sở Nông nghiệp và Môi trường tỉnh Gia Lai",
+            "nguoi_ky": "",
+            "trich_yeu": "V/v tăng cường quản lý hoạt động nhập khẩu, buôn bán, sử dụng thuốc thú y trên địa bàn tỉnh",
+            "pdf_chars": 3990,
+            "combined_norm": "v/v tang cuong quan ly hoat dong nhap khau, buon ban, su dung thuoc thu y tren dia ban tinh ubnd tinh gia lai so nong nghiep va moi truong cong hoa xa hoi chu nghia viet nam doc lap - tu do - hanh phu",
+            "sender_norm": "so nong nghiep va moi truong tinh gia lai",
+            "so_norm": "8682/snnmt-cnty"
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": true,
+            "rule": [
+              "IV.11"
+            ],
+            "recipients": [
+              "PGĐ Trần Quốc Khánh"
+            ],
+            "confidence": 0.94
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": false,
+        "rule_confidence": 0.94,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": false
+      },
+      {
+        "event": "done",
+        "method": "rule_engine",
+        "confidence": 0.94,
+        "recipients": [
+          "PGĐ Trần Quốc Khánh"
+        ],
+        "needs_human_review": true,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 240.1
+  },
+  {
+    "id": "S7",
+    "name": "Nội dung không khớp rule cứng -> deepseek-reasoner suy luận",
+    "payload": {
+      "so_van_ban": "",
+      "loai_van_ban": "Công văn",
+      "co_quan_ban_hanh": "Công ty TNHH Thương mại ABC",
+      "nguoi_ky": "",
+      "ngay_van_ban": "2026-08-08",
+      "trich_yeu": "V/v đề nghị hỗ trợ xúc tiến thương mại, quảng bá sản phẩm nông sản"
+    },
+    "pdf_name": "",
+    "response": {
+      "job_id": "8fab0ac2ef9e",
+      "method": "llm_reasoning",
+      "confidence": 0.82,
+      "recipients": [
+        {
+          "ten": "PGĐ Nguyễn Thị Tố Trân",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "llm"
+        },
+        {
+          "ten": "Chi cục Trồng trọt và BVTV",
+          "vai_tro": "xử lý chính",
+          "muc_uu_tien": 1,
+          "nguon": "llm"
+        }
+      ],
+      "matched_rules": [
+        {
+          "rule_id": "llm",
+          "name": "Suy luận ngữ nghĩa",
+          "confidence": 0.0,
+          "reason": "Nội dung nông sản -> lĩnh vực trồng trọt"
+        }
+      ],
+      "reasoning": "Văn bản xúc tiến thương mại sản phẩm nông sản thuộc lĩnh vực trồng trọt/khuyến nông, theo Mục III thuộc PGĐ Nguyễn Thị Tố Trân (Chi cục Trồng trọt và BVTV).",
+      "metadata_verified": null,
+      "metadata_notes": [
+        "Không có nội dung PDF để đối chiếu"
+      ],
+      "needs_human_review": false,
+      "warning": null,
+      "llm_reasoning_preview": "Tôi xác định lĩnh vực: 'xúc tiến thương mại sản phẩm nông sản' không khớp keyword rule cứng. Đối chiếu rulebase Mục III, nội dung nông nghiệp tổng hợp thuộc PGĐ Nguyễn Thị Tố Trân (trồng trọt, khuyến nông, chất lượng nông sản). Quy tắc nguồn II.3 (doanh nghiệp): đơn vị tham mưu xử lý chính. Trả JSON..."
+    },
+    "trace": [
+      {
+        "event": "start",
+        "job_id": "8fab0ac2ef9e",
+        "pdf_name": "",
+        "allow_llm": true,
+        "model": "deepseek-reasoner (MOCK)",
+        "llm_available": true
+      },
+      {
+        "event": "verify_metadata",
+        "verified": null,
+        "notes": [
+          "Không có nội dung PDF để đối chiếu"
+        ]
+      },
+      {
+        "event": "rule_engine",
+        "confidence": 0.0,
+        "matched_rules": [
+          "NO_MATCH"
+        ],
+        "recipients": [],
+        "source_category": null,
+        "field_leader": null,
+        "central_directive": false,
+        "urgent": false,
+        "engine_trace": [
+          {
+            "event": "input",
+            "so_van_ban": "",
+            "loai_van_ban": "Công văn",
+            "co_quan_ban_hanh": "Công ty TNHH Thương mại ABC",
+            "nguoi_ky": "",
+            "trich_yeu": "V/v đề nghị hỗ trợ xúc tiến thương mại, quảng bá sản phẩm nông sản",
+            "pdf_chars": 0,
+            "combined_norm": "v/v de nghi ho tro xuc tien thuong mai, quang ba san pham nong san",
+            "sender_norm": "cong ty tnhh thuong mai abc",
+            "so_norm": ""
+          },
+          {
+            "event": "step",
+            "step": "1_urgent(Muc_V)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "2_exception(Muc_IV)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "3_invitation(II.4)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "4_central_directive(I/II.1)",
+            "matched": false,
+            "keywords": []
+          },
+          {
+            "event": "step",
+            "step": "5_field(Muc_III)",
+            "matched": false
+          },
+          {
+            "event": "step",
+            "step": "no_match",
+            "matched": false
+          }
+        ]
+      },
+      {
+        "event": "decision",
+        "need_llm": true,
+        "rule_confidence": 0.0,
+        "high_threshold": 0.8,
+        "low_threshold": 0.5,
+        "llm_available": true
+      },
+      {
+        "event": "llm_call",
+        "model": "deepseek-reasoner (MOCK)",
+        "reasoning_mode": null
+      },
+      {
+        "event": "llm_ok",
+        "method": "llm_reasoning",
+        "llm_confidence": 0.82,
+        "final_confidence": 0.82,
+        "recipients": [
+          "PGĐ Nguyễn Thị Tố Trân",
+          "Chi cục Trồng trọt và BVTV"
+        ],
+        "matched_rules": [
+          "llm"
+        ],
+        "reasoning": "Văn bản xúc tiến thương mại sản phẩm nông sản thuộc lĩnh vực trồng trọt/khuyến nông, theo Mục III thuộc PGĐ Nguyễn Thị Tố Trân (Chi cục Trồng trọt và BVTV)."
+      },
+      {
+        "event": "done",
+        "method": "llm_reasoning",
+        "confidence": 0.82,
+        "recipients": [
+          "PGĐ Nguyễn Thị Tố Trân",
+          "Chi cục Trồng trọt và BVTV"
+        ],
+        "needs_human_review": false,
+        "warning": null
+      }
+    ],
+    "elapsed_ms": 95.0
+  }
+]
