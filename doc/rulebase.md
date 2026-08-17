@@ -53,27 +53,27 @@ Văn thư: vào sổ
 
 **Bước 0 — kiểm tra loại văn bản trước khi áp dụng bảng dưới:** nếu văn bản có nội dung **"Giao Sở NN&MT chủ trì"** hoặc **"Thông báo kết luận UBND, HĐND tỉnh"** → **luôn chuyển Giám đốc Sở bút phê trước** (áp dụng cho mọi lĩnh vực, kể cả lĩnh vực của một PGĐ cụ thể), sau đó Giám đốc chuyển xuống PGĐ/đơn vị phụ trách lĩnh vực tương ứng. Chỉ những văn bản TW/tỉnh **không** thuộc 2 loại này mới áp dụng bảng bên dưới.
 
-| Điều kiện                                                                             | Xử lý chính                                             | Phối hợp / Theo dõi                                     |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Điều kiện                                                                             | Xử lý chính                                       | Phối hợp / Theo dõi                                     |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                         | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | Giám đốc Sở (để theo dõi, nắm thông tin)          |
-| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                            | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
+| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                      | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
 
 ### II.2. Văn bản của Sở, ngành khác
 
-| Điều kiện                                                                                                 | Xử lý chính                                                            | Phối hợp / Theo dõi             |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------- |
+| Điều kiện                                                                                                 | Xử lý chính                                                      | Phối hợp / Theo dõi             |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ---------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                                             | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu                | —                                 |
 | Thuộc lĩnh vực**GĐ** phụ trách, hoặc tổng hợp nhiều lĩnh vực                               | Chánh Văn phòng Sở**+** đơn vị tham mưu (nếu ND rõ ràng) | Giám đốc Sở (mục "Theo dõi") |
-| VB lấy ý kiến thẩm định dự án; lấy ý kiến quy hoạch tỷ lệ 1/500; hoặc có yếu tố phức tạp | Chánh Văn phòng Sở (rà soát, chuyển đơn vị liên quan)          | —                                 |
+| VB lấy ý kiến thẩm định dự án; lấy ý kiến quy hoạch tỷ lệ 1/500; hoặc có yếu tố phức tạp | Chánh Văn phòng Sở (rà soát, chuyển đơn vị liên quan)    | —                                 |
 
 > **Ngoại lệ riêng:** Văn bản của **Sở Tài chính** có nội dung thẩm định hoặc thẩm định dự án → chuyển thẳng **Phòng KH-TC** (xử lý chính) **+ CVP Sở** (mục "Phối hợp xử lý") — áp dụng thay cho quy tắc chung ở trên.
 
 ### II.3. Văn bản xã, phường, tổ chức, doanh nghiệp, công dân
 
-| Điều kiện                                     | Xử lý chính                                             | Phối hợp / Theo dõi                                                                  |
-| ------------------------------------------------ | ---------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Điều kiện                                     | Xử lý chính                                       | Phối hợp / Theo dõi                                                                  |
+| ------------------------------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | —                                                                                      |
-| Thuộc lĩnh vực**GĐ** phụ trách       | Đơn vị tham mưu (nếu ND rõ ràng)                    | Chánh Văn phòng (mục phối hợp xử lý) —**không** chuyển Giám đốc Sở |
+| Thuộc lĩnh vực**GĐ** phụ trách       | Đơn vị tham mưu (nếu ND rõ ràng)              | Chánh Văn phòng (mục phối hợp xử lý) —**không** chuyển Giám đốc Sở |
 
 ### II.4. Giấy mời và văn bản có nội dung như giấy mời
 
@@ -115,11 +115,11 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 ### III.2. Nhân sự Văn phòng Sở (bổ sung chức vụ)
 
-| Họ tên                      | Chức vụ                         | Email                         |
-| ----------------------------- | --------------------------------- | ----------------------------- |
-| Hồ Đắc Khánh              | Phó Chánh Văn phòng           | khanhhd@snnmt.gialai.gov.vn   |
-| **Phạm Quý Phương** | **Phó Chánh Văn phòng** | phuongpq@snnmt.gialai.gov.vn  |
-| Đặng Phi Trường           | Công chức xếp lịch công tác | truongdp@snnmt.gialai.gov.vn  |
+| Họ tên                      | Chức vụ                         | Email                        |
+| ----------------------------- | --------------------------------- | ---------------------------- |
+| Hồ Đắc Khánh              | Phó Chánh Văn phòng           | khanhhd@snnmt.gialai.gov.vn  |
+| **Phạm Quý Phương** | **Phó Chánh Văn phòng** | phuongpq@snnmt.gialai.gov.vn |
+| Đặng Phi Trường           | Công chức xếp lịch công tác | truongdp@snnmt.gialai.gov.vn |
 
 > Văn phòng Sở thuộc lĩnh vực phụ trách của **PGĐ Nguyễn Thị Tố Trân** (xem Mục III). Văn phòng có nhiều Phó Chánh Văn phòng phụ trách các mảng khác nhau: ông **Hồ Đắc Khánh** phụ trách giấy mời/lịch công tác (Mục II.4); ông **Phạm Quý Phương** phụ trách tiếp công dân, giải quyết khiếu nại/tố cáo/kiến nghị (Mục IV.1–2).
 
@@ -153,16 +153,3 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | Khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào                                                     | **PGĐ Vũ Ngọc An** + **Phòng Tài nguyên nước**                   |
 | Thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU | **PGĐ Trần Quốc Khánh** + **Chi cục Thủy sản**                    |
 | Cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá                                                                                 | **PGĐ Trần Quốc Khánh** + **BQL cảng cá / BQL cảng cá Tam Quan** |
-
-*Lưu ý: quy tắc "chuyển song song khi hạn gấp" hiện mới ghi nhận cho 2 nhóm lĩnh vực (thủy lợi/TNN và thủy sản). Nếu phát sinh nhu cầu tương tự cho các lĩnh vực khác, cần bổ sung thêm.*
-
----
-
-## VI. GHI CHÚ / ĐIỂM CẦN LÀM RÕ THÊM
-
-Trong quá trình tổng hợp, có một số điểm các nguồn tài liệu **chưa quy định rõ**, nên rà soát lại với đơn vị trước khi vận hành rulebase này:
-
-1. Bảng ngoại lệ (Mục IV) chủ yếu liệt kê các trường hợp thuộc lĩnh vực đất đai, khoáng sản, thủy lợi/TNN, thủy sản. Các lĩnh vực khác (trồng trọt, chăn nuôi, lâm nghiệp, môi trường, nông thôn mới…) hiện áp dụng quy tắc chung ở Mục II — chưa có ngoại lệ riêng được cung cấp.
-
-> ✅ **Đã chốt:** văn bản "Giao Sở NN&MT chủ trì" / "Thông báo kết luận UBND, HĐND tỉnh" luôn qua Giám đốc bút phê trước, không phân biệt lĩnh vực — quy tắc này đã được áp dụng xuyên suốt tại Mục I và Mục II.1.
-> ✅ **Đã xác định:** nhóm "Quý Phương – Bảo Chi" = **Phạm Quý Phương** (Phó Chánh Văn phòng) + **Trần Thị Bảo Chi** (Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai) — xem Mục III.1, III.2 và chú thích tại Mục IV.
