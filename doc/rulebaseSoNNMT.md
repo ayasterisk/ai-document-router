@@ -2,23 +2,22 @@
 
 ### Sở Nông nghiệp và Môi trường tỉnh Gia Lai
 
-*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; Sơ đồ luồng văn bản; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai).*
+*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai).*
 
 ---
 
 ## NGUYÊN TẮC ÁP DỤNG (thứ tự ưu tiên)
 
-Khi xử lý một văn bản đến, kiểm tra theo đúng thứ tự sau, dừng lại ở quy tắc đầu tiên khớp:
+**Luồng chung:** Mọi văn bản đến đều qua **Giám đốc Sở bút phê trước**, sau đó Giám đốc mới chuyển xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực (xem Mục I). Trên cơ sở đó, khi xác định người/đơn vị **xử lý chính**, kiểm tra theo đúng thứ tự sau, dừng lại ở quy tắc đầu tiên khớp:
 
 1. **Ngoại lệ đặc biệt** (Mục IV) — các trường hợp có quy tắc riêng, bỏ qua quy tắc chung.
 2. **Văn bản khẩn** — còn 1–2 ngày hạn xử lý (Mục V) — chuyển song song lãnh đạo + đơn vị.
 3. **Giấy mời / văn bản có nội dung như giấy mời** (Mục II.4).
-4. **Văn bản "Giao Sở NN&MT chủ trì" hoặc "Thông báo kết luận UBND, HĐND tỉnh"** — **luôn qua Giám đốc Sở bút phê trước** (bất kể thuộc lĩnh vực Giám đốc hay Phó Giám đốc), sau đó Giám đốc mới chuyển xuống lãnh đạo phụ trách lĩnh vực (Mục I, Mục II.1).
-5. **Quy tắc chung còn lại theo nguồn gửi** (Mục II.1–II.3), đối chiếu **lĩnh vực phụ trách** của từng lãnh đạo (Mục III) để xác định người xử lý chính.
+4. **Quy tắc chung còn lại theo nguồn gửi** (Mục II.1–II.3), đối chiếu **lĩnh vực phụ trách** của từng lãnh đạo (Mục III) để xác định người xử lý chính.
 
 ---
 
-## I. QUY TRÌNH TỔNG QUÁT (theo sơ đồ luồng văn bản)
+## I. QUY TRÌNH TỔNG QUÁT
 
 ```
 Văn bản đến
@@ -26,24 +25,14 @@ Văn bản đến
       ▼
 Văn thư: vào sổ
       │
-      ├── VB: "Giao Sở NN&MT chủ trì" / "Thông báo kết luận UBND, HĐND tỉnh"
-      │        │
-      │        ▼
-      │   Giám đốc Sở bút phê → chuyển Lãnh đạo Sở phụ trách
-      │        │
-      │        ▼
-      │   Lãnh đạo Sở bút phê → chuyển phòng, ban
+      ▼
+Giám đốc Sở bút phê → chuyển Lãnh đạo Sở/đơn vị phụ trách (theo lĩnh vực)
       │
-      └── VB khác
-               │
-               ▼
-          Lãnh đạo Sở phụ trách (theo lĩnh vực)
-               │
-               ▼
-          Lãnh đạo Sở bút phê → chuyển phòng, ban
+      ▼
+Lãnh đạo Sở bút phê → chuyển phòng, ban xử lý
 ```
 
-**Diễn giải:** Mọi văn bản đều qua Văn thư để vào sổ. Nhóm văn bản có nội dung "Giao Sở NN&MT chủ trì" hoặc "Thông báo kết luận UBND/HĐND tỉnh" **luôn phải qua Giám đốc bút phê trước**, **bất kể nội dung thuộc lĩnh vực của Giám đốc hay của một Phó Giám đốc cụ thể nào** — đây là quy tắc theo *loại văn bản* (đã được xác nhận), ưu tiên hơn quy tắc phân theo lĩnh vực ở Mục II.1. Sau khi Giám đốc bút phê, văn bản mới được chuyển xuống lãnh đạo phụ trách lĩnh vực tương ứng. Các văn bản còn lại (không thuộc loại trên) được chuyển thẳng đến Lãnh đạo Sở phụ trách lĩnh vực theo Mục II. Ở cả hai nhánh, bước cuối luôn là lãnh đạo phụ trách bút phê chuyển phòng/ban xử lý.
+**Diễn giải:** Mọi văn bản đến đều qua Văn thư để vào sổ, sau đó **chuyển Giám đốc Sở bút phê trước** — bất kể nội dung thuộc lĩnh vực của Giám đốc hay của một Phó Giám đốc cụ thể nào. Sau khi bút phê, Giám đốc chuyển văn bản xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực tương ứng (xác định theo Mục II–V). Bước cuối luôn là lãnh đạo/đơn vị phụ trách bút phê chuyển phòng/ban xử lý.
 
 ---
 
@@ -51,7 +40,7 @@ Văn thư: vào sổ
 
 ### II.1. Văn bản Trung ương, UBND tỉnh, Tỉnh ủy
 
-**Bước 0 — kiểm tra loại văn bản trước khi áp dụng bảng dưới:** nếu văn bản có nội dung **"Giao Sở NN&MT chủ trì"** hoặc **"Thông báo kết luận UBND, HĐND tỉnh"** → **luôn chuyển Giám đốc Sở bút phê trước** (áp dụng cho mọi lĩnh vực, kể cả lĩnh vực của một PGĐ cụ thể), sau đó Giám đốc chuyển xuống PGĐ/đơn vị phụ trách lĩnh vực tương ứng. Chỉ những văn bản TW/tỉnh **không** thuộc 2 loại này mới áp dụng bảng bên dưới.
+Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giám đốc Sở đã bút phê chuyển xuống (mọi văn bản đều qua Giám đốc bút phê trước theo Mục I).
 
 | Điều kiện                                                                             | Xử lý chính                                       | Phối hợp / Theo dõi                                     |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
@@ -70,10 +59,10 @@ Văn thư: vào sổ
 
 ### II.3. Văn bản xã, phường, tổ chức, doanh nghiệp, công dân
 
-| Điều kiện                                     | Xử lý chính                                       | Phối hợp / Theo dõi                                                                  |
-| ------------------------------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Thuộc lĩnh vực của**PGĐ** phụ trách | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | —                                                                                      |
-| Thuộc lĩnh vực**GĐ** phụ trách       | Đơn vị tham mưu (nếu ND rõ ràng)              | Chánh Văn phòng (mục phối hợp xử lý) —**không** chuyển Giám đốc Sở |
+| Điều kiện                                     | Xử lý chính                                       | Phối hợp / Theo dõi                       |
+| ------------------------------------------------ | ---------------------------------------------------- | -------------------------------------------- |
+| Thuộc lĩnh vực của**PGĐ** phụ trách | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | —                                           |
+| Thuộc lĩnh vực**GĐ** phụ trách       | Đơn vị tham mưu (nếu ND rõ ràng)              | Chánh Văn phòng (mục phối hợp xử lý) |
 
 ### II.4. Giấy mời và văn bản có nội dung như giấy mời
 
@@ -97,7 +86,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | **PGĐ Trần Quốc Khánh**        | Thủy sản; quản lý tài nguyên, bảo vệ môi trường biển và hải đảo; ứng phó biến đổi khí hậu; ứng phó sự cố tràn dầu, hóa chất độc hại trên biển; dự án tồn đọng đất đai (Gia Lai cũ)                                                                                                                    | Chi cục Thủy sản, BQL cảng cá, BQL cảng cá Tam Quan, VP Điều phối về BĐKH, BQL dự án cộng đồng ven biển thông minh                  |
 | **PGĐ Nguyễn Thị Thế Vy**      | Phát triển nông thôn, giảm nghèo; nông thôn mới                                                                                                                                                                                                                                                                                           | Chi cục Phát triển nông thôn, VP Điều phối xây dựng NTM                                                                                      |
 
-### III.1. Nhân sự Chi cục Quản lý đất đai (bổ sung chức vụ)
+### III.1. Nhân sự Chi cục Quản lý đất đai
 
 *Nguồn: QĐ-UBND tỉnh Gia Lai về kiện toàn Hội đồng thẩm định, xử lý vướng mắc trong công tác bồi thường, hỗ trợ và tái định cư khi Nhà nước thu hồi đất — trong đó liệt kê thành viên Hội đồng thuộc Chi cục Quản lý đất đai, Sở NN&MT kèm chức vụ.*
 
@@ -113,7 +102,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 > Chi cục Quản lý đất đai thuộc lĩnh vực phụ trách của **Giám đốc Cao Thanh Thương** (xem bảng trên).
 
-### III.2. Nhân sự Văn phòng Sở (bổ sung chức vụ)
+### III.2. Nhân sự Văn phòng Sở
 
 | Họ tên                      | Chức vụ                         | Email                        |
 | ----------------------------- | --------------------------------- | ---------------------------- |
