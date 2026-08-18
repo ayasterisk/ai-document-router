@@ -112,6 +112,23 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 
 > Văn phòng Sở thuộc lĩnh vực phụ trách của **PGĐ Nguyễn Thị Tố Trân** (xem Mục III). Văn phòng có nhiều Phó Chánh Văn phòng phụ trách các mảng khác nhau: ông **Hồ Đắc Khánh** phụ trách giấy mời/lịch công tác (Mục II.4); ông **Phạm Quý Phương** phụ trách tiếp công dân, giải quyết khiếu nại/tố cáo/kiến nghị (Mục IV.1–2).
 
+### III.3. Đơn vị chuyển kèm theo lĩnh vực PGĐ phụ trách
+
+"Theo từng lĩnh vực PGĐ Sở phụ trách, khi chuyển văn bản sẽ kèm theo đơn vị mình quản lý".*
+
+| PGĐ phụ trách lĩnh vực      | Chuyển đến (PGĐ + đơn vị kèm theo)                                                                                                                                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PGĐ Đoàn Ngọc Có           | PGĐ Có + **Chi cục Chăn nuôi và Thú y**; PGĐ Có + **Trung tâm Giống Nông nghiệp**                                                                                                                |
+| PGĐ Hà Thị Thanh Hương    | PGĐ Hương + **Chi cục Bảo vệ môi trường**; PGĐ Hương + **Trung tâm Quan trắc tài nguyên và môi trường**                                                                                        |
+| PGĐ Nguyễn Văn Hoan      | PGĐ Hoan + **Chi cục Kiểm lâm**                                                                                                                                                                                |
+| PGĐ Nguyễn Thị Tố Trân    | PGĐ Trân + **Chi cục Trồng trọt và Bảo vệ thực vật**; PGĐ Trân + **Chi cục Quản lý chất lượng nông lâm sản và thủy sản**; PGĐ Trân + **Trung tâm Khuyến nông**                |
+| PGĐ Nguyễn Thị Thế Vy     | PGĐ Vy + **Chi cục Phát triển nông thôn** + **Văn phòng Điều phối xây dựng nông thôn mới**                                                                                           |
+| PGĐ Trần Đình Chương     | PGĐ Chương + **Phòng Địa chất và Khoáng sản**                                                                                                                                                                 |
+| PGĐ Vũ Ngọc An              | PGĐ An **xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                                        |
+| PGĐ Trần Quốc Khánh       | PGĐ Khánh **xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                                     |
+
+> Quy tắc này làm rõ "đơn vị tham mưu" kèm theo ở Mục II: khi văn bản thuộc lĩnh vực của một PGĐ, chuyển PGĐ đó **kèm đơn vị do PGĐ quản lý**. Riêng **PGĐ Vũ Ngọc An** và **PGĐ Trần Quốc Khánh** chỉ chuyển PGĐ xử lý (PGĐ tự bút phê chuyển đơn vị) — phù hợp với Mục IV.10–11.
+
 ---
 
 ## IV. NGOẠI LỆ ĐẶC BIỆT (áp dụng trước quy tắc chung)
