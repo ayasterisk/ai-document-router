@@ -7,3 +7,8 @@ Theo từng lĩnh vực PGĐ Sở phụ trách khi chuyển sẽ kèm theo đơn
 6. Lĩnh vực PGĐ Chương: chuyển PGĐ Chương + phòng Địa chất khoáng sản
 7. PGĐ An : chuyển PGĐ An xử lý (PGĐ tự chuyển đơn vị)
 8. PGĐ Khánh: chuyển PGĐ Khánh xử lý (PGĐ tự chuyển đơn vị)
+
+1.	Văn bản sở,ban, ngành theo từng lĩnh vực của PGĐ Sở => chuyển cho các PGĐ Sở theo lĩnh vực phụ trách
+2.	Văn bản sở,ban, ngành thuộc lĩnh vực đất đai => chuyển cho chi cục quản lý đất đai, giấy chứng nhận quyền sử dụng đất=> chuyển cho văn phòng đăng ký đất đai. Tất cả văn bản liên quan lĩnh vực đất đai chuyển GĐ Sở mục theo dõi
+3.	Văn bản của UBND tỉnh, Tỉnh ủy, Bộ, Cục thuộc lĩnh vực của PGĐ Sở => chuyển cho các PGĐ Sở theo lĩnh vực phụ trách + chuyển GĐ Sở mục theo dõi
+4.	Văn bản của UBND tỉnh, Tỉnh ủy, Bộ, Cục thuộc lĩnh vực đất đai => chuyển chi cục quản lý đất đai hoặc văn phòng đăng ký đất đai. + chuyển GĐ mục phối hợp xử lý
