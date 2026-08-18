@@ -2,7 +2,7 @@
 
 ### Sở Nông nghiệp và Môi trường tỉnh Gia Lai
 
-*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai).*
+*Tổng hợp từ: Hướng dẫn chuyển văn bản đến; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai); rule2.txt (bổ sung quy tắc luân chuyển theo lĩnh vực đất đai).*
 
 ---
 
@@ -46,6 +46,7 @@ Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giá
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                         | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | Giám đốc Sở (để theo dõi, nắm thông tin)          |
 | Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                      | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
+| Thuộc lĩnh vực **đất đai** (quản lý đất đai, GCN QSDĐ) | Chi cục Quản lý đất đai **hoặc** Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Phối hợp xử lý") |
 
 ### II.2. Văn bản của Sở, ngành khác
 
@@ -53,6 +54,8 @@ Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giá
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ---------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                                             | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu                | —                                 |
 | Thuộc lĩnh vực**GĐ** phụ trách, hoặc tổng hợp nhiều lĩnh vực                               | Chánh Văn phòng Sở**+** đơn vị tham mưu (nếu ND rõ ràng) | Giám đốc Sở (mục "Theo dõi") |
+| Thuộc lĩnh vực **đất đai** | Chi cục Quản lý đất đai | Giám đốc Sở (mục "Theo dõi") |
+| **Giấy chứng nhận quyền sử dụng đất (GCN QSDĐ)** | Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Theo dõi") |
 | VB lấy ý kiến thẩm định dự án; lấy ý kiến quy hoạch tỷ lệ 1/500; hoặc có yếu tố phức tạp | Chánh Văn phòng Sở (rà soát, chuyển đơn vị liên quan)    | —                                 |
 
 > **Ngoại lệ riêng:** Văn bản của **Sở Tài chính** có nội dung thẩm định hoặc thẩm định dự án → chuyển thẳng **Phòng KH-TC** (xử lý chính) **+ CVP Sở** (mục "Phối hợp xử lý") — áp dụng thay cho quy tắc chung ở trên.
