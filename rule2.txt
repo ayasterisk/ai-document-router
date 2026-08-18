@@ -1,0 +1,9 @@
+Theo từng lĩnh vực PGĐ Sở phụ trách khi chuyển sẽ kèm theo đơn vị mình quản lý
+1. Lĩnh vực PGĐ Có: chuyển PGĐ Có+  Chi cục Chăn nuôi thú y;  PGĐ Có + Trung tâm Giống Nông nghiệp
+2. Lĩnh vực PGĐ Hương: chuyển PGĐ Hương + Chi cục Bảo vệ môi trường; PGĐ Hương + Trung tâm Quan trắc tài nguyên và môi trường
+3. Lĩnh vực PGĐ Hoan: chuyển PGĐ Hoan + Chi cục kiểm lâm
+4. Lĩnh vực PGĐ Trân: chuyển PGĐ Trân + chi cục Trồng trọt và bảo vệ thực vật; PGĐ Trân + chi cục Quản lý chất lượng nông lâm sản và thủy sản; PGĐ Trân + Trung tâm Khuyến nông
+5. Lĩnh vực PGĐ Vy: chuyển PGĐ Vy + Chi cục Phát triển nông thôn + Văn phòng điều phối xây dựng nông thôn mới
+6. Lĩnh vực PGĐ Chương: chuyển PGĐ Chương + phòng Địa chất khoáng sản
+7. PGĐ An : chuyển PGĐ An xử lý (PGĐ tự chuyển đơn vị)
+8. PGĐ Khánh: chuyển PGĐ Khánh xử lý (PGĐ tự chuyển đơn vị)
