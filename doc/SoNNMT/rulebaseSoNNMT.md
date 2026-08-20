@@ -10,10 +10,11 @@
 
 **Luồng chung:** Mọi văn bản đến đều qua **Giám đốc Sở bút phê trước**, sau đó Giám đốc mới chuyển xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực (xem Mục I). Trên cơ sở đó, khi xác định người/đơn vị **xử lý chính**, kiểm tra theo đúng thứ tự sau, dừng lại ở quy tắc đầu tiên khớp:
 
-1. **Ngoại lệ đặc biệt** (Mục IV) — các trường hợp có quy tắc riêng, bỏ qua quy tắc chung.
-2. **Văn bản khẩn** — còn 1–2 ngày hạn xử lý (Mục V) — chuyển song song lãnh đạo + đơn vị.
-3. **Giấy mời / văn bản có nội dung như giấy mời** (Mục II.4).
-4. **Quy tắc chung còn lại theo nguồn gửi** (Mục II.1–II.3), đối chiếu **lĩnh vực phụ trách** của từng lãnh đạo (Mục III) để xác định người xử lý chính.
+1. **Văn bản trả lời / tổng hợp có ký hiệu Phòng-đơn vị** (Mục IV) — nếu văn bản mang tính trả lời hoặc tổng hợp cho văn bản do một Phòng/đơn vị của Sở phát hành (nhận biết qua ký hiệu văn bản), chuyển thẳng theo ký hiệu, bỏ qua mọi quy tắc khác.
+2. **Ngoại lệ đặc biệt** (Mục V) — các trường hợp có quy tắc riêng, bỏ qua quy tắc chung. **Riêng V.9 (thủy lợi) và V.10 (thủy sản): nếu văn bản còn 1–2 ngày hạn xử lý, áp dụng Mục VI thay vì V.9/V.10** (xem ghi chú dưới bảng Mục V).
+3. **Văn bản khẩn** — còn 1–2 ngày hạn xử lý (Mục VI) — chuyển song song lãnh đạo + đơn vị.
+4. **Giấy mời / văn bản có nội dung như giấy mời** (Mục II.4).
+5. **Quy tắc chung còn lại theo nguồn gửi** (Mục II.1–II.3), đối chiếu **lĩnh vực phụ trách** của từng lãnh đạo (Mục III) để xác định người xử lý chính.
 
 ---
 
@@ -32,7 +33,7 @@ Giám đốc Sở bút phê → chuyển Lãnh đạo Sở/đơn vị phụ trá
 Lãnh đạo Sở bút phê → chuyển phòng, ban xử lý
 ```
 
-**Diễn giải:** Mọi văn bản đến đều qua Văn thư để vào sổ, sau đó **chuyển Giám đốc Sở bút phê trước** — bất kể nội dung thuộc lĩnh vực của Giám đốc hay của một Phó Giám đốc cụ thể nào. Sau khi bút phê, Giám đốc chuyển văn bản xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực tương ứng (xác định theo Mục II–V). Bước cuối luôn là lãnh đạo/đơn vị phụ trách bút phê chuyển phòng/ban xử lý.
+**Diễn giải:** Mọi văn bản đến đều qua Văn thư để vào sổ, sau đó **chuyển Giám đốc Sở bút phê trước** — bất kể nội dung thuộc lĩnh vực của Giám đốc hay của một Phó Giám đốc cụ thể nào. Sau khi bút phê, Giám đốc chuyển văn bản xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực tương ứng (xác định theo Mục II–VI, theo đúng thứ tự ưu tiên ở trên). Bước cuối luôn là lãnh đạo/đơn vị phụ trách bút phê chuyển phòng/ban xử lý.
 
 ---
 
@@ -42,11 +43,11 @@ Lãnh đạo Sở bút phê → chuyển phòng, ban xử lý
 
 Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giám đốc Sở đã bút phê chuyển xuống (mọi văn bản đều qua Giám đốc bút phê trước theo Mục I).
 
-| Điều kiện                                                                             | Xử lý chính                                       | Phối hợp / Theo dõi                                     |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
-| Thuộc lĩnh vực của**PGĐ** phụ trách                                         | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu | Giám đốc Sở (để theo dõi, nắm thông tin)          |
-| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                      | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
-| Thuộc lĩnh vực **đất đai** (quản lý đất đai, GCN QSDĐ) | Chi cục Quản lý đất đai **hoặc** Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Phối hợp xử lý") |
+| Điều kiện                                                                             | Xử lý chính                                                                 | Phối hợp / Theo dõi                                     |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| Thuộc lĩnh vực của**PGĐ** phụ trách                                         | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu                           | Giám đốc Sở (để theo dõi, nắm thông tin)          |
+| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                                                | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
+| Thuộc lĩnh vực**đất đai** (quản lý đất đai, GCN QSDĐ)                  | Chi cục Quản lý đất đai**hoặc** Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Phối hợp xử lý")                |
 
 ### II.2. Văn bản của Sở, ngành khác
 
@@ -54,8 +55,8 @@ Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giá
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ---------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                                             | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu                | —                                 |
 | Thuộc lĩnh vực**GĐ** phụ trách, hoặc tổng hợp nhiều lĩnh vực                               | Chánh Văn phòng Sở**+** đơn vị tham mưu (nếu ND rõ ràng) | Giám đốc Sở (mục "Theo dõi") |
-| Thuộc lĩnh vực **đất đai** | Chi cục Quản lý đất đai | Giám đốc Sở (mục "Theo dõi") |
-| **Giấy chứng nhận quyền sử dụng đất (GCN QSDĐ)** | Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Theo dõi") |
+| Thuộc lĩnh vực**đất đai**                                                                        | Chi cục Quản lý đất đai                                       | Giám đốc Sở (mục "Theo dõi") |
+| **Giấy chứng nhận quyền sử dụng đất (GCN QSDĐ)**                                              | Văn phòng Đăng ký đất đai                                   | Giám đốc Sở (mục "Theo dõi") |
 | VB lấy ý kiến thẩm định dự án; lấy ý kiến quy hoạch tỷ lệ 1/500; hoặc có yếu tố phức tạp | Chánh Văn phòng Sở (rà soát, chuyển đơn vị liên quan)    | —                                 |
 
 > **Ngoại lệ riêng:** Văn bản của **Sở Tài chính** có nội dung thẩm định hoặc thẩm định dự án → chuyển thẳng **Phòng KH-TC** (xử lý chính) **+ CVP Sở** (mục "Phối hợp xử lý") — áp dụng thay cho quy tắc chung ở trên.
@@ -113,48 +114,88 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | **Phạm Quý Phương** | **Phó Chánh Văn phòng** | phuongpq@snnmt.gialai.gov.vn |
 | Đặng Phi Trường           | Công chức xếp lịch công tác | truongdp@snnmt.gialai.gov.vn |
 
-> Văn phòng Sở thuộc lĩnh vực phụ trách của **PGĐ Nguyễn Thị Tố Trân** (xem Mục III). Văn phòng có nhiều Phó Chánh Văn phòng phụ trách các mảng khác nhau: ông **Hồ Đắc Khánh** phụ trách giấy mời/lịch công tác (Mục II.4); ông **Phạm Quý Phương** phụ trách tiếp công dân, giải quyết khiếu nại/tố cáo/kiến nghị (Mục IV.1–2).
+> Văn phòng Sở thuộc lĩnh vực phụ trách của **PGĐ Nguyễn Thị Tố Trân** (xem Mục III). Văn phòng có nhiều Phó Chánh Văn phòng phụ trách các mảng khác nhau: ông **Hồ Đắc Khánh** phụ trách giấy mời/lịch công tác (Mục II.4); ông **Phạm Quý Phương** phụ trách tiếp công dân, giải quyết khiếu nại/tố cáo/kiến nghị (Mục V.1–2).
 
 ### III.3. Đơn vị chuyển kèm theo lĩnh vực PGĐ phụ trách
 
 "Theo từng lĩnh vực PGĐ Sở phụ trách, khi chuyển văn bản sẽ kèm theo đơn vị mình quản lý".*
 
-| PGĐ phụ trách lĩnh vực      | Chuyển đến (PGĐ + đơn vị kèm theo)                                                                                                                                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PGĐ Đoàn Ngọc Có           | PGĐ Có + **Chi cục Chăn nuôi và Thú y**; PGĐ Có + **Trung tâm Giống Nông nghiệp**                                                                                                                |
-| PGĐ Hà Thị Thanh Hương    | PGĐ Hương + **Chi cục Bảo vệ môi trường**; PGĐ Hương + **Trung tâm Quan trắc tài nguyên và môi trường**                                                                                        |
-| PGĐ Nguyễn Văn Hoan      | PGĐ Hoan + **Chi cục Kiểm lâm**                                                                                                                                                                                |
-| PGĐ Nguyễn Thị Tố Trân    | PGĐ Trân + **Chi cục Trồng trọt và Bảo vệ thực vật**; PGĐ Trân + **Chi cục Quản lý chất lượng nông lâm sản và thủy sản**; PGĐ Trân + **Trung tâm Khuyến nông**                |
-| PGĐ Nguyễn Thị Thế Vy     | PGĐ Vy + **Chi cục Phát triển nông thôn** + **Văn phòng Điều phối xây dựng nông thôn mới**                                                                                           |
-| PGĐ Trần Đình Chương     | PGĐ Chương + **Phòng Địa chất và Khoáng sản**                                                                                                                                                                 |
-| PGĐ Vũ Ngọc An              | PGĐ An **xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                                        |
-| PGĐ Trần Quốc Khánh       | PGĐ Khánh **xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                                     |
+| PGĐ phụ trách lĩnh vực | Chuyển đến (PGĐ + đơn vị kèm theo)                                                                                                                                                                   |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PGĐ Đoàn Ngọc Có       | PGĐ Có +**Chi cục Chăn nuôi và Thú y**; PGĐ Có + **Trung tâm Giống Nông nghiệp**                                                                                                    |
+| PGĐ Hà Thị Thanh Hương | PGĐ Hương +**Chi cục Bảo vệ môi trường**; PGĐ Hương + **Trung tâm Quan trắc tài nguyên và môi trường**                                                                       |
+| PGĐ Nguyễn Văn Hoan      | PGĐ Hoan +**Chi cục Kiểm lâm**                                                                                                                                                                     |
+| PGĐ Nguyễn Thị Tố Trân | PGĐ Trân +**Chi cục Trồng trọt và Bảo vệ thực vật**; PGĐ Trân + **Chi cục Quản lý chất lượng nông lâm sản và thủy sản**; PGĐ Trân + **Trung tâm Khuyến nông** |
+| PGĐ Nguyễn Thị Thế Vy   | PGĐ Vy +**Chi cục Phát triển nông thôn** + **Văn phòng Điều phối xây dựng nông thôn mới**                                                                                        |
+| PGĐ Trần Đình Chương  | PGĐ Chương +**Phòng Địa chất và Khoáng sản**                                                                                                                                                 |
+| PGĐ Vũ Ngọc An           | PGĐ An**xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                        |
+| PGĐ Trần Quốc Khánh     | PGĐ Khánh**xử lý** (PGĐ tự chuyển đơn vị)                                                                                                                                                    |
 
-> Quy tắc này làm rõ "đơn vị tham mưu" kèm theo ở Mục II: khi văn bản thuộc lĩnh vực của một PGĐ, chuyển PGĐ đó **kèm đơn vị do PGĐ quản lý**. Riêng **PGĐ Vũ Ngọc An** và **PGĐ Trần Quốc Khánh** chỉ chuyển PGĐ xử lý (PGĐ tự bút phê chuyển đơn vị) — phù hợp với Mục IV.10–11.
+> Quy tắc này làm rõ "đơn vị tham mưu" kèm theo ở Mục II: khi văn bản thuộc lĩnh vực của một PGĐ, chuyển PGĐ đó **kèm đơn vị do PGĐ quản lý**. Riêng **PGĐ Vũ Ngọc An** và **PGĐ Trần Quốc Khánh** chỉ chuyển PGĐ xử lý (PGĐ tự bút phê chuyển đơn vị) — phù hợp với Mục V.9–10.
 
 ---
 
-## IV. NGOẠI LỆ ĐẶC BIỆT (áp dụng trước quy tắc chung)
+## IV. QUY TẮC CHUYỂN THEO KÝ HIỆU VĂN BẢN (VB trả lời / tổng hợp)
 
-| STT | Nội dung / nguồn văn bản                                                                                                                                                                                                  | Chuyển đến                                                                    |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| 1   | Đối thoại giải quyết khiếu nại                                                                                                                                                                                         | Nhóm:**Quý Phương – Bảo Chi**¹                                      |
-| 2   | Giải quyết đơn, khiếu nại, tố cáo, kiến nghị                                                                                                                                                                        | Nhóm:**Quý Phương – Bảo Chi**¹                                      |
-| 3   | TB cơ quan Thuế: thu hồi đất; nộp tiền thuê đất (trả 1 lần hoặc hàng năm); ngăn chặn chuyển dịch/thế chấp tài sản do chậm/nợ thuế; không thực hiện nghĩa vụ nộp tiền thuê đất             | Chuyển trực tiếp**Chi cục Quản lý đất đai**                       |
-| 4   | TB cơ quan Thuế: nộp tiền cấp quyền khai thác khoáng sản; kê khai, nộp thuế tài nguyên; phí bảo vệ môi trường                                                                                             | **PGĐ Trần Đình Chương** + **Phòng Địa chất Khoáng sản** |
-| 5   | Sở NN&MT tỉnh khác thông báo mất phôi Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất                                                                                            | **Văn phòng Đăng ký đất đai**                                      |
-| 6   | Trung tâm dữ liệu đất đai yêu cầu cung cấp thông tin phục vụ điều tra vụ án liên quan sở hữu, chuyển nhượng BĐS                                                                                        | **Văn phòng Đăng ký đất đai**                                      |
-| 7   | Trung tâm Phát triển quỹ đất thông báo kết quả đấu giá QSDĐ                                                                                                                                                     | **Chi cục Quản lý đất đai**                                          |
-| 8   | Nội dung liên quan tàu cá, nghề cá trên biển, vi phạm IUU                                                                                                                                                            | **PGĐ Trần Quốc Khánh** + **Chi cục Thủy sản**                |
-| 9   | Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án                                                                                                                                              | **Phòng KH-TC** (xử lý chính) + **CVP Sở** (phối hợp xử lý) |
-| 10  | Nội dung: thủy lợi, ao/hồ/đầm/phá, xây dựng công trình thủy lợi, thiên tai, phòng chống lụt bão, khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào               | **PGĐ Vũ Ngọc An** tự bút phê chuyển đơn vị                      |
-| 11  | Nội dung: thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU, cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá | **PGĐ Trần Quốc Khánh** tự bút phê chuyển đơn vị                |
+**Nguyên tắc:** Nếu văn bản đến mang tính **trả lời** hoặc **tổng hợp** cho một văn bản do chính một Phòng/đơn vị thuộc Sở phát hành trước đó — nhận biết qua **ký hiệu văn bản** (ví dụ số hiệu có dạng .../SNNMT-XXX) — thì **chuyển thẳng đến Phòng/đơn vị tương ứng với ký hiệu đó**, không cần qua bút phê xác định theo lĩnh vực (Mục II–III). Quy tắc này có độ ưu tiên cao nhất, áp dụng trước cả Mục V.
+
+### IV.1. Phòng chuyên môn Sở
+
+| Ký hiệu   | Phòng/đơn vị                        |
+| ----------- | --------------------------------------- |
+| SNNMT-TCCB  | Phòng Tổ chức cán bộ Sở           |
+| SNNMT-VP    | Văn phòng Sở                         |
+| SNNMT-ĐCKS | Phòng Địa chất khoáng sản Sở     |
+| SNNMT-KHTC  | Phòng Kế hoạch – Tài chính Sở    |
+| SNNMT-TNN   | Phòng Tài nguyên nước và KTTV Sở |
+
+### IV.2. Chi cục / Trung tâm trực thuộc
+
+| Ký hiệu    | Phòng/đơn vị                                                |
+| ------------ | --------------------------------------------------------------- |
+| SNNMT-CNTY   | Chi cục Chăn nuôi và Thú y                                 |
+| SNNMT-BVTV   | Chi cục Trồng trọt và Bảo vệ thực vật                   |
+| SNNMT-TS     | Chi cục Thủy sản                                             |
+| SNNMT-QLCL   | Chi cục Quản lý chất lượng nông lâm sản và thủy sản |
+| SNNMT-QLĐĐ | Chi cục Quản lý đất đai                                   |
+| SNNMT-KL     | Chi cục Kiểm lâm                                             |
+| SNNMT-BVMT   | Chi cục Bảo vệ môi trường                                 |
+| SNNMT-TL     | Chi cục Thủy lợi                                             |
+| SNNMT-VPĐK  | Trung tâm Khuyến nông                                        |
+| SNNMT-KN     | Trung tâm Khuyến nông                                        |
+
+### IV.3. Đơn vị chuyển kèm lãnh đạo phụ trách (ngoại lệ trong Mục IV)
+
+| Ký hiệu  | Phòng/đơn vị                                     | Kèm theo                             |
+| ---------- | ---------------------------------------------------- | ------------------------------------- |
+| SNNMT-PTNT | Chi cục Phát triển nông thôn                    | **+ PGĐ Nguyễn Thị Thế Vy** |
+| SNNMT-NTM  | Văn phòng Điều phối xây dựng nông thôn mới | **+ PGĐ Nguyễn Thị Thế Vy** |
+
+---
+
+## V. NGOẠI LỆ ĐẶC BIỆT (áp dụng trước quy tắc chung)
+
+| STT | Nội dung / nguồn văn bản                                                                                                                                                                                                                                       | Chuyển đến                                                                    |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| 1   | Đối thoại giải quyết khiếu nại                                                                                                                                                                                                                              | Nhóm:**Quý Phương – Bảo Chi**¹                                      |
+| 2   | Giải quyết đơn, khiếu nại, tố cáo, kiến nghị                                                                                                                                                                                                             | Nhóm:**Quý Phương – Bảo Chi**¹                                      |
+| 3   | TB cơ quan Thuế: thu hồi đất; nộp tiền thuê đất (trả 1 lần hoặc hàng năm); ngăn chặn chuyển dịch/thế chấp tài sản do chậm/nợ thuế; không thực hiện nghĩa vụ nộp tiền thuê đất                                                  | Chuyển trực tiếp**Chi cục Quản lý đất đai**                       |
+| 4   | TB cơ quan Thuế: nộp tiền cấp quyền khai thác khoáng sản; kê khai, nộp thuế tài nguyên; phí bảo vệ môi trường                                                                                                                                  | **PGĐ Trần Đình Chương** + **Phòng Địa chất Khoáng sản** |
+| 5   | Sở NN&MT tỉnh khác thông báo mất phôi Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất                                                                                                                                 | **Văn phòng Đăng ký đất đai**                                      |
+| 6   | Trung tâm dữ liệu đất đai yêu cầu cung cấp thông tin phục vụ điều tra vụ án liên quan sở hữu, chuyển nhượng BĐS                                                                                                                             | **Văn phòng Đăng ký đất đai**                                      |
+| 7   | Trung tâm Phát triển quỹ đất thông báo kết quả đấu giá QSDĐ                                                                                                                                                                                          | **Chi cục Quản lý đất đai**                                          |
+| 8   | Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án                                                                                                                                                                                   | **Phòng KH-TC** (xử lý chính) + **CVP Sở** (phối hợp xử lý) |
+| 9   | Nội dung: thủy lợi, ao/hồ/đầm/phá, xây dựng công trình thủy lợi, thiên tai, phòng chống lụt bão, khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào                                                    | **PGĐ Vũ Ngọc An** tự bút phê chuyển đơn vị                      |
+| 10  | Nội dung: thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU, vi phạm IUU, nghề cá trên biển, cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá | **PGĐ Trần Quốc Khánh** tự bút phê chuyển đơn vị                |
 
 ¹ **Quý Phương** = Phạm Quý Phương, **Phó Chánh Văn phòng** Sở NN&MT (email: phuongpq@snnmt.gialai.gov.vn). **Bảo Chi** = Trần Thị Bảo Chi, Chuyên viên Phòng Kinh tế đất, Chi cục Quản lý đất đai (xem Mục III.1). Nhóm xử lý khiếu nại/tố cáo/kiến nghị gồm 1 đại diện Văn phòng Sở (phụ trách tiếp công dân) + 1 chuyên viên Chi cục Quản lý đất đai (do phần lớn đơn thư liên quan đất đai).
 
+>
+> **Lưu ý về thứ tự ưu tiên với Mục VI:** Mục V.9 (thủy lợi) và V.10 (thủy sản) là quy tắc cho trường hợp **bình thường**. Nếu văn bản thuộc 2 lĩnh vực này còn **1–2 ngày hạn xử lý (khẩn)**, áp dụng **Mục VI** thay thế — chuyển song song lãnh đạo + đơn vị cụ thể, thay vì để lãnh đạo tự bút phê chuyển đơn vị. Xem "Nguyên tắc áp dụng" ở đầu tài liệu.
+
 ---
 
-## V. VĂN BẢN HẠN GẤP (còn 1–2 ngày xử lý) — CHUYỂN SONG SONG
+## VI. VĂN BẢN HẠN GẤP (còn 1–2 ngày xử lý) — CHUYỂN SONG SONG
 
 | Lĩnh vực                                                                                                                                       | Chuyển song song đến                                                              |
 | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
