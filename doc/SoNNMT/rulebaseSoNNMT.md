@@ -4,11 +4,13 @@
 
 *Tổng hợp từ: Hướng dẫn chuyển văn bản đến; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai); rule2.txt (bổ sung quy tắc luân chuyển theo lĩnh vực đất đai).*
 
+*Phiên bản 2 — cập nhật: (1) bỏ khâu Giám đốc Sở bút phê toàn bộ văn bản, Văn thư chuyển trực tiếp theo lĩnh vực GĐ/PGĐ phụ trách; (2) bổ sung Trần Thị Bảo Chi vào nhóm xử lý giấy mời (Mục II.4); (3) văn bản của Sở Tài chính có nội dung thẩm định/thẩm định dự án — chuyển CVP Sở xử lý chính, Phòng KH-TC phối hợp, bổ sung nội dung tham gia/lấy ý kiến của Sở Xây dựng, Sở Tài chính, Ban Quản lý Khu kinh tế; (4) bổ sung lĩnh vực tổ chức cán bộ, kế hoạch tài chính vào Mục II.1.*
+
 ---
 
 ## NGUYÊN TẮC ÁP DỤNG (thứ tự ưu tiên)
 
-**Luồng chung:** Mọi văn bản đến đều qua **Giám đốc Sở bút phê trước**, sau đó Giám đốc mới chuyển xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực (xem Mục I). Trên cơ sở đó, khi xác định người/đơn vị **xử lý chính**, kiểm tra theo đúng thứ tự sau, dừng lại ở quy tắc đầu tiên khớp:
+**Luồng chung:** Văn bản đến **không còn qua Giám đốc Sở bút phê toàn bộ** như trước — **Văn thư chuyển trực tiếp** theo từng lĩnh vực đến **Giám đốc** (nếu thuộc lĩnh vực Giám đốc phụ trách) hoặc **Phó Giám đốc phụ trách lĩnh vực** tương ứng (xem Mục I). Trên cơ sở đó, khi xác định người/đơn vị **xử lý chính**, kiểm tra theo đúng thứ tự sau, dừng lại ở quy tắc đầu tiên khớp:
 
 1. **Văn bản trả lời / tổng hợp có ký hiệu Phòng-đơn vị** (Mục IV) — nếu văn bản mang tính trả lời hoặc tổng hợp cho văn bản do một Phòng/đơn vị của Sở phát hành (nhận biết qua ký hiệu văn bản), chuyển thẳng theo ký hiệu, bỏ qua mọi quy tắc khác.
 2. **Ngoại lệ đặc biệt** (Mục V) — các trường hợp có quy tắc riêng, bỏ qua quy tắc chung. **Riêng V.9 (thủy lợi) và V.10 (thủy sản): nếu văn bản còn 1–2 ngày hạn xử lý, áp dụng Mục VI thay vì V.9/V.10** (xem ghi chú dưới bảng Mục V).
@@ -24,16 +26,17 @@
 Văn bản đến
       │
       ▼
-Văn thư: vào sổ
+Văn thư: vào sổ, xác định lĩnh vực văn bản
       │
       ▼
-Giám đốc Sở bút phê → chuyển Lãnh đạo Sở/đơn vị phụ trách (theo lĩnh vực)
+Văn thư chuyển trực tiếp → Giám đốc (lĩnh vực GĐ phụ trách)
+                          → PGĐ phụ trách lĩnh vực (lĩnh vực PGĐ phụ trách)
       │
       ▼
 Lãnh đạo Sở bút phê → chuyển phòng, ban xử lý
 ```
 
-**Diễn giải:** Mọi văn bản đến đều qua Văn thư để vào sổ, sau đó **chuyển Giám đốc Sở bút phê trước** — bất kể nội dung thuộc lĩnh vực của Giám đốc hay của một Phó Giám đốc cụ thể nào. Sau khi bút phê, Giám đốc chuyển văn bản xuống lãnh đạo Sở/đơn vị phụ trách lĩnh vực tương ứng (xác định theo Mục II–VI, theo đúng thứ tự ưu tiên ở trên). Bước cuối luôn là lãnh đạo/đơn vị phụ trách bút phê chuyển phòng/ban xử lý.
+**Diễn giải:** Văn bản đến qua Văn thư để vào sổ và **xác định lĩnh vực** của văn bản, sau đó **Văn thư chuyển trực tiếp** đến lãnh đạo phụ trách lĩnh vực đó — **không còn qua Giám đốc Sở bút phê toàn bộ văn bản như trước**: văn bản thuộc lĩnh vực Giám đốc phụ trách thì chuyển thẳng Giám đốc; văn bản thuộc lĩnh vực của Phó Giám đốc nào thì chuyển thẳng Phó Giám đốc đó (xác định theo Mục II–VI, theo đúng thứ tự ưu tiên ở trên). Bước cuối luôn là lãnh đạo/đơn vị phụ trách bút phê chuyển phòng/ban xử lý.
 
 ---
 
@@ -41,13 +44,14 @@ Lãnh đạo Sở bút phê → chuyển phòng, ban xử lý
 
 ### II.1. Văn bản Trung ương, UBND tỉnh, Tỉnh ủy
 
-Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giám đốc Sở đã bút phê chuyển xuống (mọi văn bản đều qua Giám đốc bút phê trước theo Mục I).
+Bảng dưới xác định người/đơn vị **xử lý chính** mà **Văn thư chuyển trực tiếp** đến theo lĩnh vực (không qua Giám đốc Sở bút phê trước — theo Mục I).
 
 | Điều kiện                                                                             | Xử lý chính                                                                 | Phối hợp / Theo dõi                                     |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------- |
 | Thuộc lĩnh vực của**PGĐ** phụ trách                                         | PGĐ phụ trách lĩnh vực**+** đơn vị tham mưu                           | Giám đốc Sở (để theo dõi, nắm thông tin)          |
-| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                                                | + đơn vị tham mưu (nếu nội dung văn bản rõ ràng) |
+| Thuộc lĩnh vực**GĐ** phụ trách, hoặc nội dung tổng hợp nhiều lĩnh vực | Giám đốc Sở                                                                | —                |
 | Thuộc lĩnh vực**đất đai** (quản lý đất đai, GCN QSDĐ)                  | Chi cục Quản lý đất đai**hoặc** Văn phòng Đăng ký đất đai | Giám đốc Sở (mục "Phối hợp xử lý")                |
+| Thuộc lĩnh vực**tổ chức cán bộ, kế hoạch tài chính**                  | Phòng Tổ chức cán bộ (lĩnh vực tổ chức cán bộ)**hoặc** Phòng Kế hoạch – Tài chính (lĩnh vực KH-TC) | Giám đốc Sở (mục "Phối hợp xử lý")                |
 
 ### II.2. Văn bản của Sở, ngành khác
 
@@ -59,7 +63,7 @@ Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giá
 | **Giấy chứng nhận quyền sử dụng đất (GCN QSDĐ)**                                              | Văn phòng Đăng ký đất đai                                   | Giám đốc Sở (mục "Theo dõi") |
 | VB lấy ý kiến thẩm định dự án; lấy ý kiến quy hoạch tỷ lệ 1/500; hoặc có yếu tố phức tạp | Chánh Văn phòng Sở (rà soát, chuyển đơn vị liên quan)    | —                                 |
 
-> **Ngoại lệ riêng:** Văn bản của **Sở Tài chính** có nội dung thẩm định hoặc thẩm định dự án → chuyển thẳng **Phòng KH-TC** (xử lý chính) **+ CVP Sở** (mục "Phối hợp xử lý") — áp dụng thay cho quy tắc chung ở trên.
+> **Ngoại lệ riêng:** Văn bản của **Sở Tài chính** có nội dung thẩm định/thẩm định dự án; văn bản tham gia ý kiến, lấy ý kiến thẩm định dự án của **Sở Xây dựng**, **Sở Tài chính**, **Ban Quản lý Khu kinh tế** → chuyển thẳng **CVP Sở** (xử lý chính) **+ Phòng KH-TC** (mục "Phối hợp xử lý") — áp dụng thay cho quy tắc chung ở trên.
 
 ### II.3. Văn bản xã, phường, tổ chức, doanh nghiệp, công dân
 
@@ -70,7 +74,7 @@ Bảng dưới xác định người/đơn vị **xử lý chính** sau khi Giá
 
 ### II.4. Giấy mời và văn bản có nội dung như giấy mời
 
-→ Chuyển **Chánh Văn phòng**, **Phó Chánh Văn phòng (Hồ Đắc Khánh)** và **công chức xếp lịch công tác (Đặng Phi Trường)** để sắp xếp theo lịch công tác.
+→ Chuyển **Chánh Văn phòng**, **Phó Chánh Văn phòng (Hồ Đắc Khánh)**, **công chức xếp lịch công tác (Đặng Phi Trường)** và **Trần Thị Bảo Chi** (xem Mục III.1) để sắp xếp theo lịch công tác.
 
 ---
 
@@ -184,7 +188,7 @@ Dùng bảng này để xác định "PGĐ theo lĩnh vực phụ trách" ở M�
 | 5   | Sở NN&MT tỉnh khác thông báo mất phôi Giấy chứng nhận QSDĐ, quyền sở hữu nhà ở và tài sản gắn liền với đất                                                                                                                                 | **Văn phòng Đăng ký đất đai**                                      |
 | 6   | Trung tâm dữ liệu đất đai yêu cầu cung cấp thông tin phục vụ điều tra vụ án liên quan sở hữu, chuyển nhượng BĐS                                                                                                                             | **Văn phòng Đăng ký đất đai**                                      |
 | 7   | Trung tâm Phát triển quỹ đất thông báo kết quả đấu giá QSDĐ                                                                                                                                                                                          | **Chi cục Quản lý đất đai**                                          |
-| 8   | Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án                                                                                                                                                                                   | **Phòng KH-TC** (xử lý chính) + **CVP Sở** (phối hợp xử lý) |
+| 8   | Văn bản của Sở Tài chính có nội dung thẩm định / thẩm định dự án; văn bản tham gia ý kiến, lấy ý kiến thẩm định dự án của Sở Xây dựng, Sở Tài chính, Ban Quản lý Khu kinh tế                                                                     | **CVP Sở** (xử lý chính) + **Phòng KH-TC** (phối hợp xử lý) |
 | 9   | Nội dung: thủy lợi, ao/hồ/đầm/phá, xây dựng công trình thủy lợi, thiên tai, phòng chống lụt bão, khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan, giếng đào                                                    | **PGĐ Vũ Ngọc An** tự bút phê chuyển đơn vị                      |
 | 10  | Nội dung: thủy sản, tàu cá, giải bản tàu cá, sự cố tràn dầu, nhận chìm vật chất, nuôi trồng/khai thác thủy sản, chống khai thác IUU, vi phạm IUU, nghề cá trên biển, cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá | **PGĐ Trần Quốc Khánh** tự bút phê chuyển đơn vị                |
 
