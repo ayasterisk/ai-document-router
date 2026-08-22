@@ -4,8 +4,6 @@
 
 *Tổng hợp từ: Hướng dẫn chuyển văn bản đến; QĐ 899/QĐ-SNNMT (phân công nhiệm vụ Giám đốc, Phó Giám đốc); Bảng quy tắc ngoại lệ nội bộ; QĐ-UBND tỉnh về kiện toàn Hội đồng thẩm định, xử lý vướng mắc bồi thường, hỗ trợ, tái định cư (bổ sung chức vụ nhân sự Chi cục Quản lý đất đai); rule2.txt (bổ sung quy tắc luân chuyển theo lĩnh vực đất đai).*
 
-*Phiên bản 2 — cập nhật: (1) bỏ khâu Giám đốc Sở bút phê toàn bộ văn bản, Văn thư chuyển trực tiếp theo lĩnh vực GĐ/PGĐ phụ trách; (2) bổ sung Trần Thị Bảo Chi vào nhóm xử lý giấy mời (Mục II.4); (3) văn bản của Sở Tài chính có nội dung thẩm định/thẩm định dự án — chuyển CVP Sở xử lý chính, Phòng KH-TC phối hợp, bổ sung nội dung tham gia/lấy ý kiến của Sở Xây dựng, Sở Tài chính, Ban Quản lý Khu kinh tế; (4) bổ sung lĩnh vực tổ chức cán bộ, kế hoạch tài chính vào Mục II.1.*
-
 ---
 
 ## NGUYÊN TẮC ÁP DỤNG (thứ tự ưu tiên)
