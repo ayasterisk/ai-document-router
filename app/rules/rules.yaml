@@ -1,0 +1,528 @@
+# =============================================================================
+# RULEBASE PHÂN LUỒNG VĂN BẢN ĐẾN — Sở Nông nghiệp và Môi trường tỉnh Gia Lai
+# Chuyển đổi từ: doc/SoNNMT/rulebaseSoNNMT.md (+ rule.txt, rule2.txt)
+# =============================================================================
+# Cấu trúc:
+#   meta        : thông tin phiên bản / nguồn
+#   lookup      : bảng tra cứu tĩnh (lĩnh vực → lãnh đạo + đơn vị; ký hiệu → đơn vị)
+#   personnel   : chuẩn hóa tên nhân sự / đơn vị xuất hiện trong action
+#   rules       : danh sách rule định tuyến, engine duyệt theo `priority` tăng dần
+#                 và dừng ở rule đầu tiên khớp (theo "Nguyên tắc áp dụng").
+#
+# action gồm 3 vai trò (có thể rỗng):
+#   primary     : xử lý chính
+#   coordinator : phối hợp xử lý
+#   monitor     : theo dõi
+#
+# condition dùng 1 trong các `type`:
+#   ky_hieu        : số hiệu văn bản chứa ký hiệu phòng/đơn vị (tra lookup.ky_hieu)
+#   giay_moi       : văn bản có tính chất giấy mời
+#   khan           : văn bản khẩn (còn 1–2 ngày hạn xử lý)
+#   keywords       : khớp từ khóa trên trích yếu + nội dung PDF (all_of / any_of)
+#   source         : phân loại nguồn gửi (cap_tren | so_nganh | khac)
+#   linh_vuc       : khớp lĩnh vực đã nhận diện (tra lookup.linh_vuc_phu_trach)
+# =============================================================================
+
+meta:
+  version: "1.0"
+  department: "SoNNMT"
+  department_name: "Sở Nông nghiệp và Môi trường tỉnh Gia Lai"
+  source: "doc/SoNNMT/rulebaseSoNNMT.md"
+  effective_from: "2026-08-24"
+
+# -----------------------------------------------------------------------------
+# Bảng tra cứu tĩnh
+# -----------------------------------------------------------------------------
+lookup:
+  # Phân loại nguồn gửi theo tên cơ quan ban hành (khớp chứa chuỗi, không phân biệt hoa thường)
+  nguon_gui:
+    # Engine duyệt theo thứ tự: specific_so_nganh -> cap_tren -> so_nganh -> khac.
+    # (tránh "Cục Thuế"/"Bộ chỉ huy quân sự" địa phương bị nhận nhầm thành cấp trên)
+    specific_so_nganh:
+      - "cục thuế"
+      - "chi cục thuế"
+      - "bộ chỉ huy quân sự"
+      - "công an tỉnh"
+      - "công an thành phố"
+    cap_tren:
+      - "trung ương"
+      - "chính phủ"
+      - "thủ tướng"
+      - "tổng cục"
+      - "bộ trưởng"
+      - "bộ "
+      - "ubnd tỉnh"
+      - "ủy ban nhân dân tỉnh"
+      - "tỉnh ủy"
+      - "hội đồng nhân dân"
+      - "hđnd"
+      - "viện kiểm sát nhân dân"
+      - "tòa án nhân dân"
+      - "quốc hội"
+      - "chủ tịch nước"
+    so_nganh:
+      - "sở "
+      - "ban quản lý"
+      - "ubnd huyện"
+      - "ubnd thành phố"
+      - "ubnd thị xã"
+      - "ủy ban nhân dân huyện"
+      - "ủy ban nhân dân thành phố"
+      - "ủy ban nhân dân thị xã"
+      - "ủy ban mặt trận tổ quốc"
+      - "hội nông dân"
+      - "liên đoàn lao động"
+    khac:
+      - "ubnd xã"
+      - "ubnd phường"
+      - "ủy ban nhân dân xã"
+      - "ủy ban nhân dân phường"
+      - "công ty"
+      - "doanh nghiệp"
+      - "hợp tác xã"
+      - "trường "
+      - "bệnh viện"
+      - "công dân"
+      - "hộ gia đình"
+      - "cá nhân"
+
+  # Lĩnh vực phụ trách → lãnh đạo + đơn vị kèm theo (Mục III + III.3)
+  linh_vuc_phu_trach:
+    - linh_vuc: "đất đai"
+      lanh_dao: "Giám đốc Cao Thanh Thương"
+      don_vi: ["Chi cục Quản lý đất đai", "Văn phòng Đăng ký đất đai"]
+      keywords: ["đất đai", "quyền sử dụng đất", "giấy chứng nhận quyền sử dụng đất", "gcn", "thu hồi đất", "bồi thường", "tái định cư", "đấu giá quyền sử dụng đất", "chuyển nhượng", "đăng ký đất đai", "sổ đỏ", "địa chính"]
+    - linh_vuc: "thủy lợi - nước"
+      lanh_dao: "PGĐ Vũ Ngọc An"
+      don_vi: ["Chi cục Thủy lợi", "Phòng Tài nguyên nước và KTTV"]
+      keywords: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào", "nước sạch nông thôn", "khí tượng thủy văn"]
+    - linh_vuc: "thủy sản"
+      lanh_dao: "PGĐ Trần Quốc Khánh"
+      don_vi: ["Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan"]
+      keywords: ["thủy sản", "tàu cá", "giải bản tàu cá", "sự cố tràn dầu", "nhận chìm vật chất", "nuôi trồng thủy sản", "khai thác thủy sản", "iuu", "cảng cá", "bến cá", "khu neo đậu", "nghề cá", "ngư dân"]
+    - linh_vuc: "địa chất khoáng sản"
+      lanh_dao: "PGĐ Trần Đình Chương"
+      don_vi: ["Phòng Địa chất và Khoáng sản"]
+      keywords: ["địa chất", "khoáng sản", "khai thác khoáng sản", "thuế tài nguyên", "phí bảo vệ môi trường"]
+    - linh_vuc: "trồng trọt - bảo vệ thực vật"
+      lanh_dao: "PGĐ Nguyễn Thị Tố Trân"
+      don_vi: ["Chi cục Trồng trọt và Bảo vệ thực vật", "Trung tâm Khuyến nông"]
+      keywords: ["trồng trọt", "bảo vệ thực vật", "khuyến nông", "giống cây trồng", "kiểm dịch thực vật", "cây trồng", "nông sản"]
+    - linh_vuc: "chăn nuôi - thú y"
+      lanh_dao: "PGĐ Đoàn Ngọc Có"
+      don_vi: ["Chi cục Chăn nuôi và Thú y", "Trung tâm Giống Nông nghiệp"]
+      keywords: ["chăn nuôi", "thú y", "dịch bệnh gia súc", "gia cầm", "giống vật nuôi", "giống nông nghiệp", "quy hoạch nông nghiệp"]
+    - linh_vuc: "lâm nghiệp - kiểm lâm"
+      lanh_dao: "PGĐ Nguyễn Văn Hoan"
+      don_vi: ["Chi cục Kiểm lâm"]
+      keywords: ["lâm nghiệp", "kiểm lâm", "rừng", "phòng hộ", "rừng đặc dụng", "bảo tồn thiên nhiên", "phá rừng", "quản lý rừng"]
+    - linh_vuc: "bảo vệ môi trường"
+      lanh_dao: "PGĐ Hà Thị Thanh Hương"
+      don_vi: ["Chi cục Bảo vệ môi trường", "Trung tâm Quan trắc tài nguyên và môi trường"]
+      keywords: ["bảo vệ môi trường", "môi trường", "đa dạng sinh học", "chất thải", "ô nhiễm", "quan trắc", "đánh giá tác động môi trường", "biến đổi khí hậu"]
+    - linh_vuc: "phát triển nông thôn"
+      lanh_dao: "PGĐ Nguyễn Thị Thế Vy"
+      don_vi: ["Chi cục Phát triển nông thôn", "Văn phòng Điều phối xây dựng nông thôn mới"]
+      keywords: ["phát triển nông thôn", "giảm nghèo", "nông thôn mới", "ntm", "định canh định cư", "hạ tầng nông thôn"]
+    - linh_vuc: "tổ chức cán bộ"
+      lanh_dao: "Giám đốc Cao Thanh Thương"
+      don_vi: ["Phòng Tổ chức cán bộ"]
+      keywords: ["tổ chức cán bộ", "bổ nhiệm", "điều động", "biên chế", "cán bộ", "thi đua khen thưởng", "kỷ luật"]
+    - linh_vuc: "kế hoạch - tài chính"
+      lanh_dao: "Giám đốc Cao Thanh Thương"
+      don_vi: ["Phòng Kế hoạch - Tài chính"]
+      keywords: ["kế hoạch", "tài chính", "ngân sách", "đầu tư công", "thẩm định dự án", "quyết toán", "dự toán"]
+    - linh_vuc: "tiếp công dân - khiếu nại tố cáo"
+      lanh_dao: "Giám đốc Cao Thanh Thương"
+      don_vi: ["Văn phòng Sở", "Chi cục Quản lý đất đai"]
+      keywords: ["tiếp công dân", "khiếu nại", "tố cáo", "kiến nghị", "phản ánh", "đơn thư"]
+
+  # Ký hiệu văn bản → đơn vị (Mục IV) — áp dụng ưu tiên cao nhất
+  ky_hieu:
+    "SNNMT-TCCB": { don_vi: "Phòng Tổ chức cán bộ Sở", kem_lanh_dao: null }
+    "SNNMT-VP": { don_vi: "Văn phòng Sở", kem_lanh_dao: null }
+    "SNNMT-ĐCKS": { don_vi: "Phòng Địa chất khoáng sản Sở", kem_lanh_dao: null }
+    "SNNMT-KHTC": { don_vi: "Phòng Kế hoạch - Tài chính Sở", kem_lanh_dao: null }
+    "SNNMT-TNN": { don_vi: "Phòng Tài nguyên nước và KTTV Sở", kem_lanh_dao: null }
+    "SNNMT-CNTY": { don_vi: "Chi cục Chăn nuôi và Thú y", kem_lanh_dao: null }
+    "SNNMT-BVTV": { don_vi: "Chi cục Trồng trọt và Bảo vệ thực vật", kem_lanh_dao: null }
+    "SNNMT-TS": { don_vi: "Chi cục Thủy sản", kem_lanh_dao: null }
+    "SNNMT-QLCL": { don_vi: "Chi cục Quản lý chất lượng nông lâm sản và thủy sản", kem_lanh_dao: null }
+    "SNNMT-QLĐĐ": { don_vi: "Chi cục Quản lý đất đai", kem_lanh_dao: null }
+    "SNNMT-KL": { don_vi: "Chi cục Kiểm lâm", kem_lanh_dao: null }
+    "SNNMT-BVMT": { don_vi: "Chi cục Bảo vệ môi trường", kem_lanh_dao: null }
+    "SNNMT-TL": { don_vi: "Chi cục Thủy lợi", kem_lanh_dao: null }
+    # CẦN KIỂM CHỨNG: nguồn ghi "Trung tâm Khuyến nông" — nghi ngờ nhầm, VPĐK thường là Văn phòng Đăng ký đất đai
+    "SNNMT-VPĐK": { don_vi: "Trung tâm Khuyến nông", kem_lanh_dao: null, note: "CẦN KIỂM CHỨNG: VPĐK có thể là Văn phòng Đăng ký đất đai" }
+    "SNNMT-KN": { don_vi: "Trung tâm Khuyến nông", kem_lanh_dao: null }
+    "SNNMT-PTNT": { don_vi: "Chi cục Phát triển nông thôn", kem_lanh_dao: "PGĐ Nguyễn Thị Thế Vy" }
+    "SNNMT-NTM": { don_vi: "Văn phòng Điều phối xây dựng nông thôn mới", kem_lanh_dao: "PGĐ Nguyễn Thị Thế Vy" }
+
+# -----------------------------------------------------------------------------
+# Chuẩn hóa tên nhân sự / đơn vị (dùng cho output + audit)
+# -----------------------------------------------------------------------------
+personnel:
+  "Quý Phương": "Phạm Quý Phương"
+  "Bảo Chi": "Trần Thị Bảo Chi"
+  "PGĐ An": "PGĐ Vũ Ngọc An"
+  "PGĐ Khánh": "PGĐ Trần Quốc Khánh"
+  "PGĐ Chương": "PGĐ Trần Đình Chương"
+  "PGĐ Trân": "PGĐ Nguyễn Thị Tố Trân"
+  "PGĐ Có": "PGĐ Đoàn Ngọc Có"
+  "PGĐ Hương": "PGĐ Hà Thị Thanh Hương"
+  "PGĐ Hoan": "PGĐ Nguyễn Văn Hoan"
+  "PGĐ Vy": "PGĐ Nguyễn Thị Thế Vy"
+  "GĐ Sở": "Giám đốc Cao Thanh Thương"
+  "CVP Sở": "Chánh Văn phòng Sở"
+
+# -----------------------------------------------------------------------------
+# RULES — duyệt theo priority tăng dần, dừng ở rule đầu tiên khớp
+# -----------------------------------------------------------------------------
+rules:
+  # ---- P1: Văn bản trả lời / tổng hợp theo ký hiệu (Mục IV) ----
+  - id: "IV"
+    priority: 1
+    name: "Văn bản trả lời / tổng hợp theo ký hiệu phòng-đơn vị"
+    condition:
+      type: ky_hieu
+    action:
+      primary: ["{ky_hieu.don_vi}"]
+      coordinator: []
+      monitor: []
+    note: "Chuyển thẳng theo ký hiệu văn bản; bỏ qua mọi quy tắc khác."
+
+  # ---- P2: Ngoại lệ đặc biệt (Mục V) ----
+  - id: "V.1"
+    priority: 2
+    name: "Đối thoại giải quyết khiếu nại"
+    condition:
+      type: keywords
+      any_of: ["đối thoại giải quyết khiếu nại"]
+    action:
+      primary: ["Phạm Quý Phương", "Trần Thị Bảo Chi"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.2"
+    priority: 2
+    name: "Giải quyết đơn, khiếu nại, tố cáo, kiến nghị"
+    condition:
+      type: keywords
+      any_of: ["giải quyết đơn", "khiếu nại", "tố cáo", "kiến nghị"]
+    action:
+      primary: ["Phạm Quý Phương", "Trần Thị Bảo Chi"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.3"
+    priority: 2
+    name: "TB cơ quan Thuế: thu hồi đất / nộp tiền thuê đất / ngăn chặn chuyển dịch thế chấp do nợ thuế"
+    condition:
+      type: keywords
+      source: ["thuế"]
+      any_of: ["thu hồi đất", "tiền thuê đất", "ngăn chặn chuyển dịch", "thế chấp tài sản", "chậm nộp thuế", "nợ thuế", "nghĩa vụ nộp tiền thuê đất"]
+    action:
+      primary: ["Chi cục Quản lý đất đai"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.4"
+    priority: 2
+    name: "TB cơ quan Thuế: cấp quyền khai thác khoáng sản / thuế tài nguyên / phí BVMT"
+    condition:
+      type: keywords
+      source: ["thuế"]
+      any_of: ["cấp quyền khai thác khoáng sản", "thuế tài nguyên", "phí bảo vệ môi trường", "kê khai và nộp thuế tài nguyên"]
+    action:
+      primary: ["PGĐ Trần Đình Chương", "Phòng Địa chất và Khoáng sản"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.5"
+    priority: 2
+    name: "Sở NN&MT tỉnh khác thông báo mất phôi GCN QSDĐ"
+    condition:
+      type: keywords
+      any_of: ["mất phôi giấy chứng nhận", "mất phôi"]
+    action:
+      primary: ["Văn phòng Đăng ký đất đai"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.6"
+    priority: 2
+    name: "Trung tâm dữ liệu đất đai yêu cầu cung cấp thông tin phục vụ điều tra vụ án BĐS"
+    condition:
+      type: keywords
+      any_of: ["trung tâm dữ liệu đất đai", "điều tra vụ án", "sở hữu chuyển bất động sản", "chuyển nhượng bất động sản"]
+    action:
+      primary: ["Văn phòng Đăng ký đất đai"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.7"
+    priority: 2
+    name: "Trung tâm phát triển quỹ đất thông báo kết quả đấu giá QSDĐ"
+    condition:
+      type: keywords
+      any_of: ["trung tâm phát triển quỹ đất", "kết quả đấu giá quyền sử dụng đất", "kết quả đấu giá"]
+    action:
+      primary: ["Chi cục Quản lý đất đai"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.8"
+    priority: 2
+    name: "VB Sở Tài chính / Sở Xây dựng / BQL Khu kinh tế thẩm định hoặc lấy ý kiến thẩm định dự án"
+    condition:
+      type: keywords
+      source: ["sở tài chính", "sở xây dựng", "ban quản lý khu kinh tế"]
+      any_of: ["thẩm định dự án", "thẩm định", "lấy ý kiến thẩm định", "ý kiến thẩm định"]
+    action:
+      primary: ["Chánh Văn phòng Sở"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.8b"
+    priority: 2
+    name: "Báo cáo kết quả thẩm định chủ trương đầu tư dự án (Sở Tài chính)"
+    condition:
+      type: keywords
+      source: ["sở tài chính"]
+      any_of: ["kết quả thẩm định chủ trương đầu tư", "thẩm định chủ trương đầu tư"]
+    action:
+      primary: ["Chi cục Bảo vệ môi trường", "Chi cục Quản lý đất đai", "Chi cục Kiểm lâm", "Trung tâm Quan trắc tài nguyên và môi trường", "Trưởng phòng KH-TC Châu Thái Quy", "Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.11"
+    priority: 2
+    name: "UBND tỉnh QĐ chấp thuận chủ trương đầu tư (liên quan chăn nuôi, thú y)"
+    condition:
+      type: keywords
+      source: ["ubnd tỉnh", "ủy ban nhân dân tỉnh"]
+      all_of: ["chấp thuận chủ trương đầu tư"]
+      any_of: ["chăn nuôi", "thú y"]
+    action:
+      primary: ["Chi cục Bảo vệ môi trường", "Chi cục Quản lý đất đai", "Chi cục Kiểm lâm", "Trung tâm Quan trắc tài nguyên và môi trường", "Trưởng phòng KH-TC Châu Thái Quy", "Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh", "Chi cục Chăn nuôi và Thú y"]
+      coordinator: ["Lãnh đạo Sở"]
+      monitor: []
+
+  - id: "V.12"
+    priority: 2
+    name: "UBND tỉnh QĐ chấp thuận chủ trương đầu tư"
+    condition:
+      type: keywords
+      source: ["ubnd tỉnh", "ủy ban nhân dân tỉnh"]
+      any_of: ["chấp thuận chủ trương đầu tư"]
+    action:
+      primary: ["Chi cục Bảo vệ môi trường", "Chi cục Quản lý đất đai", "Chi cục Kiểm lâm", "Trung tâm Quan trắc tài nguyên và môi trường", "Trưởng phòng KH-TC Châu Thái Quy", "Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh"]
+      coordinator: ["Lãnh đạo Sở"]
+      monitor: []
+
+  - id: "V.13"
+    priority: 2
+    name: "UBND tỉnh QĐ thẩm định báo cáo đánh giá tác động môi trường (ĐTM)"
+    condition:
+      type: keywords
+      source: ["ubnd tỉnh", "ủy ban nhân dân tỉnh"]
+      any_of: ["đánh giá tác động môi trường", "thẩm định báo cáo đánh giá tác động môi trường", "đtm"]
+    action:
+      primary: ["PGĐ Hà Thị Thanh Hương", "Chi cục Bảo vệ môi trường"]
+      coordinator: []
+      monitor: ["Giám đốc Cao Thanh Thương"]
+
+  - id: "V.9"
+    priority: 2
+    name: "Thủy lợi / tài nguyên nước (bình thường)"
+    condition:
+      type: keywords
+      unless_khan: true
+      any_of: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào"]
+    action:
+      primary: ["PGĐ Vũ Ngọc An"]
+      coordinator: []
+      monitor: []
+    note: "PGĐ tự bút phê chuyển đơn vị. Nếu còn 1-2 ngày hạn → ưu tiên áp dụng Mục VI (rule VI.1/VI.2)."
+
+  - id: "V.10"
+    priority: 2
+    name: "Thủy sản / tàu cá / IUU (bình thường)"
+    condition:
+      type: keywords
+      unless_khan: true
+      any_of: ["thủy sản", "tàu cá", "giải bản tàu cá", "sự cố tràn dầu", "nhận chìm vật chất", "nuôi trồng thủy sản", "khai thác thủy sản", "iuu", "nghề cá trên biển", "cảng cá", "bến cá", "khu neo đậu"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh"]
+      coordinator: []
+      monitor: []
+    note: "PGĐ tự bút phê chuyển đơn vị. Nếu còn 1-2 ngày hạn → ưu tiên áp dụng Mục VI (rule VI.3/VI.4)."
+
+  # ---- P3: Văn bản khẩn còn 1-2 ngày (Mục VI) — chuyển song song ----
+  - id: "VI.1"
+    priority: 3
+    name: "Khẩn: thủy lợi, công trình thủy lợi, thiên tai, phòng chống lụt bão"
+    condition:
+      type: khan
+      any_of: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão"]
+    action:
+      primary: ["PGĐ Vũ Ngọc An", "Chi cục Thủy lợi"]
+      coordinator: []
+      monitor: []
+
+  - id: "VI.2"
+    priority: 3
+    name: "Khẩn: khai thác tài nguyên nước, nước dưới đất, nước mặt, giếng khoan/đào"
+    condition:
+      type: khan
+      any_of: ["tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào", "khai thác nước"]
+    action:
+      primary: ["PGĐ Vũ Ngọc An", "Phòng Tài nguyên nước và KTTV"]
+      coordinator: []
+      monitor: []
+
+  - id: "VI.3"
+    priority: 3
+    name: "Khẩn: thủy sản, tàu cá, tràn dầu, nuôi trồng/khai thác thủy sản, IUU"
+    condition:
+      type: khan
+      any_of: ["thủy sản", "tàu cá", "giải bản tàu cá", "sự cố tràn dầu", "nhận chìm vật chất", "nuôi trồng thủy sản", "khai thác thủy sản", "iuu"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"]
+      coordinator: []
+      monitor: []
+
+  - id: "VI.4"
+    priority: 3
+    name: "Khẩn: cảng cá, bến cá, khu neo đậu tránh trú bão cho tàu cá"
+    condition:
+      type: khan
+      any_of: ["cảng cá", "bến cá", "khu neo đậu"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh", "BQL cảng cá", "BQL cảng cá Tam Quan"]
+      coordinator: []
+      monitor: []
+
+  # ---- P4: Giấy mời (Mục II.4) ----
+  - id: "II.4"
+    priority: 4
+    name: "Giấy mời / văn bản có nội dung như giấy mời"
+    condition:
+      type: giay_moi
+    action:
+      primary: ["Chánh Văn phòng Sở", "Hồ Đắc Khánh", "Đặng Phi Trường", "Trần Thị Bảo Chi"]
+      coordinator: []
+      monitor: []
+    note: "Để sắp xếp theo lịch công tác."
+
+  # ---- P5: Quy tắc chung theo nguồn gửi + lĩnh vực phụ trách (Mục II.1-II.3) ----
+  - id: "II.cap_tren.pgd"
+    priority: 5
+    name: "Cấp trên — thuộc lĩnh vực PGĐ phụ trách"
+    condition:
+      type: source
+      source: cap_tren
+      linh_vuc_leader: pgd
+    action:
+      primary: ["{lanh_dao}", "{don_vi}"]
+      coordinator: []
+      monitor: ["Giám đốc Cao Thanh Thương"]
+
+  # đất đai là trường hợp riêng, phải xét trước rule "lĩnh vực GĐ phụ trách"
+  - id: "II.cap_tren.dat_dai"
+    priority: 5
+    name: "Cấp trên — lĩnh vực đất đai"
+    condition:
+      type: source
+      source: cap_tren
+      linh_vuc: "đất đai"
+    action:
+      primary: ["Chi cục Quản lý đất đai"]
+      coordinator: ["Giám đốc Cao Thanh Thương"]
+      monitor: []
+
+  - id: "II.cap_tren.gd"
+    priority: 5
+    name: "Cấp trên — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp nhiều lĩnh vực"
+    condition:
+      type: source
+      source: cap_tren
+      linh_vuc_leader: gd
+    action:
+      primary: ["Giám đốc Cao Thanh Thương"]
+      coordinator: []
+      monitor: []
+
+  - id: "II.so_nganh.pgd"
+    priority: 5
+    name: "Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách"
+    condition:
+      type: source
+      source: so_nganh
+      linh_vuc_leader: pgd
+    action:
+      primary: ["{lanh_dao}", "{don_vi}"]
+      coordinator: []
+      monitor: []
+
+  # gcn cụ thể hơn dat_dai -> xét trước
+  - id: "II.so_nganh.gcn"
+    priority: 5
+    name: "Sở/ngành khác — Giấy chứng nhận quyền sử dụng đất"
+    condition:
+      type: source
+      source: so_nganh
+      linh_vuc: "đất đai"
+      any_of: ["giấy chứng nhận quyền sử dụng đất", "gcn"]
+    action:
+      primary: ["Văn phòng Đăng ký đất đai"]
+      coordinator: []
+      monitor: ["Giám đốc Cao Thanh Thương"]
+
+  - id: "II.so_nganh.dat_dai"
+    priority: 5
+    name: "Sở/ngành khác — lĩnh vực đất đai"
+    condition:
+      type: source
+      source: so_nganh
+      linh_vuc: "đất đai"
+    action:
+      primary: ["Chi cục Quản lý đất đai"]
+      coordinator: []
+      monitor: ["Giám đốc Cao Thanh Thương"]
+
+  - id: "II.so_nganh.gd"
+    priority: 5
+    name: "Sở/ngành khác — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp"
+    condition:
+      type: source
+      source: so_nganh
+      linh_vuc_leader: gd
+    action:
+      primary: ["Chánh Văn phòng Sở", "{don_vi}"]
+      coordinator: []
+      monitor: ["Giám đốc Cao Thanh Thương"]
+
+  - id: "II.khac.pgd"
+    priority: 5
+    name: "Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách"
+    condition:
+      type: source
+      source: khac
+      linh_vuc_leader: pgd
+    action:
+      primary: ["{lanh_dao}", "{don_vi}"]
+      coordinator: []
+      monitor: []
+
+  - id: "II.khac.gd"
+    priority: 5
+    name: "Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực GĐ phụ trách"
+    condition:
+      type: source
+      source: khac
+      linh_vuc_leader: gd
+    action:
+      primary: ["{don_vi}"]
+      coordinator: ["Chánh Văn phòng Sở"]
+      monitor: []

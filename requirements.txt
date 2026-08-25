@@ -1,0 +1,12 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+pydantic>=2.7
+PyYAML>=6.0
+pdfplumber>=0.11
+pypdf>=5.0
+httpx>=0.27
+
+# OCR (bản scan) — bật khi cần, yêu cầu binary Tesseract cài sẵn:
+# pytesseract>=0.3.13
+# pdf2image>=1.17
