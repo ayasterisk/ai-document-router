@@ -1,23 +1,24 @@
-"""Sinh PDF từ rulebaseSoNNMT.md, tái tạo format của rulebaseSoNNMT.pdf (wkhtmltopdf).
+"""Chuyển Markdown -> HTML với CSS khớp format PDF gốc (wkhtmltopdf), để in bằng Chrome headless.
 
-Quan sát từ PDF gốc:
-  - A4, margin ~4mm, body DejaVuSans 6.9pt màu #1F2937
+Dùng:
+  python tools/build_pdf.py [input.md] [output.html]
+  (mặc định: doc/SoNNMT/rulebaseSoNNMT.md -> tools/rulebase.html)
+
+Style quan sát từ PDF gốc:
+  - A4, margin ~4mm, body sans-serif 6.9pt màu #1F2937
   - H1 #0B3D2E 12.7pt / H2 #0B5D43 9.8pt / H3 #14532D 8.1pt
   - <strong> màu #0B3D2E; <em> màu #4B5563
-  - bảng viền #CCD6E0, header nền nhạt #F2F5F2 chữ #0B3D2E 6.3pt
+  - bảng viền #CCD6E0, header nền #F2F5F2 chữ #0B3D2E 6.3pt
   - code/pre nền #F7F9FA; blockquote nền #E8F0E8 viền trái xanh
-
-Đầu ra: tools/rulebase.html (dùng Chrome headless in ra PDF).
 """
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
-MD = ROOT / "doc" / "SoNNMT" / "rulebaseSoNNMT.md"
-OUT_HTML = ROOT / "tools" / "rulebase.html"
 
 CSS = """
 @page { size: A4; margin: 4mm; }
@@ -56,9 +57,11 @@ blockquote p { margin: 2px 0; }
 
 
 def main() -> None:
-    md_text = MD.read_text(encoding="utf-8")
+    md = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "doc" / "SoNNMT" / "rulebaseSoNNMT.md"
+    out = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "tools" / "rulebase.html"
+
     body = markdown.markdown(
-        md_text,
+        md.read_text(encoding="utf-8"),
         extensions=["tables", "fenced_code", "sane_lists"],
     )
     html_doc = (
@@ -67,8 +70,8 @@ def main() -> None:
         f"<style>{CSS}</style></head>\n"
         f"<body>\n{body}\n</body></html>"
     )
-    OUT_HTML.write_text(html_doc, encoding="utf-8")
-    print(f"wrote {OUT_HTML} ({len(html_doc)} bytes)")
+    out.write_text(html_doc, encoding="utf-8")
+    print(f"wrote {out} ({len(html_doc)} bytes)")
 
 
 if __name__ == "__main__":

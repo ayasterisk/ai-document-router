@@ -1,7 +1,7 @@
 # Skill: verify_metadata
 
-Đối chiếu 6 trường metadata (số hiệu, loại, cơ quan ban hành, người ký, ngày, trích yếu)
-với nội dung PDF. Phát hiện sai lệch (ví dụ trích yếu không khớp nội dung, người ký sai).
+Sau khi trích metadata từ nội dung, kiểm tra tính nhất quán nội bộ (ví dụ: loại văn bản
+ở tiêu đề có khớp trích yếu không; số hiệu có khớp cơ quan ban hành không).
 
-- Nếu sai lệch nghiêm trọng → dừng, trả `needs_review: true` và nêu lý do, KHÔNG tự định tuyến.
-- Nếu khớp → trả về xác nhận để tiếp tục bước classify.
+- Nếu mâu thuẫn nghiêm trọng → trả `needs_review: true` và nêu lý do, KHÔNG tự định tuyến.
+- Nếu hợp lệ → tiếp tục bước classify.

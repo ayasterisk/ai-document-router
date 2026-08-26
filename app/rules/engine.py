@@ -1,8 +1,8 @@
 """Rule engine deterministic cho Sở NN&MT.
 
-Không phụ thuộc model: nhận một Document, áp dụng rule theo đúng thứ tự ưu tiên
-("Nguyên tắc áp dụng" trong rulebase), dừng ở rule đầu tiên khớp, trả kết quả kèm
-độ tin cậy và danh sách rule đã khớp.
+Nhận một Document (được dựng từ metadata trích từ nội dung văn bản), áp dụng rule
+theo đúng thứ tự ưu tiên ("Nguyên tắc áp dụng"), dừng ở rule đầu tiên khớp, trả về
+4 trường kết quả: Đơn vị xử lý chính / Phối hợp xử lý / Lãnh đạo theo dõi / Hạn thực hiện.
 
 Thứ tự ưu tiên (khớp rulebaseSoNNMT.md):
   P1 (1): ký hiệu văn bản (Mục IV)
@@ -43,9 +43,9 @@ _TOKEN_SPLIT = re.compile(r"[^a-z0-9]+")
 def _contains(hay_norm: str, keyword: str) -> bool:
     """Khớp keyword trong haystack đã chuẩn hóa.
 
-    - Từ đơn (không chứa khoảng trắng) -> khớp token chính xác (tránh
-      'hồ' -> 'ho' khớp nhầm 'không'/'họp').
-    - Cụm từ -> khớp substring (để bắt được 'công trình thủy lợi'...).
+    - Từ đơn (không chứa khoảng trắng) -> khớp token chính xác (tránh 'hồ'->'ho'
+      khớp nhầm 'không'/'họp').
+    - Cụm từ -> khớp substring (để bắt 'công trình thủy lợi'...).
     """
     kw = norm(keyword)
     if " " in kw:
@@ -64,8 +64,9 @@ class Document:
     nguoi_ky: str = ""
     ngay_van_ban: Optional[date] = None
     trich_yeu: str = ""
-    han_xu_ly: Optional[date] = None
-    noi_dung: str = ""
+    noi_dung: str = ""              # toàn bộ text đã trích
+    han_thuc_hien: Optional[str] = None  # "YYYY-MM-DD" hoặc "hỏa tốc"
+    khan: bool = False              # dấu hiệu khẩn (khẩn/hỏa tốc, hoặc hạn <= 2 ngày)
 
     def haystack(self) -> str:
         return " ".join([self.loai, self.trich_yeu, self.noi_dung])
@@ -73,7 +74,10 @@ class Document:
 
 @dataclass
 class EngineResult:
-    assignments: List[Dict[str, str]] = field(default_factory=list)
+    don_vi_xu_ly_chinh: List[str] = field(default_factory=list)
+    phoi_hop_xu_ly: List[str] = field(default_factory=list)
+    lanh_dao_theo_doi: List[str] = field(default_factory=list)
+    han_thuc_hien: Optional[str] = None
     confidence: float = 0.0
     reason: str = ""
     matched_rules: List[str] = field(default_factory=list)
@@ -131,11 +135,16 @@ class RuleEngine:
         return None
 
     def detect_khan(self, doc: Document, today: Optional[date] = None) -> bool:
-        if doc.han_xu_ly is None:
-            return False
-        today = today or date.today()
-        days_left = (doc.han_xu_ly - today).days
-        return days_left <= 2
+        if doc.khan:
+            return True
+        if doc.han_thuc_hien and doc.han_thuc_hien != "hỏa tốc":
+            try:
+                d = date.fromisoformat(doc.han_thuc_hien)
+                today = today or date.today()
+                return (d - today).days <= 2
+            except ValueError:
+                pass
+        return False
 
     def detect_linh_vuc(self, doc: Document) -> Optional[Dict[str, Any]]:
         """Nhận diện lĩnh vực theo từ khóa; trả entry có nhiều keyword khớp nhất."""
@@ -174,10 +183,8 @@ class RuleEngine:
         if ctype == "keywords":
             if cond.get("unless_khan") and features["khan"]:
                 return False
-            # lọc theo nguồn (VD: chỉ áp dụng cho cơ quan thuế)
             if cond.get("source") and not any(norm(s) in norm(doc.co_quan_ban_hanh) for s in cond["source"]):
                 return False
-            # all_of: tất cả từ khóa phải xuất hiện
             if cond.get("all_of") and not self._all_keyword(doc, cond["all_of"]):
                 return False
             return self._any_keyword(doc, cond.get("any_of", []))
@@ -186,15 +193,12 @@ class RuleEngine:
             if features["source"] != cond.get("source"):
                 return False
             lv = features.get("linh_vuc")
-            # điều kiện theo lĩnh vực cụ thể (VD: đất đai)
             if cond.get("linh_vuc"):
                 if lv is None or lv["linh_vuc"] != cond["linh_vuc"]:
                     return False
-                # nếu có thêm any_of thì cũng phải khớp
                 if cond.get("any_of") and not self._any_keyword(doc, cond["any_of"]):
                     return False
                 return True
-            # điều kiện theo "lãnh đạo phụ trách là GĐ hay PGĐ"
             if cond.get("linh_vuc_leader"):
                 if lv is None:
                     return False
@@ -232,7 +236,7 @@ class RuleEngine:
             "giay_moi": self.is_giay_moi(doc),
         }
 
-        result = EngineResult(extracted=dict(features))
+        result = EngineResult(extracted=dict(features), han_thuc_hien=doc.han_thuc_hien)
         result.extracted["linh_vuc"] = (
             features["linh_vuc"]["linh_vuc"] if features["linh_vuc"] else None
         )
@@ -256,7 +260,6 @@ class RuleEngine:
         self._resolve_action(matched_rule, features, result)
         result.reason = f"Khớp rule {matched_rule['id']} — {matched_rule.get('name', '')}"
 
-        # rule cứng match rõ ràng -> confidence cao; case khẩn/xếp chồng thấp hơn một chút
         if matched_rule.get("priority") in (1, 2):
             result.confidence = 0.95
         else:
@@ -282,8 +285,7 @@ class RuleEngine:
         def resolve(tokens: List[str]) -> List[str]:
             out: List[str] = []
             for tok in tokens:
-                resolved = repl.get(tok, tok)
-                out.append(resolved)
+                out.append(repl.get(tok, tok))
             return [t for t in out if t]
 
         primary = resolve(action.get("primary", []))
@@ -294,12 +296,9 @@ class RuleEngine:
         if ky_hieu and ky_info.get("kem_lanh_dao"):
             primary = [ky_info["kem_lanh_dao"], *primary]
 
-        for target in primary:
-            result.assignments.append({"role": "xử lý chính", "target": self.normalize_person(target)})
-        for target in coordinator:
-            result.assignments.append({"role": "phối hợp xử lý", "target": self.normalize_person(target)})
-        for target in monitor:
-            result.assignments.append({"role": "theo dõi", "target": self.normalize_person(target)})
+        result.don_vi_xu_ly_chinh = [self.normalize_person(t) for t in primary]
+        result.phoi_hop_xu_ly = [self.normalize_person(t) for t in coordinator]
+        result.lanh_dao_theo_doi = [self.normalize_person(t) for t in monitor]
 
     def normalize_person(self, name: str) -> str:
         """Chuẩn hóa tên viết tắt -> tên đầy đủ (nếu có trong danh bạ)."""

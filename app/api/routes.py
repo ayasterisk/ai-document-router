@@ -1,15 +1,13 @@
-"""API routes — POST /classify nhận 6 field (+ hạn xử lý) + file PDF."""
+"""API routes — POST /classify nhận file đính kèm (PDF), không còn payload JSON."""
 from __future__ import annotations
 
 import uuid
-from datetime import date
 from typing import Optional
 
-from fastapi import APIRouter, File, Form, Request, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 
-from app.models.schema import Assignment, ClassifyResponse
+from app.models.schema import ClassifyResponse
 from app.pdf.extractor import extract_pdf_content_bytes
-from app.rules.engine import Document
 from app.storage import audit
 
 router = APIRouter()
@@ -18,45 +16,38 @@ router = APIRouter()
 @router.post("/classify", response_model=ClassifyResponse)
 async def classify(
     request: Request,
-    so_hieu: str = Form(..., description="Số hiệu văn bản"),
-    loai: str = Form(..., description="Loại văn bản"),
-    co_quan_ban_hanh: str = Form(..., description="Cơ quan ban hành"),
-    nguoi_ky: str = Form(..., description="Người ký"),
-    ngay_van_ban: date = Form(..., description="Ngày văn bản (YYYY-MM-DD)"),
-    trich_yeu: str = Form(..., description="Trích yếu văn bản"),
-    han_xu_ly: Optional[date] = Form(None, description="Hạn xử lý (nullable)"),
-    file: UploadFile = File(..., description="File PDF đính kèm"),
+    file: Optional[UploadFile] = File(None, description="File đính kèm (thường là PDF)"),
+    text: Optional[str] = Form(None, description="Text thô (tùy chọn, để test/dev)"),
 ) -> ClassifyResponse:
-    data = await file.read()
-    noi_dung = extract_pdf_content_bytes(data)
+    noi_dung = (text or "").strip()
 
-    doc = Document(
-        so_hieu=so_hieu,
-        loai=loai,
-        co_quan_ban_hanh=co_quan_ban_hanh,
-        nguoi_ky=nguoi_ky,
-        ngay_van_ban=ngay_van_ban,
-        trich_yeu=trich_yeu,
-        han_xu_ly=han_xu_ly,
-        noi_dung=noi_dung,
-    )
+    if not noi_dung and file is not None:
+        data = await file.read()
+        if data:
+            noi_dung = extract_pdf_content_bytes(data).strip()
+
+    if not noi_dung:
+        raise HTTPException(status_code=400, detail="Không trích được nội dung từ file đính kèm.")
 
     harness = request.app.state.harness
-    result = harness.run(doc)
+    result = harness.run(noi_dung)
 
     job_id = uuid.uuid4().hex
-    audit.log(job_id, doc, result)
+    audit.log(job_id, noi_dung, result)
 
     return ClassifyResponse(
         job_id=job_id,
-        assignments=[Assignment(**a) for a in result.assignments],
+        don_vi_xu_ly_chinh=result.don_vi_xu_ly_chinh,
+        phoi_hop_xu_ly=result.phoi_hop_xu_ly,
+        lanh_dao_theo_doi=result.lanh_dao_theo_doi,
+        han_thuc_hien=result.han_thuc_hien,
         confidence=result.confidence,
         reason=result.reason,
         matched_rules=result.matched_rules,
         needs_review=result.needs_review,
         degraded=result.degraded,
         tier=result.tier,
-        extracted=result.extracted,
+        extracted_metadata=result.extracted_metadata,
     )
 
 

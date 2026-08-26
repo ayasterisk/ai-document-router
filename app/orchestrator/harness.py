@@ -1,9 +1,9 @@
-"""Harness điều phối: chạy rule engine deterministic trước, chỉ gọi model cho phần "mờ".
+"""Harness điều phối: trích metadata -> chạy rule engine deterministic -> gọi model cho phần "mờ".
 
-Hoạt động theo 3 bậc (xem thiết kế Mục 3.2):
+Hoạt động theo 3 bậc (xem thiết kế Mục 3):
   T2 — model gọi tool (function-calling) qua vòng lặp agent
   T1 — model trả JSON trực tiếp (prompt-only, rule set nằm trong context)
-  T0 — không dùng model (chỉ rule engine)
+  T0 — không dùng model (chỉ extraction + rule engine)
 
 Thang fallback: T2 -> T1 -> T0. Kết quả luôn hợp lệ, kèm cờ `degraded`.
 """
@@ -15,16 +15,16 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import Any, Dict, List, Optional
 
+from app.extract.metadata import ExtractedMetadata, MetadataExtractor
 from app.rules.engine import Document, RuleEngine
 
 logger = logging.getLogger(__name__)
 
-# Tool mà model (T2) có thể gọi — chính là rule engine deterministic
 APPLY_RULES_TOOL = {
     "type": "function",
     "function": {
         "name": "apply_rules",
-        "description": "Chạy rule engine định tuyến văn bản và trả kết quả.",
+        "description": "Chạy rule engine định tuyến văn bản và trả kết quả 4 trường.",
         "parameters": {
             "type": "object",
             "properties": {
@@ -34,7 +34,7 @@ APPLY_RULES_TOOL = {
                 "nguoi_ky": {"type": "string"},
                 "ngay_van_ban": {"type": "string"},
                 "trich_yeu": {"type": "string"},
-                "han_xu_ly": {"type": ["string", "null"]},
+                "han_thuc_hien": {"type": ["string", "null"]},
                 "noi_dung": {"type": "string"},
             },
             "required": ["so_hieu", "co_quan_ban_hanh", "trich_yeu"],
@@ -49,15 +49,12 @@ APPLY_RULES_TOOL = {
 class InferenceClient:
     supports_tool_calling: bool = False
 
-    def generate(self, messages: List[Dict[str, Any]], tools: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+    def generate(self, messages, tools=None) -> Dict[str, Any]:
         raise NotImplementedError
 
 
 class MockInferenceClient(InferenceClient):
-    """Trả response giả lập để phát triển/test không cần GPU (thiết kế Mục 7).
-
-    Lần gọi đầu (nếu có tools) trả tool_call -> apply_rules; các lần sau trả JSON cuối.
-    """
+    """Trả response giả lập để phát triển/test không cần GPU."""
 
     def __init__(self, supports_tool_calling: bool = True) -> None:
         self.supports_tool_calling = supports_tool_calling
@@ -80,7 +77,10 @@ class MockInferenceClient(InferenceClient):
         return {
             "content": json.dumps(
                 {
-                    "assignments": [{"role": "xử lý chính", "target": "PGĐ Vũ Ngọc An"}],
+                    "don_vi_xu_ly_chinh": ["PGĐ Vũ Ngọc An", "Chi cục Thủy lợi"],
+                    "phoi_hop_xu_ly": [],
+                    "lanh_dao_theo_doi": ["Giám đốc Cao Thanh Thương"],
+                    "han_thuc_hien": "hỏa tốc",
                     "confidence": 0.7,
                     "reason": "Mock model: suy luận lĩnh vực thủy lợi từ trích yếu.",
                 },
@@ -90,7 +90,6 @@ class MockInferenceClient(InferenceClient):
 
     @staticmethod
     def _extract_args(messages) -> Dict[str, Any]:
-        # lấy text user cuối cùng làm trích yếu giả lập
         last_user = next((m["content"] for m in reversed(messages) if m["role"] == "user"), "")
         return {
             "so_hieu": "",
@@ -99,7 +98,7 @@ class MockInferenceClient(InferenceClient):
             "nguoi_ky": "",
             "ngay_van_ban": None,
             "trich_yeu": str(last_user)[:200],
-            "han_xu_ly": None,
+            "han_thuc_hien": None,
             "noi_dung": "",
         }
 
@@ -108,7 +107,7 @@ class HttpInferenceClient(InferenceClient):
     """Gọi inference server local (vLLM/TGI) qua API tương thích OpenAI."""
 
     def __init__(self, base_url: str, api_key: str = "EMPTY", supports_tool_calling: bool = True) -> None:
-        import httpx  # local import để không bắt buộc cài khi dùng mock
+        import httpx
 
         self._httpx = httpx
         self.base_url = base_url.rstrip("/")
@@ -135,14 +134,17 @@ class HttpInferenceClient(InferenceClient):
 # --------------------------------------------------------------------------- #
 @dataclass
 class HarnessResult:
-    assignments: List[Dict[str, str]] = field(default_factory=list)
+    don_vi_xu_ly_chinh: List[str] = field(default_factory=list)
+    phoi_hop_xu_ly: List[str] = field(default_factory=list)
+    lanh_dao_theo_doi: List[str] = field(default_factory=list)
+    han_thuc_hien: Optional[str] = None
     confidence: float = 0.0
     reason: str = ""
     matched_rules: List[str] = field(default_factory=list)
     needs_review: bool = False
     degraded: bool = False
     tier: str = "T0"
-    extracted: Dict[str, Any] = field(default_factory=dict)
+    extracted_metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 class Harness:
@@ -161,54 +163,70 @@ class Harness:
         self.retry = retry
 
     # ------------------------------------------------------------------ #
-    def run(self, doc: Document, today: Optional[date] = None) -> HarnessResult:
+    def run(self, text: str, today: Optional[date] = None) -> HarnessResult:
+        meta = MetadataExtractor.extract(text)
+        doc = self._doc_from_meta(meta, text)
         engine_result = self.engine.run(doc, today)
 
         # Happy path: rule cứng khớp rõ -> không cần model
         if not engine_result.needs_review:
-            return self._from_engine(engine_result, tier="T0", degraded=False)
+            return self._from_engine(engine_result, meta, tier="T0", degraded=False)
 
         # Cần model cho phần "mờ"
         if self.mode == "off":
-            return self._from_engine(engine_result, tier="T0", degraded=True)
+            return self._from_engine(engine_result, meta, tier="T0", degraded=True)
 
-        # Thử T2 (tool-calling)
         if self.mode in ("auto", "native") and self.client.supports_tool_calling:
-            result = self._run_t2(doc)
+            result = self._run_t2(text, meta)
             if result is not None:
                 return result
 
-        # Fallback T1 (prompt-only)
         if self.mode in ("auto", "native", "prompt"):
-            result = self._run_t1(doc)
+            result = self._run_t1(text, meta)
             if result is not None:
                 return result
 
-        # Fallback T0
-        return self._from_engine(engine_result, tier="T0", degraded=True)
+        return self._from_engine(engine_result, meta, tier="T0", degraded=True)
 
     # ------------------------------------------------------------------ #
-    def _from_engine(self, er, tier: str, degraded: bool) -> HarnessResult:
+    @staticmethod
+    def _doc_from_meta(meta: ExtractedMetadata, text: str) -> Document:
+        return Document(
+            so_hieu=meta.so_hieu or "",
+            loai=meta.loai or "",
+            co_quan_ban_hanh=meta.co_quan_ban_hanh or "",
+            nguoi_ky=meta.nguoi_ky or "",
+            ngay_van_ban=meta.ngay_van_ban,
+            trich_yeu=meta.trich_yeu or "",
+            noi_dung=text,
+            han_thuc_hien=meta.han_thuc_hien,
+            khan=meta.khan,
+        )
+
+    @staticmethod
+    def _from_engine(er, meta: ExtractedMetadata, tier: str, degraded: bool) -> HarnessResult:
         return HarnessResult(
-            assignments=er.assignments,
+            don_vi_xu_ly_chinh=er.don_vi_xu_ly_chinh,
+            phoi_hop_xu_ly=er.phoi_hop_xu_ly,
+            lanh_dao_theo_doi=er.lanh_dao_theo_doi,
+            han_thuc_hien=er.han_thuc_hien,
             confidence=er.confidence,
             reason=er.reason,
             matched_rules=er.matched_rules,
             needs_review=er.needs_review,
             degraded=degraded,
             tier=tier,
-            extracted=er.extracted,
+            extracted_metadata=meta.to_dict(),
         )
 
-    def _run_t2(self, doc: Document) -> Optional[HarnessResult]:
-        """Vòng lặp agent: model có thể gọi tool apply_rules."""
+    def _run_t2(self, text: str, meta: ExtractedMetadata) -> Optional[HarnessResult]:
         messages: List[Dict[str, Any]] = [
             {
                 "role": "system",
                 "content": "Bạn là trợ lý định tuyến văn bản đến của Sở NN&MT. "
                 "Khi chưa chắc chắn, hãy gọi tool apply_rules để chạy rule engine.",
             },
-            {"role": "user", "content": self._document_prompt(doc)},
+            {"role": "user", "content": self._document_prompt(text, meta)},
         ]
 
         for _ in range(self.max_tool_steps):
@@ -224,14 +242,17 @@ class Harness:
                     fn = call.get("function", {})
                     if fn.get("name") == "apply_rules":
                         args = json.loads(fn.get("arguments", "{}"))
-                        engine_out = self.engine.run(Document(**self._coerce(args)), None)
+                        doc = Document(**self._coerce(args))
+                        engine_out = self.engine.run(doc, None)
                         messages.append(
                             {
                                 "role": "tool",
                                 "tool_call_id": call.get("id", "mock"),
                                 "content": json.dumps(
                                     {
-                                        "assignments": engine_out.assignments,
+                                        "don_vi_xu_ly_chinh": engine_out.don_vi_xu_ly_chinh,
+                                        "phoi_hop_xu_ly": engine_out.phoi_hop_xu_ly,
+                                        "lanh_dao_theo_doi": engine_out.lanh_dao_theo_doi,
                                         "needs_review": engine_out.needs_review,
                                         "matched_rules": engine_out.matched_rules,
                                     },
@@ -242,13 +263,11 @@ class Harness:
                 messages.append({"role": "assistant", "content": None, "tool_calls": tool_calls})
                 continue
 
-            # model trả câu trả lời cuối (JSON)
             return self._parse_final(raw.get("content"), tier="T2")
 
         return None
 
-    def _run_t1(self, doc: Document) -> Optional[HarnessResult]:
-        """Prompt-only: gộp toàn bộ rule set vào context, model trả 1 JSON."""
+    def _run_t1(self, text: str, meta: ExtractedMetadata) -> Optional[HarnessResult]:
         rule_set = json.dumps(
             {"lookup": self.engine.lookup, "rules": self.engine.rules},
             ensure_ascii=False,
@@ -259,12 +278,14 @@ class Harness:
                 "content": (
                     "Bạn là hệ thống định tuyến văn bản đến. Dưới đây là toàn bộ rule set "
                     "(điều kiện -> cơ quan nhận). Hãy suy luận và trả VỀ ĐÚNG MỘT JSON, "
-                    'không kèm text khác, theo cấu trúc: {"assignments":[{"role":"xử lý chính",'
-                    '"target":"..."}],"confidence":0.0-1.0,"reason":"..."}.\n\n'
+                    "không kèm text khác, theo cấu trúc:\n"
+                    '{"don_vi_xu_ly_chinh":["..."],"phoi_hop_xu_ly":["..."],'
+                    '"lanh_dao_theo_doi":["..."],"han_thuc_hien":"...",'
+                    '"confidence":0.0-1.0,"reason":"..."}\n\n'
                     f"RULE_SET:\n{rule_set}"
                 ),
             },
-            {"role": "user", "content": self._document_prompt(doc)},
+            {"role": "user", "content": self._document_prompt(text, meta)},
         ]
         try:
             raw = self.client.generate(messages, tools=None)
@@ -281,10 +302,10 @@ class Harness:
             try:
                 data = json.loads(content)
                 return HarnessResult(
-                    assignments=[
-                        {"role": a.get("role", "xử lý chính"), "target": a["target"]}
-                        for a in data.get("assignments", [])
-                    ],
+                    don_vi_xu_ly_chinh=data.get("don_vi_xu_ly_chinh", []),
+                    phoi_hop_xu_ly=data.get("phoi_hop_xu_ly", []),
+                    lanh_dao_theo_doi=data.get("lanh_dao_theo_doi", []),
+                    han_thuc_hien=data.get("han_thuc_hien"),
                     confidence=float(data.get("confidence", 0.0)),
                     reason=data.get("reason", ""),
                     needs_review=bool(data.get("needs_review", False)),
@@ -292,7 +313,6 @@ class Harness:
                     tier=tier,
                 )
             except (json.JSONDecodeError, KeyError, TypeError):
-                # thử bóc phần JSON nằm trong dấu ngoặc nhọn
                 start, end = content.find("{"), content.rfind("}")
                 if start != -1 and end > start:
                     content = content[start : end + 1]
@@ -302,25 +322,26 @@ class Harness:
 
     # ------------------------------------------------------------------ #
     @staticmethod
-    def _document_prompt(doc: Document) -> str:
+    def _document_prompt(text: str, meta: ExtractedMetadata) -> str:
+        md = meta.to_dict()
         return (
-            f"Số hiệu: {doc.so_hieu}\n"
-            f"Loại: {doc.loai}\n"
-            f"Cơ quan ban hành: {doc.co_quan_ban_hanh}\n"
-            f"Người ký: {doc.nguoi_ky}\n"
-            f"Ngày văn bản: {doc.ngay_van_ban}\n"
-            f"Hạn xử lý: {doc.han_xu_ly or 'null'}\n"
-            f"Trích yếu: {doc.trich_yeu}\n"
-            f"Nội dung PDF: {doc.noi_dung[:4000]}"
+            "METADATA ĐÃ TRÍCH (deterministic):\n"
+            f"- Số hiệu: {md['so_hieu']}\n"
+            f"- Loại: {md['loai']}\n"
+            f"- Cơ quan ban hành: {md['co_quan_ban_hanh']}\n"
+            f"- Người ký: {md['nguoi_ky']}\n"
+            f"- Ngày văn bản: {md['ngay_van_ban']}\n"
+            f"- Trích yếu: {md['trich_yeu']}\n"
+            f"- Hạn thực hiện: {md['han_thuc_hien']}\n\n"
+            f"NỘI DUNG VĂN BẢN:\n{text[:6000]}"
         )
 
     @staticmethod
     def _coerce(args: Dict[str, Any]) -> Dict[str, Any]:
-        """Ép kiểu arguments (chuỗi ngày -> date) trước khi dựng Document."""
         import datetime as _dt
 
         out = dict(args)
-        for key in ("ngay_van_ban", "han_xu_ly"):
+        for key in ("ngay_van_ban",):
             val = out.get(key)
             if isinstance(val, str):
                 try:

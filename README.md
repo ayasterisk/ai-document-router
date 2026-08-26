@@ -1,12 +1,23 @@
 # AI Document Router — Sở NN&MT (Gia Lai)
 
-Server AI phân loại & định tuyến văn bản đến. Thiết kế chi tiết: [`thiet-ke-ai-document-router.md`](thiet-ke-ai-document-router.md).
+Server AI định tuyến văn bản đến. Thiết kế chi tiết: [`thiet-ke-ai-document-router.md`](thiet-ke-ai-document-router.md).
 
-## Kiến trúc (tóm tắt)
+## Hướng hoạt động (v3)
 
-- **Rule engine deterministic** (`app/rules/engine.py` + `app/rules/rules.yaml`) chạy trước, xử lý rule tường minh theo thứ tự ưu tiên — nhanh, rẻ, audit được.
-- **Model tự host** (vLLM/TGI) chỉ can thiệp phần "mờ" khi rule cứng không khớp rõ.
-- **Harness** (`app/orchestrator/harness.py`) có thang fallback `T2 → T1 → T0`.
+- **Đầu vào:** văn bản + file đính kèm (PDF). **Không có payload JSON** — mọi thông tin
+  (số hiệu, loại, cơ quan ban hành, trích yếu, hạn thực hiện…) được trích tự động từ nội dung file.
+- **Đầu ra:** 4 trường để chuyển văn bản đi:
+  - `don_vi_xu_ly_chinh` — Đơn vị xử lý chính
+  - `phoi_hop_xu_ly` — Phối hợp xử lý
+  - `lanh_dao_theo_doi` — Lãnh đạo theo dõi
+  - `han_thuc_hien` — Hạn thực hiện
+- **Knowledge base:** rulebase riêng từng Sở (`app/rules/rules.yaml` cho SoNNMT).
+
+## Kiến trúc
+
+`PDF → trích text → trích metadata (regex + model) → rule engine deterministic → response 4 trường`
+
+Harness tự hạ cấp `T2 → T1 → T0` khi model yếu/lỗi (rule engine luôn chạy độc lập).
 
 ## Cài đặt & chạy
 
@@ -24,14 +35,13 @@ uvicorn app.main:app --reload
 ### Gọi API
 
 ```bash
+# chỉ cần file đính kèm
 curl -X POST http://127.0.0.1:8000/classify \
-  -F "so_hieu=123/SNNMT-TS" \
-  -F "loai=Công văn" \
-  -F "co_quan_ban_hanh=Cục Thuế tỉnh Gia Lai" \
-  -F "nguoi_ky=Nguyễn Văn A" \
-  -F "ngay_van_ban=2026-08-01" \
-  -F "trich_yeu=Thông báo thu hồi đất do nợ thuế" \
   -F "file=@van_ban.pdf"
+
+# hoặc text thô (test/dev)
+curl -X POST http://127.0.0.1:8000/classify \
+  -F "text=CÔNG VĂN V/v xây dựng công trình thủy lợi"
 ```
 
 ## Chạy test
@@ -40,23 +50,26 @@ curl -X POST http://127.0.0.1:8000/classify \
 python -m unittest discover -s tests -v
 ```
 
-## Lưu ý khớp keyword
+## Sinh PDF (rulebase / kế hoạch)
 
-Engine khớp từ khóa dạng **substring** (sau khi bỏ dấu tiếng Việt). Các từ đơn âm ngắn
-(ví dụ `hồ`, `ao`, `phá`) có thể gây false-positive (VD `hồ sơ` chứa `hồ`). Admin nên
-tinh chỉnh danh sách `keywords` trong `app/rules/rules.yaml` dựa trên dữ liệu văn bản thật.
+```powershell
+.venv\Scripts\python.exe tools\build_pdf.py      # sinh tools/rulebase.html
+# rồi in bằng Chrome headless:
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --no-pdf-header-footer --print-to-pdf="out.pdf" "file:///D:/GPHI/ai-document-router/tools/rulebase.html"
+```
 
 ## Cấu trúc
 
 ```
 app/
-├── main.py                 # FastAPI entrypoint
-├── api/routes.py           # POST /classify
-├── pdf/extractor.py        # text extraction + hook OCR
-├── rules/rules.yaml        # rule admin set (điều kiện → cơ quan)
-├── rules/engine.py         # rule matcher deterministic
-├── orchestrator/harness.py # vòng lặp agent + fallback T2→T1→T0
-├── orchestrator/skills/    # SKILL.md cho từng bước reasoning
-├── models/schema.py        # Pydantic request/response
-└── storage/audit.py        # SQLite audit log
+├── main.py                    # FastAPI entrypoint
+├── api/routes.py              # POST /classify — nhận file đính kèm
+├── pdf/extractor.py           # text extraction + fallback OCR
+├── extract/metadata.py        # trích metadata + hạn thực hiện từ văn bản
+├── rules/rules.yaml           # rulebase riêng từng Sở (SoNNMT)
+├── rules/engine.py            # rule matcher deterministic
+├── orchestrator/harness.py    # vòng lặp agent + fallback T2→T1→T0
+├── orchestrator/skills/       # SKILL.md cho từng bước reasoning
+├── models/schema.py           # Pydantic response 4 trường
+└── storage/audit.py           # SQLite audit log
 ```

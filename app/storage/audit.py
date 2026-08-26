@@ -1,4 +1,4 @@
-"""SQLite audit log — lưu input, rule matched, output, lý do."""
+"""SQLite audit log — lưu input, metadata, rule matched, output 4 trường."""
 from __future__ import annotations
 
 import json
@@ -6,8 +6,6 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 from typing import Any
-
-from app.rules.engine import Document
 
 DB_PATH = Path(__file__).resolve().parent / "audit.db"
 
@@ -25,11 +23,11 @@ def init_db() -> None:
         CREATE TABLE IF NOT EXISTS audit_log (
             job_id TEXT PRIMARY KEY,
             created_at TEXT,
-            so_hieu TEXT,
-            co_quan_ban_hanh TEXT,
-            trich_yeu TEXT,
-            han_xu_ly TEXT,
-            assignments TEXT,
+            input_text TEXT,
+            don_vi_xu_ly_chinh TEXT,
+            phoi_hop_xu_ly TEXT,
+            lanh_dao_theo_doi TEXT,
+            han_thuc_hien TEXT,
             confidence REAL,
             reason TEXT,
             matched_rules TEXT,
@@ -43,23 +41,24 @@ def init_db() -> None:
     conn.close()
 
 
-def log(job_id: str, doc: Document, result: Any) -> None:
+def log(job_id: str, input_text: str, result: Any) -> None:
     conn = _connect()
     conn.execute(
         """
         INSERT OR REPLACE INTO audit_log
-        (job_id, created_at, so_hieu, co_quan_ban_hanh, trich_yeu, han_xu_ly,
-         assignments, confidence, reason, matched_rules, needs_review, degraded, tier)
+        (job_id, created_at, input_text, don_vi_xu_ly_chinh, phoi_hop_xu_ly,
+         lanh_dao_theo_doi, han_thuc_hien, confidence, reason, matched_rules,
+         needs_review, degraded, tier)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             job_id,
             datetime.now().isoformat(timespec="seconds"),
-            doc.so_hieu,
-            doc.co_quan_ban_hanh,
-            doc.trich_yeu,
-            doc.han_xu_ly.isoformat() if doc.han_xu_ly else None,
-            json.dumps(result.assignments, ensure_ascii=False),
+            input_text[:2000],
+            json.dumps(result.don_vi_xu_ly_chinh, ensure_ascii=False),
+            json.dumps(result.phoi_hop_xu_ly, ensure_ascii=False),
+            json.dumps(result.lanh_dao_theo_doi, ensure_ascii=False),
+            result.han_thuc_hien,
             result.confidence,
             result.reason,
             json.dumps(result.matched_rules, ensure_ascii=False),
