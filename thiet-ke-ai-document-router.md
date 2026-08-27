@@ -1,8 +1,6 @@
 # Thiết kế Server AI Phân loại & Định tuyến Văn bản Đến
 
-> Trạng thái: Đã điều chỉnh hướng (v3) — bỏ payload JSON, đầu vào chỉ là văn bản + file đính kèm; đầu ra 4 trường để chuyển văn bản đi.
 
----
 
 ## 1. Bài toán
 
@@ -10,12 +8,12 @@ Xây dựng một server AI cho văn phòng Sở. **Đầu vào** là một văn
 
 **Đầu ra** — kết quả để **chuyển văn bản đi**, gồm 4 trường:
 
-| Trường | Ý nghĩa |
-|---|---|
-| **Đơn vị xử lý chính** | Người/đơn vị chịu trách nhiệm xử lý chính (có thể kèm lãnh đạo phụ trách) |
-| **Phối hợp xử lý** | Người/đơn vị phối hợp xử lý |
-| **Lãnh đạo theo dõi** | Lãnh đạo theo dõi, chỉ đạo |
-| **Hạn thực hiện** | Thời hạn cần hoàn thành xử lý (trích từ nội dung văn bản, hoặc null nếu không xác định) |
+| Trường                           | Ý nghĩa                                                                                                 |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Đơn vị xử lý chính** | Người/đơn vị chịu trách nhiệm xử lý chính (có thể kèm lãnh đạo phụ trách)              |
+| **Phối hợp xử lý**       | Người/đơn vị phối hợp xử lý                                                                      |
+| **Lãnh đạo theo dõi**    | Lãnh đạo theo dõi, chỉ đạo                                                                         |
+| **Hạn thực hiện**         | Thời hạn cần hoàn thành xử lý (trích từ nội dung văn bản, hoặc null nếu không xác định) |
 
 Kết quả được suy ra từ: **trích nội dung PDF** → **trích metadata** (số hiệu, loại, cơ quan ban hành, người ký, ngày, trích yếu, hạn) → **áp dụng Rule** của Sở tương ứng.
 
@@ -72,24 +70,24 @@ Văn bản đến + file đính kèm (PDF)
 
 ### Vai trò từng thành phần
 
-| Thành phần | Vai trò |
-|---|---|
-| **PDF Extractor** | Trích text từ PDF (pdfplumber/pypdf, fallback OCR cho bản scan) |
-| **Metadata Extractor** | Trích các trường nghiệp vụ + hạn thực hiện từ văn bản; deterministic trước, model sau |
-| **Harness** | Vòng lặp điều phối, retry, giới hạn bước, tự hạ cấp fallback `T2 → T1 → T0` |
-| **Rule Engine (code)** | Áp dụng rule tường minh của Sở; tách khỏi model để nhanh/audit/dự đoán được |
-| **Agent Skills** | Đóng gói từng nghiệp vụ: `extract-metadata`, `classify-document`, `apply-routing-rules`, `resolve-conflicts`, `explain-decision` |
-| **Inference Server (vLLM/TGI)** | Chạy open-weight model tại chỗ, gọi qua API local, không cần Internet |
+| Thành phần                          | Vai trò                                                                                                                                        |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **PDF Extractor**               | Trích text từ PDF (pdfplumber/pypdf, fallback OCR cho bản scan)                                                                              |
+| **Metadata Extractor**          | Trích các trường nghiệp vụ + hạn thực hiện từ văn bản; deterministic trước, model sau                                             |
+| **Harness**                     | Vòng lặp điều phối, retry, giới hạn bước, tự hạ cấp fallback`T2 → T1 → T0`                                                      |
+| **Rule Engine (code)**          | Áp dụng rule tường minh của Sở; tách khỏi model để nhanh/audit/dự đoán được                                                     |
+| **Agent Skills**                | Đóng gói từng nghiệp vụ:`extract-metadata`, `classify-document`, `apply-routing-rules`, `resolve-conflicts`, `explain-decision` |
+| **Inference Server (vLLM/TGI)** | Chạy open-weight model tại chỗ, gọi qua API local, không cần Internet                                                                     |
 
 ### Mô hình 3 bậc của Harness (fallback)
 
 Harness hạ cấp dần mà kết quả vẫn hợp lệ — rule engine luôn chạy độc lập, model chỉ làm phần "mờ".
 
-| Bậc | Cách gọi model | Dùng khi |
-|---|---|---|
-| **T2 — Tool-calling** | Model tự gọi tool (extract_metadata, apply_rules…) qua vòng lặp | Model hỗ trợ function-calling tốt |
-| **T1 — Prompt-only** | Gộp toàn bộ văn bản + rule set vào 1 prompt, model trả 1 JSON | Model không hỗ trợ tool-calling |
-| **T0 — Không model** | Chỉ chạy extraction + rule engine deterministic; phần không rõ → flag người duyệt | Model lỗi/timeout/parse hỏng |
+| Bậc                         | Cách gọi model                                                                           | Dùng khi                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------ |
+| **T2 — Tool-calling** | Model tự gọi tool (extract_metadata, apply_rules…) qua vòng lặp                       | Model hỗ trợ function-calling tốt |
+| **T1 — Prompt-only**  | Gộp toàn bộ văn bản + rule set vào 1 prompt, model trả 1 JSON                       | Model không hỗ trợ tool-calling   |
+| **T0 — Không model** | Chỉ chạy extraction + rule engine deterministic; phần không rõ → flag người duyệt | Model lỗi/timeout/parse hỏng       |
 
 **Thang fallback:** `T2 → T1 → T0`. Kết quả luôn kèm cờ `degraded` để audit.
 
@@ -127,6 +125,7 @@ Văn bản có thể thuộc loại nhạy cảm/mật — **không rời khỏi
 **Ánh xạ rule → 4 trường:** `xử lý chính` → `don_vi_xu_ly_chinh`; `phối hợp xử lý` → `phoi_hop_xu_ly`; `theo dõi` → `lanh_dao_theo_doi`; `hạn` → `han_thuc_hien`.
 
 **Hạn thực hiện** được trích từ nội dung văn bản theo thứ tự ưu tiên:
+
 1. Ngày cụ thể: `trước ngày …`, `hạn … ngày DD/MM/YYYY`, `chậm nhất ngày …`.
 2. Dấu hiệu khẩn: `khẩn`, `hỏa tốc`, `thượng khẩn` → `"hỏa tốc"`.
 3. Không xác định được → `null` (cờ nhẹ để người duyệt tự xác định).
