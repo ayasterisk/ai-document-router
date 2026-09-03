@@ -32,6 +32,14 @@ uvicorn app.main:app --reload
 # gắn model thật: đặt INFERENCE_SERVER_URL trong .env
 ```
 
+### OCR bản scan (Qwen2.5-VL-7B)
+
+Đặt trong `.env`:
+- `OCR_SERVER_URL=http://127.0.0.1:8001` — vLLM serve `Qwen/Qwen2.5-VL-7B-Instruct`.
+- `OCR_PROVIDER=auto` — dùng VLM trước, Tesseract làm fallback.
+
+Cần cài `pdf2image` (+ Poppler) và `Pillow`; Tesseract (lang `vie`) là fallback tùy chọn.
+
 ### Gọi API
 
 ```bash
@@ -64,7 +72,7 @@ python -m unittest discover -s tests -v
 app/
 ├── main.py                    # FastAPI entrypoint
 ├── api/routes.py              # POST /classify — nhận file đính kèm
-├── pdf/extractor.py           # text extraction + fallback OCR
+├── pdf/extractor.py           # text extraction + OCR Qwen2.5-VL + Tesseract fallback
 ├── extract/metadata.py        # trích metadata + hạn thực hiện từ văn bản
 ├── rules/rules.yaml           # rulebase riêng từng Sở (SoNNMT)
 ├── rules/engine.py            # rule matcher deterministic

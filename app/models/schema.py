@@ -1,4 +1,4 @@
-"""Pydantic schema cho response định tuyến văn bản (không còn payload JSON đầu vào)."""
+"""Pydantic schema cho response định tuyến văn bản."""
 from __future__ import annotations
 
 from typing import Any, Dict, List, Literal, Optional

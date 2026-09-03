@@ -46,7 +46,7 @@ Văn bản đến + file đính kèm (PDF)
 [API Layer] — nhận file, validate, lưu tạm, tạo job_id
         │
         ▼
-[PDF Extractor] — trích text/OCR từ PDF  (deterministic)
+[PDF Extractor] — trích text/OCR từ PDF (text-based; bản scan → OCR Qwen2.5-VL-7B)
         │
         ▼
 [Metadata Extractor] — trích từ nội dung văn bản:
@@ -72,7 +72,7 @@ Văn bản đến + file đính kèm (PDF)
 
 | Thành phần                          | Vai trò                                                                                                                                        |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **PDF Extractor**               | Trích text từ PDF (pdfplumber/pypdf, fallback OCR cho bản scan)                                                                              |
+| **PDF Extractor**               | Trích text từ PDF (pdfplumber/pypdf); bản scan → OCR Qwen2.5-VL-7B (vLLM) + Tesseract fallback                                                                              |
 | **Metadata Extractor**          | Trích các trường nghiệp vụ + hạn thực hiện từ văn bản; deterministic trước, model sau                                             |
 | **Harness**                     | Vòng lặp điều phối, retry, giới hạn bước, tự hạ cấp fallback`T2 → T1 → T0`                                                      |
 | **Rule Engine (code)**          | Áp dụng rule tường minh của Sở; tách khỏi model để nhanh/audit/dự đoán được                                                     |
@@ -147,7 +147,7 @@ ai-doc-router/
 ├── app/
 │   ├── main.py                    # FastAPI entrypoint
 │   ├── api/routes.py              # POST /classify — nhận file đính kèm
-│   ├── pdf/extractor.py           # text extraction + fallback OCR
+│   ├── pdf/extractor.py           # text extraction + OCR Qwen2.5-VL + Tesseract fallback
 │   ├── extract/metadata.py        # trích metadata + hạn thực hiện từ văn bản
 │   ├── rules/
 │   │   ├── rules.yaml             # rulebase riêng từng Sở (SoNNMT)
@@ -168,11 +168,13 @@ ai-doc-router/
 ## 7. Tech stack
 
 - **API**: FastAPI (Python)
-- **PDF extraction**: `pdfplumber`/`pypdf` (text-based); Tesseract OCR (offline) cho bản scan
+- **PDF extraction**: `pdfplumber`/`pypdf` (text-based); bản scan → **Qwen2.5-VL-7B-Instruct qua vLLM** (chính) + Tesseract (fallback)
 - **Metadata extraction**: regex thuần (deterministic) + model fallback
 - **Rule storage**: YAML/JSON (rulebase riêng từng Sở), sau chuyển SQLite/Postgres + admin UI
 - **Orchestration**: harness tự viết, gọi model qua API tương thích OpenAI do vLLM/TGI cung cấp
-- **Model**: self-host open-weight (Qwen2.5/Qwen3, Llama… — benchmark lại tại thời điểm triển khai)
+- **Model định tuyến**: self-host open-weight (Qwen2.5/Qwen3, Llama… — benchmark lại tại thời điểm triển khai)
+- **Model OCR**: Qwen2.5-VL-7B-Instruct (vLLM) cho bản scan
+- **Phần cứng**: NVIDIA RTX 4090 (24 GB VRAM) — serve OCR VLM + model định tuyến qua vLLM on-prem
 - **Audit**: SQLite (demo) → Postgres (production)
 
 ---
@@ -181,7 +183,7 @@ ai-doc-router/
 
 ### Giai đoạn 1 — Demo local (Sở NN&MT)
 
-0. **Thu thập 20–30 văn bản mẫu thật + xác minh OCR** — kiểm tra tỷ lệ scan vs text gốc TRƯỚC khi code; quyết định OCR có bắt buộc ở đầu hay không.
+0. **Thu thập 20–30 văn bản mẫu thật + xác minh OCR** — kiểm tra tỷ lệ scan vs text gốc TRƯỚC khi code; chốt OCR dùng Qwen2.5-VL-7B (vLLM) + Tesseract fallback.
 1. **PDF extractor** — trích text từ PDF (có sẵn).
 2. **Metadata extractor** — trích số hiệu, loại, cơ quan, ngày, trích yếu, hạn (deterministic).
 3. **Rule engine** — `rules.yaml` SoNNMT + matcher deterministic, output 4 trường (rule theo chức danh, xem Mục 11.2).
@@ -195,7 +197,7 @@ ai-doc-router/
 8. Docker + docker-compose, secret qua `.env`.
 9. Reverse proxy (Nginx) trong mạng nội bộ, không expose Internet.
 10. Giám sát uptime, backup rule, restart tự động.
-11. Cài vLLM/TGI trên GPU, load model đã benchmark; Harness gọi qua localhost/LAN.
+11. Cài vLLM trên RTX 4090: serve **Qwen2.5-VL-7B-Instruct** (OCR) + model định tuyến đã benchmark; Harness gọi qua localhost/LAN.
 
 ### Giai đoạn 3 — Mở rộng đa Sở
 
@@ -211,7 +213,7 @@ ai-doc-router/
 - [X] **Knowledge base**: rulebase riêng từng Sở; trước mắt Sở NN&MT.
 - [X] **Hạn thực hiện**: trích từ nội dung văn bản; văn bản loại khẩn → `"hỏa tốc"`; không xác định được → null.
 - [X] **Định dạng output**: khóa snake_case (`don_vi_xu_ly_chinh`…) cho client nhận.
-- [ ] **OCR bản scan**: cần xác minh SỚM bằng 20–30 văn bản thật (scan phổ biến trong văn bản hành chính) — xem Mục 8 bước 0.
+- [ ] **OCR bản scan**: cần xác minh SỚM bằng 20–30 văn bản thật (scan phổ biến trong văn bản hành chính) — xem Mục 8 bước 0; OCR dùng Qwen2.5-VL-7B (vLLM) + Tesseract fallback.
 - [ ] **Rule theo chức danh thay vì tên người**: chốt thiết kế map chức danh → người đang giữ chức qua bảng nhân sự riêng (Mục 11.2).
 - [ ] **Trách nhiệm pháp lý khi định tuyến sai**: quy trình sign-off + người chịu trách nhiệm cuối (đưa ra bàn với lãnh đạo).
 
@@ -232,7 +234,7 @@ ai-doc-router/
 
 ## 11. Rủi ro & quyết định thiết kế (phản hồi đánh giá)
 
-1. **OCR không để cuối** — văn bản hành chính thường scan; đưa bước thu thập mẫu + xác minh OCR lên **bước 0** (Mục 8).
+1. **OCR không để cuối** — văn bản hành chính thường scan; đưa bước thu thập mẫu + xác minh OCR lên **bước 0** (Mục 8). Dùng **Qwen2.5-VL-7B (vLLM)** cho bản scan, Tesseract làm fallback.
 2. **Rule theo chức danh, không theo tên** — rule tham chiếu chức danh/vai trò (VD: `PGĐ Thủy lợi`, `Giám đốc Sở`); một **bảng nhân sự riêng** map chức danh → người đang giữ chức (kèm email), cập nhật độc lập khỏi rule logic.
 3. **Tiêu chí thành công định lượng** — đã thêm ở Mục 10.
 4. **Trách nhiệm pháp lý khi AI sai** — kỹ thuật chỉ dừng ở cờ `needs_review`; cần quy trình sign-off do lãnh đạo quyết định.
