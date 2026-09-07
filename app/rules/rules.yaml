@@ -18,13 +18,15 @@
 #   ky_hieu        : số hiệu văn bản chứa ký hiệu phòng/đơn vị (tra lookup.ky_hieu)
 #   giay_moi       : văn bản có tính chất giấy mời
 #   khan           : văn bản khẩn (còn 1–2 ngày hạn xử lý)
-#   keywords       : khớp từ khóa trên trích yếu + nội dung PDF (all_of / any_of)
+#   keywords       : khớp từ khóa trên trích yếu + nội dung PDF
+#                    (all_of / any_of; `source` = khớp chuỗi tên cơ quan ban hành;
+#                     `source_category` = khớp loại nguồn gửi cap_tren|so_nganh|khac)
 #   source         : phân loại nguồn gửi (cap_tren | so_nganh | khac)
 #   linh_vuc       : khớp lĩnh vực đã nhận diện (tra lookup.linh_vuc_phu_trach)
 # =============================================================================
 
 meta:
-  version: "1.0"
+  version: "1.1"
   department: "SoNNMT"
   department_name: "Sở Nông nghiệp và Môi trường tỉnh Gia Lai"
   source: "doc/SoNNMT/rulebaseSoNNMT.md"
@@ -42,6 +44,9 @@ lookup:
       - "cục thuế"
       - "chi cục thuế"
       - "bộ chỉ huy quân sự"
+      - "bộ đội biên phòng"
+      - "biên phòng"
+      - "ban chỉ huy"
       - "công an tỉnh"
       - "công an thành phố"
     cap_tren:
@@ -49,6 +54,7 @@ lookup:
       - "chính phủ"
       - "thủ tướng"
       - "tổng cục"
+      - "kiểm toán nhà nước"
       - "bộ trưởng"
       - "bộ "
       - "ubnd tỉnh"
@@ -95,19 +101,19 @@ lookup:
     - linh_vuc: "thủy lợi - nước"
       lanh_dao: "PGĐ Vũ Ngọc An"
       don_vi: ["Chi cục Thủy lợi", "Phòng Tài nguyên nước và KTTV"]
-      keywords: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào", "nước sạch nông thôn", "khí tượng thủy văn"]
+      keywords: ["thủy lợi", "ao hồ", "đầm phá", "hồ chứa", "hồ chứa nước", "hồ đập", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào", "điều tiết nước", "xả tràn", "hạ du", "mực nước", "lưu lượng", "dung tích hồ", "nước sạch nông thôn", "khí tượng thủy văn"]
     - linh_vuc: "thủy sản"
       lanh_dao: "PGĐ Trần Quốc Khánh"
-      don_vi: ["Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan"]
+      don_vi: ["Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan", "VP Điều phối về BĐKH"]
       keywords: ["thủy sản", "tàu cá", "giải bản tàu cá", "sự cố tràn dầu", "nhận chìm vật chất", "nuôi trồng thủy sản", "khai thác thủy sản", "iuu", "cảng cá", "bến cá", "khu neo đậu", "nghề cá", "ngư dân"]
     - linh_vuc: "địa chất khoáng sản"
       lanh_dao: "PGĐ Trần Đình Chương"
       don_vi: ["Phòng Địa chất và Khoáng sản"]
-      keywords: ["địa chất", "khoáng sản", "khai thác khoáng sản", "thuế tài nguyên", "phí bảo vệ môi trường"]
+      keywords: ["địa chất", "khoáng sản", "khai thác khoáng sản", "khai thác đá", "khai thác cát", "mỏ đá", "mỏ cát", "đóng cửa mỏ", "vật liệu nổ công nghiệp", "vlncn", "thuế tài nguyên", "phí bảo vệ môi trường"]
     - linh_vuc: "trồng trọt - bảo vệ thực vật"
       lanh_dao: "PGĐ Nguyễn Thị Tố Trân"
       don_vi: ["Chi cục Trồng trọt và Bảo vệ thực vật", "Trung tâm Khuyến nông"]
-      keywords: ["trồng trọt", "bảo vệ thực vật", "khuyến nông", "giống cây trồng", "kiểm dịch thực vật", "cây trồng", "nông sản"]
+      keywords: ["trồng trọt", "bảo vệ thực vật", "khuyến nông", "giống cây trồng", "kiểm dịch thực vật", "cây trồng", "nông sản", "nông nghiệp công nghệ cao", "chế biến nông lâm sản"]
     - linh_vuc: "chăn nuôi - thú y"
       lanh_dao: "PGĐ Đoàn Ngọc Có"
       don_vi: ["Chi cục Chăn nuôi và Thú y", "Trung tâm Giống Nông nghiệp"]
@@ -119,23 +125,27 @@ lookup:
     - linh_vuc: "bảo vệ môi trường"
       lanh_dao: "PGĐ Hà Thị Thanh Hương"
       don_vi: ["Chi cục Bảo vệ môi trường", "Trung tâm Quan trắc tài nguyên và môi trường"]
-      keywords: ["bảo vệ môi trường", "môi trường", "đa dạng sinh học", "chất thải", "ô nhiễm", "quan trắc", "đánh giá tác động môi trường", "biến đổi khí hậu"]
+      keywords: ["bảo vệ môi trường", "môi trường", "đa dạng sinh học", "chất thải", "ô nhiễm", "quan trắc", "đánh giá tác động môi trường", "biến đổi khí hậu", "kinh tế tuần hoàn"]
     - linh_vuc: "phát triển nông thôn"
       lanh_dao: "PGĐ Nguyễn Thị Thế Vy"
       don_vi: ["Chi cục Phát triển nông thôn", "Văn phòng Điều phối xây dựng nông thôn mới"]
-      keywords: ["phát triển nông thôn", "giảm nghèo", "nông thôn mới", "ntm", "định canh định cư", "hạ tầng nông thôn"]
+      keywords: ["phát triển nông thôn", "giảm nghèo", "nông thôn mới", "ntm", "ocop", "định canh định cư", "hạ tầng nông thôn"]
     - linh_vuc: "tổ chức cán bộ"
       lanh_dao: "Giám đốc Cao Thanh Thương"
       don_vi: ["Phòng Tổ chức cán bộ"]
       keywords: ["tổ chức cán bộ", "bổ nhiệm", "điều động", "biên chế", "cán bộ", "thi đua khen thưởng", "kỷ luật"]
+    - linh_vuc: "pháp chế - rà soát văn bản"
+      lanh_dao: "Giám đốc Cao Thanh Thương"
+      don_vi: ["Văn phòng Sở"]
+      keywords: ["văn bản quy phạm pháp luật", "vbqppl", "rà soát văn bản", "tiếp cận thông tin", "pháp chế"]
     - linh_vuc: "kế hoạch - tài chính"
       lanh_dao: "Giám đốc Cao Thanh Thương"
       don_vi: ["Phòng Kế hoạch - Tài chính"]
-      keywords: ["kế hoạch", "tài chính", "ngân sách", "đầu tư công", "thẩm định dự án", "quyết toán", "dự toán"]
+      keywords: ["kế hoạch", "tài chính", "ngân sách", "đầu tư công", "thẩm định dự án", "quyết toán", "dự toán", "kiểm toán", "tài sản công", "dịch vụ công ích", "giải ngân"]
     - linh_vuc: "tiếp công dân - khiếu nại tố cáo"
       lanh_dao: "Giám đốc Cao Thanh Thương"
       don_vi: ["Văn phòng Sở", "Chi cục Quản lý đất đai"]
-      keywords: ["tiếp công dân", "khiếu nại", "tố cáo", "kiến nghị", "phản ánh", "đơn thư"]
+      keywords: ["tiếp công dân", "đơn khiếu nại", "đơn tố cáo", "khiếu nại tố cáo", "phản ánh", "đơn thư", "tố cáo"]
 
   # Ký hiệu văn bản → đơn vị (Mục IV) — áp dụng ưu tiên cao nhất
   ky_hieu:
@@ -208,7 +218,7 @@ rules:
     name: "Giải quyết đơn, khiếu nại, tố cáo, kiến nghị"
     condition:
       type: keywords
-      any_of: ["giải quyết đơn", "khiếu nại", "tố cáo", "kiến nghị"]
+      any_of: ["giải quyết đơn", "đơn khiếu nại", "đơn tố cáo", "đơn thư", "tiếp công dân", "khiếu nại tố cáo", "tố cáo"]
     action:
       primary: ["Phạm Quý Phương", "Trần Thị Bảo Chi"]
       coordinator: []
@@ -338,25 +348,65 @@ rules:
     condition:
       type: keywords
       unless_khan: true
-      any_of: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào"]
+      any_of: ["thủy lợi", "ao hồ", "đầm phá", "hồ chứa", "hồ đập", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão", "tài nguyên nước", "nước dưới đất", "nước mặt", "giếng khoan", "giếng đào"]
     action:
       primary: ["PGĐ Vũ Ngọc An"]
       coordinator: []
       monitor: []
     note: "PGĐ tự bút phê chuyển đơn vị. Nếu còn 1-2 ngày hạn → ưu tiên áp dụng Mục VI (rule VI.1/VI.2)."
 
+  # ---- P2b: IUU — ưu tiên trước rule thủy sản chung V.10 ----
+  - id: "V.14"
+    priority: 2
+    name: "IUU — từ Sở NN&MT tỉnh khác / bộ, ngành trung ương / sở, ngành / công an / biên phòng"
+    condition:
+      type: keywords
+      unless_khan: true
+      source_category: ["cap_tren", "so_nganh"]
+      any_of: ["iuu", "đánh bắt bất hợp pháp", "khai thác hải sản bất hợp pháp", "khai thác thủy sản bất hợp pháp"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.15"
+    priority: 2
+    name: "IUU — từ xã/phường ven biển"
+    condition:
+      type: keywords
+      unless_khan: true
+      source: ["Cát Tiến", "Đề Gi", "An Lương", "Phù Mỹ Đông", "Phù Mỹ Bắc", "Tuy Phước", "Tuy Phước Đông", "Hoài Nhơn", "Hoài Nhơn Đông", "Hoài Nhơn Bắc", "Hoài Nhơn Nam", "Hoài Nhơn Tây", "Tam Quan", "Bồng Sơn", "Quy Nhơn", "Quy Nhơn Đông", "Quy Nhơn Nam", "Nhơn Châu", "Quy Nhơn Bắc", "An Hoà", "Hoài Ân", "Ngô Mây", "Phù Cát", "Xuân An"]
+      any_of: ["iuu", "đánh bắt bất hợp pháp", "khai thác hải sản bất hợp pháp", "khai thác thủy sản bất hợp pháp"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan"]
+      coordinator: []
+      monitor: []
+
+  - id: "V.16"
+    priority: 2
+    name: "IUU — từ xã/phường khác"
+    condition:
+      type: keywords
+      unless_khan: true
+      source_category: ["khac"]
+      any_of: ["iuu", "đánh bắt bất hợp pháp", "khai thác hải sản bất hợp pháp", "khai thác thủy sản bất hợp pháp"]
+    action:
+      primary: ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"]
+      coordinator: []
+      monitor: []
+
   - id: "V.10"
     priority: 2
-    name: "Thủy sản / tàu cá / IUU (bình thường)"
+    name: "Thủy sản / tàu cá / IUU (bình thường) — chuyển song song"
     condition:
       type: keywords
       unless_khan: true
       any_of: ["thủy sản", "tàu cá", "giải bản tàu cá", "sự cố tràn dầu", "nhận chìm vật chất", "nuôi trồng thủy sản", "khai thác thủy sản", "iuu", "nghề cá trên biển", "cảng cá", "bến cá", "khu neo đậu"]
     action:
-      primary: ["PGĐ Trần Quốc Khánh"]
+      primary: ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản", "BQL cảng cá", "BQL cảng cá Tam Quan", "VP Điều phối về BĐKH"]
       coordinator: []
       monitor: []
-    note: "PGĐ tự bút phê chuyển đơn vị. Nếu còn 1-2 ngày hạn → ưu tiên áp dụng Mục VI (rule VI.3/VI.4)."
+    note: "PGĐ Khánh không xử lý riêng lẻ — chuyển song song cùng đơn vị. V.14–V.16 xử lý IUU trước. Nếu còn 1-2 ngày hạn → ưu tiên Mục VI (VI.3/VI.4)."
 
   # ---- P3: Văn bản khẩn còn 1-2 ngày (Mục VI) — chuyển song song ----
   - id: "VI.1"
@@ -364,7 +414,7 @@ rules:
     name: "Khẩn: thủy lợi, công trình thủy lợi, thiên tai, phòng chống lụt bão"
     condition:
       type: khan
-      any_of: ["thủy lợi", "ao", "hồ", "đầm", "phá", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão"]
+      any_of: ["thủy lợi", "ao hồ", "đầm phá", "hồ chứa", "hồ đập", "công trình thủy lợi", "thiên tai", "phòng chống lụt bão"]
     action:
       primary: ["PGĐ Vũ Ngọc An", "Chi cục Thủy lợi"]
       coordinator: []

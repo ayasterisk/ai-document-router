@@ -1,0 +1,1605 @@
+[
+  {
+    "file": "01-TB-TL.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2028-08-25",
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": "01/TB-TL",
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "01_QD-KNCD_04092026-signed_03.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Thị Tố Trân",
+      "Chi cục Trồng trọt và Bảo vệ thực vật"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/QĐ-KNCĐ Ia Grai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "UBND XÃ IA GRAI TỔ KHUYẾN NÔNG CỘNG ĐỒNG XÃ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "06_GXN-UBND_05092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Đình Chương",
+      "Phòng Địa chất và Khoáng sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/GXN-UBND Ia Tul, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA TUL Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "11223_UBND-NNMT_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Đình Chương",
+      "Phòng Địa chất và Khoáng sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": "hỏa tốc",
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-NNMT Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "11224_UBND-XDCT_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Đình Chương",
+      "Phòng Địa chất và Khoáng sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-XDCT Gia Lai, ngày tháng 9 năm 202",
+    "co_quan_ban_hanh": "UỶ BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "11229_UBND-XDCT_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-XDCT Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "11271_UBND-KGVX_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": "2026-10-15",
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-KGVX Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "11281_UBND-NNMT_06092026-signed.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Thị Thế Vy",
+      "Chi cục Phát triển nông thôn"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "IV"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule IV — Văn bản trả lời / tổng hợp theo ký hiệu phòng-đơn vị",
+    "so_hieu": "9917/SNNMT-PTNT",
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "1165_QD-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Phòng Kế hoạch - Tài chính"
+    ],
+    "phoi_hop_xu_ly": [
+      "Chánh Văn phòng Sở"
+    ],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.gd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực GĐ phụ trách",
+    "so_hieu": "/QĐ-UBND Al Bá, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ AL BÁ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1200_GM-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Hồ Đắc Khánh",
+      "Đặng Phi Trường",
+      "Trần Thị Bảo Chi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "hỏa tốc",
+    "matched_rules": [
+      "II.4"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.4 — Giấy mời / văn bản có nội dung như giấy mời",
+    "so_hieu": "/GM-UBND Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "12016.TB-SNNMT.signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.14"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.14 — IUU — từ Sở NN&MT tỉnh khác / bộ, ngành trung ương / sở, ngành / công an / biên phòng",
+    "so_hieu": "/TB-SNN&MT Quảng Ninh, ngày tháng 9 năm",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1254_CV-UBND_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-KT Tơ Tung, ngày tháng 8 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ TƠ TUNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1280_UBND-KT_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "1280/UBND-KT Ya Ma, ngày 04 tháng 9 năm",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ YA MA Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1305_CV-UBND_22082026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [
+      "Chánh Văn phòng Sở"
+    ],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.gd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực GĐ phụ trách",
+    "so_hieu": "/UBND-KT Hoài Nhơn Nam, ngày tháng 8 năm",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN PHƯỜNG HOÀI NHƠN NAM Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1385_2026_BC-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Thị Tố Trân",
+      "Chi cục Trồng trọt và Bảo vệ thực vật"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/BC-UBND Ia Le, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA LE Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1393-BC-TDAK.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "1407_QLCL-CL_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan",
+      "VP Điều phối về BĐKH"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.10"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.10 — Thủy sản / tàu cá / IUU (bình thường) — chuyển song song",
+    "so_hieu": "/QLCL-CL Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG GIA LAI CHI CỤC QUẢN",
+    "trich_yeu": null
+  },
+  {
+    "file": "1426_QD-UBND_03092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Văn Hoan",
+      "Chi cục Kiểm lâm"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/QĐ-UBND K ô n g Bơ La, ngày tháng 9 năm",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ KÔNG BƠ LA Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "147_CV-VNCSCC_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan",
+      "VP Điều phối về BĐKH"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.10"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.10 — Thủy sản / tàu cá / IUU (bình thường) — chuyển song song",
+    "so_hieu": "/CV-VNCSCC Gia Lai, ngày 04 tháng 09 năm",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG TỈNH GIA LAI BAN QUẢN",
+    "trich_yeu": null
+  },
+  {
+    "file": "1521 QD-KTNN.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "1617_UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND An Hòa, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ AN HÒA Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1690_UBND-KTHTDT_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-KTHTĐT Bồng Sơn, ngày tháng 9 năm",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN PHƯỜNG BỒNG SƠN Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "172_TTr-UBND_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/TTr-UBND Phù Cát, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "UỶ BAN NHÂN DÂN XÃ PHÙ CÁT Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1756_UBND-NL_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-NL Bờ Ngoong, ngày tháng 9 năm 202",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ BỜ NGOONG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1807_TTT-GSTD&XLSTT_04092026-signed_01 (1).pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-09-15",
+    "matched_rules": [
+      "II.cap_tren.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.gd — Cấp trên — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp nhiều lĩnh vực",
+    "so_hieu": "/TTT-GSTĐ&XLSTT Gia Lai, ngày tháng 9 nă",
+    "co_quan_ban_hanh": "UBND TỈNH GIA LAI THANH TRA TỈNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1807_TTT-GSTD&XLSTT_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-09-15",
+    "matched_rules": [
+      "II.cap_tren.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.gd — Cấp trên — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp nhiều lĩnh vực",
+    "so_hieu": "/TTT-GSTĐ&XLSTT Gia Lai, ngày tháng 9 nă",
+    "co_quan_ban_hanh": "UBND TỈNH GIA LAI THANH TRA TỈNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1812_QD-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/QĐ-UBND Bình Khê, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ BÌNH KHÊ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1821_UBND-KT_05092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/UBND-KT Ia Dreh, ngày tháng năm 2026",
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "1879_SDTTG-DT_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Hồ Đắc Khánh",
+      "Đặng Phi Trường",
+      "Trần Thị Bảo Chi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.4"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.4 — Giấy mời / văn bản có nội dung như giấy mời",
+    "so_hieu": "/SDTTG-DT Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ DÂN TỘC VÀ TÔN GIÁO Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1881_SDTTG-VP_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Phòng Tổ chức cán bộ"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.gd — Sở/ngành khác — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp",
+    "so_hieu": "/SDTTG-VP",
+    "co_quan_ban_hanh": "SỞ DÂN TỘC VÀ TÔN GIÁO",
+    "trich_yeu": null
+  },
+  {
+    "file": "190_KH-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Văn Hoan",
+      "Chi cục Kiểm lâm"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/KH-UBND Quy Nhơn Tây, ngày tháng 9 năm",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN PHƯỜNG QUY NHƠN TÂY Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "1917_CV-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Đoàn Ngọc Có",
+      "Chi cục Chăn nuôi và Thú y"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/UBND-PKT Ia Grai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA GRAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "196_KH-UBND_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-10-31",
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/KH-UBND Tuy Phước Tây, ngày tháng năm 2",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ TUY PHƯỚC TÂY Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "2016_TTPTQD-QLPTQD_05092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.7"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.7 — Trung tâm phát triển quỹ đất thông báo kết quả đấu giá QSDĐ",
+    "so_hieu": "/TTPTQĐ-QLPTQĐ Gia Lai, ngày tháng 9 năm",
+    "co_quan_ban_hanh": "UBND TỈNH GIA LAI TRUNG TÂM PHÁT TRIỂN QUỸ ĐẤT Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "230_KH-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/KH-UBND Tơ Tung, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ TƠ TUNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "26.9.04-Thong-bao-IUU-ok-67804.09.2026_09h58p34_signed_khanhth.stnmt_04-09-2026-14-30-19(04.09.2026_15h26p19)_signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.14"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.14 — IUU — từ Sở NN&MT tỉnh khác / bộ, ngành trung ương / sở, ngành / công an / biên phòng",
+    "so_hieu": "/S NNMT-TS Hà Tĩnh, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "272_2026_KH-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-10-05",
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/KH-UBND Ia Le, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA LE Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "272_GP-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Đình Chương",
+      "Phòng Địa chất và Khoáng sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/GP-UBND Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "28- CV- TT.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "283_KH-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/KH-UBND",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ BIỂN HỒ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "28648-SNN-KV3-VANBAN_Phoi hop, xu ly tau ca cua TP Ho Chi Minh co nguy co cao vi pham IUU (cap ngay 28.8.2026).signed.signed.signed.signed.signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.14"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.14 — IUU — từ Sở NN&MT tỉnh khác / bộ, ngành trung ương / sở, ngành / công an / biên phòng",
+    "so_hieu": "/SNNMT-CCTSKN Thành phố Hồ Chí Minh, ngà",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "3025_STP-NV1_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": "/STP-NV1 Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ TƯ PHÁP Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "350_KH-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "351_KH-UBND_04092026-signed.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "360_BC-UBND_29082026-signed_04.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An",
+      "Chi cục Thủy lợi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "hỏa tốc",
+    "matched_rules": [
+      "VI.1"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule VI.1 — Khẩn: thủy lợi, công trình thủy lợi, thiên tai, phòng chống lụt bão",
+    "so_hieu": "/BC-UBND Phù Mỹ Đông, ngày tháng 8 năm 2",
+    "co_quan_ban_hanh": "UỶ BAN NHÂN DÂN XÃ PHÙ MỸ ĐÔNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "3763_QD-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-10-10",
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/QĐ-UBND G ia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "402-04092026.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "418_BC-UBND_03092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Phòng Kế hoạch - Tài chính"
+    ],
+    "phoi_hop_xu_ly": [
+      "Chánh Văn phòng Sở"
+    ],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.gd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực GĐ phụ trách",
+    "so_hieu": "/BC-UBND Ia Krái, ngày tháng 8 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA KRÁI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "431_BC-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "hỏa tốc",
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/BC-UBND Ia Rbol, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA RBOL Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "4326.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "4402_SCT-VP_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Văn Hoan",
+      "Chi cục Kiểm lâm"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/SCT-VP Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ CÔNG THƯƠNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "4430_SCT-QLNL_05092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.dat_dai"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.dat_dai — Sở/ngành khác — lĩnh vực đất đai",
+    "so_hieu": "/SCT-QLNL Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ CÔNG THƯƠNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "4432_SCT-QLNL_05092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Văn Hoan",
+      "Chi cục Kiểm lâm"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-08-12",
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/SCT-QLNL Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ CÔNG THƯƠNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "449_BC-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/BC-UBND Ia Pia, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ IA PIA Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "462_BC-UBND_03092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/BC-UBND Bờ Ngoong, ngày tháng 9 năm 202",
+    "co_quan_ban_hanh": "UỶ BAN NHÂN DÂN XÃ BỜ NGOONG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "484_BC-UBND_03092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.15"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.15 — IUU — từ xã/phường ven biển",
+    "so_hieu": "484/BC-UBND Quy Nhơn Nam, ngày 03 tháng",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN PHƯỜNG QUY NHƠN NAM Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "526_BC-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Đoàn Ngọc Có",
+      "Chi cục Chăn nuôi và Thú y"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-09-20",
+    "matched_rules": [
+      "II.khac.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.pgd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/BC-UBND An Bình, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN PHƯỜNG AN BÌNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "5605_SGDDT-GDTrH_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": "2026-09-10",
+    "matched_rules": [
+      "II.so_nganh.dat_dai"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.dat_dai — Sở/ngành khác — lĩnh vực đất đai",
+    "so_hieu": "/SGDĐT-GDTrH Gia Lai, ngày tháng 9 năm 2",
+    "co_quan_ban_hanh": "SỞ GIÁO DỤC VÀ ĐÀO TẠO Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "6573_SNV-CCVC_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.dat_dai"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.dat_dai — Sở/ngành khác — lĩnh vực đất đai",
+    "so_hieu": "/SNV-CCVC Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ NỘI VỤ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "6599_SNV-TCBC_04092026-signed_01 (1).pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/SNV-TCBC Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ NỘI VỤ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "6599_SNV-TCBC_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/SNV-TCBC Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ NỘI VỤ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "685_BC-UBND_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": "/BC-UBND Pleiku, ngày tháng năm 2026",
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "72_BC-KT_28082026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Phạm Quý Phương",
+      "Trần Thị Bảo Chi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-08-31",
+    "matched_rules": [
+      "V.2"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.2 — Giải quyết đơn, khiếu nại, tố cáo, kiến nghị",
+    "so_hieu": "/BC-PKT Phù Mỹ, ngày tháng 8 năm 2026",
+    "co_quan_ban_hanh": "UBND XÃ AN LƯƠNG PHÒNG KINH TẾ Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "7366_SXD-HTKT_03092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/SXD-HTKT Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ XÂY DỰNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "7370_SXD-HTKT_03092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Hà Thị Thanh Hương",
+      "Chi cục Bảo vệ môi trường"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "7370/SXD-HTKT Gia Lai, ngày 03 tháng 9 n",
+    "co_quan_ban_hanh": "SỞ XÂY DỰNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "872_TS-HCTH_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan",
+      "VP Điều phối về BĐKH"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.10"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.10 — Thủy sản / tàu cá / IUU (bình thường) — chuyển song song",
+    "so_hieu": "/TS-HCTH Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MT GIA LAI CHI CỤC THỦY SẢN",
+    "trich_yeu": null
+  },
+  {
+    "file": "874_TTBVTV-BVTV_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Nguyễn Thị Tố Trân",
+      "Chi cục Trồng trọt và Bảo vệ thực vật"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/TTBVTV-BVTV Gia Lai, ngày tháng 9 năm 2",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG TỈNH GIA LAI CHI CỤC",
+    "trich_yeu": null
+  },
+  {
+    "file": "879_BC-STC_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An",
+      "Chi cục Thủy lợi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-09-02",
+    "matched_rules": [
+      "VI.1"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule VI.1 — Khẩn: thủy lợi, công trình thủy lợi, thiên tai, phòng chống lụt bão",
+    "so_hieu": "/BC-STC Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ TÀI CHÍNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "8852_STC-QLN_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Phòng Kế hoạch - Tài chính"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.so_nganh.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.gd — Sở/ngành khác — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp",
+    "so_hieu": "/STC-QLN Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ TÀI CHÍNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "8869_STC-QLN_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.8"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.8 — VB Sở Tài chính / Sở Xây dựng / BQL Khu kinh tế thẩm định hoặc lấy ý kiến thẩm định dự án",
+    "so_hieu": "/STC-QLN Gia Lai, ngày tháng 9 năm 2026",
+    "co_quan_ban_hanh": "SỞ TÀI CHÍNH",
+    "trich_yeu": null
+  },
+  {
+    "file": "8884_CV-STC_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Phòng Kế hoạch - Tài chính"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": "2026-08-28",
+    "matched_rules": [
+      "II.so_nganh.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.gd — Sở/ngành khác — thuộc lĩnh vực GĐ phụ trách hoặc tổng hợp",
+    "so_hieu": "/STC-RECAF Gia Lai, ngày tháng 9 năm 202",
+    "co_quan_ban_hanh": "SỞ TÀI CHÍNH Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "89_TTr-UBND_04092026-signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Vũ Ngọc An"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.9"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.9 — Thủy lợi / tài nguyên nước (bình thường)",
+    "so_hieu": "/TTr-UBND Hoài Ân, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "ỦY BAN NHÂN DÂN XÃ HOÀI ÂN Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "904cv_snn_phoi_hop_xu_ly_tau_g20260905035036988_Signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Thủy sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "IV"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule IV — Văn bản trả lời / tổng hợp theo ký hiệu phòng-đơn vị",
+    "so_hieu": "/SNNMT-TSKN Nghệ An, ngày tháng 9 năm 20",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "942_UBND-KTTH_04092026-signed_01.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Phòng Kế hoạch - Tài chính"
+    ],
+    "phoi_hop_xu_ly": [
+      "Chánh Văn phòng Sở"
+    ],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.khac.gd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.khac.gd — Xã/phường/tổ chức/doanh nghiệp/công dân — thuộc lĩnh vực GĐ phụ trách",
+    "so_hieu": "/UBND-KTTH Chư Krey, ngày tháng 9 năm 20",
+    "co_quan_ban_hanh": "UỶ BAN NHÂN DÂN XÃ CHƯ KREY Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "Bao muc nuoc 03092026.pdf",
+    "ocr": true,
+    "don_vi_xu_ly_chinh": [],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [],
+    "confidence": 0.0,
+    "needs_review": true,
+    "reason": "Không có rule cứng nào khớp rõ ràng — cần model suy luận ngữ nghĩa hoặc người duyệt xác nhận.",
+    "so_hieu": null,
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "Copy of 40242.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan",
+      "VP Điều phối về BĐKH"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.10"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.10 — Thủy sản / tàu cá / IUU (bình thường) — chuyển song song",
+    "so_hieu": "/QĐ-TS Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MT GIA LAI CHI CỤC THỦY SẢN",
+    "trich_yeu": null
+  },
+  {
+    "file": "Copy of QD-TS thanh lap To TTKS De Gi (6-20.9.2026).pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản",
+      "BQL cảng cá",
+      "BQL cảng cá Tam Quan"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.14"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.14 — IUU — từ Sở NN&MT tỉnh khác / bộ, ngành trung ương / sở, ngành / công an / biên phòng",
+    "so_hieu": "/QĐ-TS Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "SỞ NÔNG NGHIỆP VÀ MT GIA LAI CÔNG HOÀ XÃ HỘI",
+    "trich_yeu": null
+  },
+  {
+    "file": "CV Gui cac don vi tham gia_-_nthyen7_04092026104410__04092026104721_signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [
+      "Giám đốc Cao Thanh Thương"
+    ],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.cap_tren.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.cap_tren.pgd — Cấp trên — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/KTHT-NNNT",
+    "co_quan_ban_hanh": "BỘ NÔNG NGHIỆP VÀ MÔI TRƯỜNG CỤC KINH TẾ HỢP TÁC",
+    "trich_yeu": null
+  },
+  {
+    "file": "Thong bao moi tap huan - So ban nganh - 2026.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chánh Văn phòng Sở",
+      "Hồ Đắc Khánh",
+      "Đặng Phi Trường",
+      "Trần Thị Bảo Chi"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "II.4"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.4 — Giấy mời / văn bản có nội dung như giấy mời",
+    "so_hieu": "9736/VPTT(CAT)-PA02",
+    "co_quan_ban_hanh": null,
+    "trich_yeu": null
+  },
+  {
+    "file": "vv dang ky tham gia khoa hoc ve ANM DLCN TTNT tren nen tang binh dan hoc vu so_signed.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "PGĐ Trần Quốc Khánh",
+      "Chi cục Thủy sản"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": "2026-09-10",
+    "matched_rules": [
+      "II.so_nganh.pgd"
+    ],
+    "confidence": 0.85,
+    "needs_review": false,
+    "reason": "Khớp rule II.so_nganh.pgd — Sở/ngành khác — thuộc lĩnh vực PGĐ phụ trách",
+    "so_hieu": "/CAT-PA05 Gia Lai, ngày 04 tháng 9 năm 2",
+    "co_quan_ban_hanh": "BỘ CÔNG AN CÔNG AN TỈNH GIA LAI Số",
+    "trich_yeu": null
+  },
+  {
+    "file": "Xac nhan nghia vu tai chinh dong mo_47.pdf",
+    "ocr": false,
+    "don_vi_xu_ly_chinh": [
+      "Chi cục Quản lý đất đai"
+    ],
+    "phoi_hop_xu_ly": [],
+    "lanh_dao_theo_doi": [],
+    "han_thuc_hien": null,
+    "matched_rules": [
+      "V.3"
+    ],
+    "confidence": 0.95,
+    "needs_review": false,
+    "reason": "Khớp rule V.3 — TB cơ quan Thuế: thu hồi đất / nộp tiền thuê đất / ngăn chặn chuyển dịch thế chấp do nợ thuế",
+    "so_hieu": "Gia Lai, ngày tháng năm 2026",
+    "co_quan_ban_hanh": "CỤC THUẾ THUẾ TỈNH GIA LAI Số",
+    "trich_yeu": null
+  }
+]

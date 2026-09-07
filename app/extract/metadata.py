@@ -7,6 +7,7 @@ của file đính kèm. Phần không bắt được bằng regex sẽ do model 
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date
 from typing import Any, Dict, Optional
@@ -109,18 +110,40 @@ class MetadataExtractor:
 
     @staticmethod
     def extract_co_quan_ban_hanh(text: str) -> Optional[str]:
-        head = text[:600]
+        # Letterhead: dòng trái = cơ quan, dòng phải = quốc hiệu/tiêu ngữ.
+        # PDF text layer dồn trái-phải + Unicode tổ hợp -> chuẩn hóa NFC, gộp khoảng trắng, bỏ slogan.
+        head = unicodedata.normalize("NFC", (text or "")[:800])
+        head = re.sub(r"\s+", " ", head)
+        head = re.sub(r"CỘNG\s+H\S*\s+XÃ\s+HỘI\s+CHỦ\s+NGHĨA\s+VIỆT\s+NAM", " ", head, flags=re.IGNORECASE)
+        head = re.sub(r"ĐỘC\s+LẬP\s*[-–—]\s*TỰ\s+DO\s*[-–—]\s*HẠNH\s+PHÚC", " ", head, flags=re.IGNORECASE)
+        # cắt bỏ phần sau "Số: ..." để không dính số hiệu/ngày vào tên cơ quan
+        head = re.split(r"\s+S[Ốố]+\s*:", head, maxsplit=1, flags=re.IGNORECASE)[0]
+
+        W = r"[A-ZÀ-ỸĐ][A-Za-zà-ỹđÀ-ỸĐ&.\-]*"   # từ bắt đầu viết hoa (title-case hoặc ALL-CAPS)
+        ORG = W + r"(?:\s+" + W + r"){0,9}"
         patterns = [
-            r"ỦY BAN NHÂN DÂN\s+(?:TỈNH|THÀNH PHỐ|HUYỆN|THỊ XÃ)\s+[A-ZÀ-ỸĐ\s]+",
-            r"UBND\s+(?:TỈNH|THÀNH PHỐ|HUYỆN|THỊ XÃ)\s+[A-ZÀ-ỸĐ\s]+",
-            r"SỞ\s+[A-ZÀ-ỸĐ\s]+",
-            r"BỘ\s+[A-ZÀ-ỸĐ\s]+",
-            r"CỤC\s+THUẾ\s+[A-ZÀ-ỸĐ\s]+",
-            r"CHI CỤC\s+THUẾ\s+[A-ZÀ-ỸĐ\s]+",
-            r"TỈNH ỦY\s+[A-ZÀ-ỸĐ\s]+",
+            r"SỞ\s+" + ORG,
+            r"CHI\s+CỤC\s+" + ORG,
+            r"CÔNG\s+TY\s+" + ORG,
+            r"KIỂM\s+TOÁN\s+NHÀ\s+NƯỚC" + ORG,
+            r"BAN\s+CHỈ\s+HUY\s+" + ORG,
+            r"BỘ\s+ĐỘI\s+BIÊN\s+PHÒNG\s+" + ORG,
+            r"CÔNG\s+AN\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN)?\s*" + ORG,
+            r"(?:ỦY|UỶ)\s+BAN\s+NHÂN\s+DÂN\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN|THỊ\s+XÃ|XÃ|PHƯỜNG)\s*" + ORG,
+            r"UBND\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN|THỊ\s+XÃ|XÃ|PHƯỜNG)\s*" + ORG,
+            r"BỘ\s+" + ORG,
+            r"TRUNG\s+TÂM\s+" + ORG,
+            r"HỢP\s+TÁC\s+XÃ\s+" + ORG,
+            r"BAN\s+QUẢN\s+LÝ\s+" + ORG,
+            r"DOANH\s+NGHIỆP\s+" + ORG,
+            r"CỤC\s+THUẾ\s+" + ORG,
+            r"CHI\s+CỤC\s+THUẾ\s+" + ORG,
+            r"TỈNH\s+ỦY\s+" + ORG,
+            r"THÀNH\s+ỦY\s+" + ORG,
+            r"HUYỆN\s+ỦY\s+" + ORG,
         ]
         for p in patterns:
-            m = re.search(p, head)
+            m = re.search(p, head, re.IGNORECASE)
             if m:
                 return re.sub(r"\s+", " ", m.group(0)).strip()
         return None
@@ -140,11 +163,13 @@ class MetadataExtractor:
 
     @staticmethod
     def extract_ngay_van_ban(text: str) -> Optional[date]:
-        # ưu tiên dòng '..., ngày ... tháng ... năm ...'
-        m = re.search(r"ngày\s+(\d{1,2})\s+tháng\s+([^\s,.;]+)\s*(?:năm\s+(\d{4}))?", text, re.IGNORECASE)
+        # Ngày ban hành nằm ở phần đầu văn bản ("..., ngày ... tháng ... năm ..."),
+        # tránh bắt nhầm ngày sinh / ngày cấp giấy tờ trong nội dung.
+        head = (text or "")[:600]
+        m = re.search(r"ngày\s+(\d{1,2})\s+tháng\s+([^\s,.;]+)\s*(?:năm\s+(\d{4}))?", head, re.IGNORECASE)
         if m:
             return _parse_vn_date(m.group(0))
-        return _parse_vn_date(text)
+        return _parse_vn_date(head) or _parse_vn_date(text)
 
     @staticmethod
     def extract_trich_yeu(text: str) -> Optional[str]:
@@ -175,7 +200,7 @@ class MetadataExtractor:
     # ------------------------------------------------------------------ #
     @classmethod
     def extract(cls, text: str) -> ExtractedMetadata:
-        text = text or ""
+        text = unicodedata.normalize("NFC", text or "")
         meta = ExtractedMetadata(
             so_hieu=cls.extract_so_hieu(text),
             loai=cls.extract_loai(text),

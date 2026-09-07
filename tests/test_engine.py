@@ -157,5 +157,36 @@ class TestHarnessFallback(unittest.TestCase):
         self.assertTrue(res.needs_review)
 
 
+class TestIuuRules(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.engine = RuleEngine(RULES_PATH)
+
+    def test_iuu_tu_so_nganh(self):
+        doc = make_doc(co_quan_ban_hanh="Công an tỉnh Gia Lai", trich_yeu="báo cáo tàu cá vi phạm IUU")
+        res = self.engine.run(doc)
+        self.assertIn("V.14", res.matched_rules)
+        self.assertIn("Chi cục Thủy sản", res.don_vi_xu_ly_chinh)
+        self.assertIn("BQL cảng cá", res.don_vi_xu_ly_chinh)
+
+    def test_iuu_xa_ven_bien(self):
+        doc = make_doc(co_quan_ban_hanh="UBND xã Cát Tiến", trich_yeu="thông tin tàu cá IUU")
+        res = self.engine.run(doc)
+        self.assertIn("V.15", res.matched_rules)
+        self.assertIn("BQL cảng cá Tam Quan", res.don_vi_xu_ly_chinh)
+
+    def test_iuu_xa_khac(self):
+        doc = make_doc(co_quan_ban_hanh="UBND xã Ia Rsai", trich_yeu="phản ánh tàu cá IUU")
+        res = self.engine.run(doc)
+        self.assertIn("V.16", res.matched_rules)
+        self.assertEqual(res.don_vi_xu_ly_chinh, ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"])
+
+    def test_thuy_san_binh_thuong_song_song(self):
+        doc = make_doc(trich_yeu="nuôi trồng thủy sản")
+        res = self.engine.run(doc)
+        self.assertIn("V.10", res.matched_rules)
+        self.assertIn("VP Điều phối về BĐKH", res.don_vi_xu_ly_chinh)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

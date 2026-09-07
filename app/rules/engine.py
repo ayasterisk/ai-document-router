@@ -126,13 +126,26 @@ class RuleEngine:
         return None
 
     def detect_ky_hieu(self, doc: Document) -> Optional[str]:
-        """Tìm ký hiệu phòng/đơn vị trong số hiệu (khớp key dài nhất trước)."""
-        hay = norm(doc.so_hieu)
+        """Tìm ký hiệu phòng/đơn vị (khớp key dài nhất trước).
+
+        Ưu tiên số hiệu văn bản đến; nếu là văn bản trả lời/phúc đáp thì dò thêm
+        ký hiệu của văn bản được trả lời trong nội dung (Mục IV).
+        """
         keys = sorted(self.lookup["ky_hieu"].keys(), key=len, reverse=True)
+        hay = norm(doc.so_hieu)
         for key in keys:
             if norm(key) in hay:
                 return key
+        if self._is_reply(doc):
+            body = norm(doc.trich_yeu + " " + doc.noi_dung)
+            for key in keys:
+                if norm(key) in body:
+                    return key
         return None
+
+    def _is_reply(self, doc: Document) -> bool:
+        t = norm(doc.trich_yeu + " " + doc.noi_dung)
+        return any(k in t for k in ("tra loi", "phuc dap", "phan hoi"))
 
     def detect_khan(self, doc: Document, today: Optional[date] = None) -> bool:
         if doc.khan:
@@ -157,6 +170,15 @@ class RuleEngine:
                 best_score = score
                 best = entry
         return best if best_score > 0 else None
+
+    def count_linh_vuc(self, doc: Document, min_score: int = 2) -> int:
+        """Đếm số lĩnh vực có >= min_score keyword khớp (dùng phát hiện 'tổng hợp nhiều lĩnh vực')."""
+        hay = norm(doc.haystack())
+        return sum(
+            1
+            for entry in self.lookup["linh_vuc_phu_trach"]
+            if sum(1 for kw in entry.get("keywords", []) if _contains(hay, kw)) >= min_score
+        )
 
     def is_giay_moi(self, doc: Document) -> bool:
         hay = norm(doc.haystack())
@@ -185,6 +207,8 @@ class RuleEngine:
                 return False
             if cond.get("source") and not any(norm(s) in norm(doc.co_quan_ban_hanh) for s in cond["source"]):
                 return False
+            if cond.get("source_category") and features["source"] not in cond["source_category"]:
+                return False
             if cond.get("all_of") and not self._all_keyword(doc, cond["all_of"]):
                 return False
             return self._any_keyword(doc, cond.get("any_of", []))
@@ -200,6 +224,9 @@ class RuleEngine:
                     return False
                 return True
             if cond.get("linh_vuc_leader"):
+                # tổng hợp nhiều lĩnh vực -> coi như GĐ phụ trách/tổng hợp
+                if cond["linh_vuc_leader"] == "gd" and features.get("tong_hop"):
+                    return True
                 if lv is None:
                     return False
                 leader_is_gd = str(lv.get("lanh_dao", "")).startswith("Giám đốc")
@@ -234,6 +261,7 @@ class RuleEngine:
             "khan": self.detect_khan(doc, today),
             "linh_vuc": self.detect_linh_vuc(doc),
             "giay_moi": self.is_giay_moi(doc),
+            "tong_hop": self.count_linh_vuc(doc) >= 2,
         }
 
         result = EngineResult(extracted=dict(features), han_thuc_hien=doc.han_thuc_hien)

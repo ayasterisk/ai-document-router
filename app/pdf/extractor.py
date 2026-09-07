@@ -20,7 +20,19 @@ from typing import List
 
 logger = logging.getLogger(__name__)
 
-MIN_TEXT_LENGTH = 50  # ngưỡng coi text extract là "quá ít" -> kích hoạt OCR
+MIN_TEXT_LENGTH = 80  # ngưỡng coi text extract là "quá ít" -> kích hoạt OCR
+
+# Marker nhận diện văn bản hành chính thật (tránh text của chữ ký số bị nhận nhầm là nội dung)
+DOC_MARKERS = (
+    "số:", "v/v", "về việc", "cộng hòa", "cộng hoà", "độc lập", "kính gửi",
+    "trích yếu", "quyết định", "công văn", "thông báo", "báo cáo", "tờ trình",
+    "giấy mời", "công điện", "chỉ thị", "kế hoạch", "hướng dẫn", "đề nghị",
+)
+
+
+def _has_document_content(text: str) -> bool:
+    t = (text or "").lower()
+    return any(m in t for m in DOC_MARKERS)
 
 
 # --------------------------------------------------------------------------- #
@@ -36,13 +48,14 @@ OCR_MODEL = _env("OCR_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct")
 OCR_API_KEY = _env("OCR_API_KEY", "EMPTY")
 OCR_PAGE_DPI = int(os.getenv("OCR_PAGE_DPI", "200"))
 OCR_MAX_TOKENS = int(os.getenv("OCR_MAX_TOKENS", "8192"))
+OCR_NUM_CTX = int(os.getenv("OCR_NUM_CTX", "16384"))  # context window (ảnh trang A4 ~4k token)
 OCR_TIMEOUT = float(os.getenv("OCR_TIMEOUT", "120"))
 
 OCR_USER_PROMPT = (
     "Đây là ảnh quét một trang văn bản hành chính tiếng Việt. "
-    "Hãy trích xuất TOÀN BỘ văn bản trong ảnh (tiêu đề, số hiệu, nội dung, bảng, chữ ký), "
-    "giữ nguyên thứ tự và xuống dòng theo bố cục, không tóm tắt, không bình luận, "
-    "chỉ trả về phần chữ trong trang."
+    "Hãy trích xuất nguyên văn toàn bộ chữ trong ảnh (tiêu đề, số hiệu, cơ quan ban hành, nội dung, bảng, chữ ký). "
+    "Giữ nguyên thứ tự dòng và bố cục. Không tóm tắt, không bình luận, không thêm lời mở đầu. "
+    "Chỉ trả về đúng phần chữ có trong trang."
 )
 
 
@@ -154,6 +167,7 @@ def ocr_qwen_vl(path: Path) -> str:
             ],
             "temperature": 0,
             "max_tokens": OCR_MAX_TOKENS,
+            "options": {"num_ctx": OCR_NUM_CTX},
         }
 
         try:
@@ -212,10 +226,11 @@ def extract_pdf_content(path: Path, ocr_fallback: bool = True) -> str:
 
     text = (text or "").strip()
 
-    if len(text) >= MIN_TEXT_LENGTH or not ocr_fallback:
+    if not ocr_fallback or (len(text) >= MIN_TEXT_LENGTH and _has_document_content(text)):
         return text
 
-    logger.info("Text quá ít (%d ký tự), kích hoạt OCR (provider=%s)", len(text), OCR_PROVIDER)
+    logger.info("Text thiếu nội dung (%d ký tự, marker=%s), kích hoạt OCR (provider=%s)",
+                len(text), _has_document_content(text), OCR_PROVIDER)
     for provider in _ocr_chain():
         try:
             ocr_text = _run_ocr(provider, path)
