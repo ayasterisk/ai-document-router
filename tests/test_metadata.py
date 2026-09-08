@@ -1,4 +1,5 @@
 """Unit test cho MetadataExtractor (trích metadata + hạn từ nội dung văn bản)."""
+
 from __future__ import annotations
 
 import sys
@@ -10,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.extract.metadata import MetadataExtractor  # noqa: E402
+from app.extract.metadata import MetadataExtractor
 
 
 class TestMetadataExtractor(unittest.TestCase):
@@ -21,7 +22,9 @@ class TestMetadataExtractor(unittest.TestCase):
         )
 
     def test_loai(self):
-        self.assertEqual(MetadataExtractor.extract_loai("CÔNG VĂN\nSố: 1/ABC"), "Công văn")
+        self.assertEqual(
+            MetadataExtractor.extract_loai("CÔNG VĂN\nSố: 1/ABC"), "Công văn"
+        )
 
     def test_ngay_van_ban(self):
         self.assertEqual(
@@ -31,14 +34,16 @@ class TestMetadataExtractor(unittest.TestCase):
 
     def test_han_thuc_hien_ngay(self):
         self.assertEqual(
-            MetadataExtractor.extract_han_thuc_hien("Đề nghị trả lời trước ngày 20/08/2026"),
+            MetadataExtractor.extract_han_thuc_hien(
+                "Đề nghị trả lời trước ngày 20/08/2026"
+            ),
             "2026-08-20",
         )
 
     def test_han_thuc_hien_khan(self):
         self.assertEqual(
             MetadataExtractor.extract_han_thuc_hien("CÔNG ĐIỆN HỎA TỐC"),
-            "hỏa tốc",
+            None,
         )
 
     def test_detect_khan(self):
@@ -47,7 +52,8 @@ class TestMetadataExtractor(unittest.TestCase):
     def test_trich_yeu(self):
         self.assertIn(
             "thu hồi đất",
-            MetadataExtractor.extract_trich_yeu("V/v: thông báo thu hồi đất do nợ thuế") or "",
+            MetadataExtractor.extract_trich_yeu("V/v: thông báo thu hồi đất do nợ thuế")
+            or "",
         )
 
     def test_extract_tong_hop(self):

@@ -1,4 +1,5 @@
 """Demo: chạy pipeline định tuyến trên vài văn bản mẫu, in kết quả 4 trường."""
+
 from __future__ import annotations
 
 import json
@@ -9,24 +10,39 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.orchestrator.harness import Harness, MockInferenceClient  # noqa: E402
-from app.rules.engine import RuleEngine  # noqa: E402
+from app.orchestrator.harness import Harness
+from app.rules.engine import RuleEngine
 
 RULES = ROOT / "app" / "rules" / "rules.yaml"
 
 SAMPLES = [
-    ("Thuế - thu hồi đất", "CỤC THUẾ TỈNH GIA LAI\nCÔNG VĂN\nV/v: Thông báo thu hồi đất do nợ thuế"),
+    (
+        "Thuế - thu hồi đất",
+        "CỤC THUẾ TỈNH GIA LAI\nTHÔNG BÁO\nV/v: Thông báo thu hồi đất do nợ thuế",
+    ),
     ("Thủy lợi - bình thường", "SỞ NN&MT\nCÔNG VĂN\nV/v: xây dựng công trình thủy lợi"),
-    ("Khẩn - hỏa tốc thủy lợi", "CÔNG ĐIỆN HỎA TỐC\nV/v: phòng chống lụt bão công trình thủy lợi"),
-    ("Ký hiệu văn bản (SNNMT-TS)", "SỞ NN&MT\nCÔNG VĂN\nSố: 123/SNNMT-TS\nV/v: báo cáo nuôi trồng thủy sản"),
-    ("UBND tỉnh - thẩm định ĐTM", "UBND TỈNH GIA LAI\nQUYẾT ĐỊNH\nV/v: thẩm định báo cáo đánh giá tác động môi trường"),
-    ("UBND tỉnh - chấp thuận chủ trương đầu tư (chăn nuôi)", "UBND TỈNH GIA LAI\nQUYẾT ĐỊNH\nV/v: chấp thuận chủ trương đầu tư trang trại chăn nuôi"),
+    (
+        "Khẩn - hỏa tốc thủy lợi",
+        "CÔNG ĐIỆN HỎA TỐC\nV/v: phòng chống lụt bão công trình thủy lợi",
+    ),
+    (
+        "Ký hiệu văn bản (SNNMT-TS)",
+        "SỞ NN&MT\nCÔNG VĂN\nSố: 123/SNNMT-TS\nV/v: Trả lời Công văn số 123/SNNMT-TS về nuôi trồng thủy sản",
+    ),
+    (
+        "UBND tỉnh - thẩm định ĐTM",
+        "UBND TỈNH GIA LAI\nQUYẾT ĐỊNH\nV/v: thẩm định báo cáo đánh giá tác động môi trường",
+    ),
+    (
+        "UBND tỉnh - chấp thuận chủ trương đầu tư (chăn nuôi)",
+        "UBND TỈNH GIA LAI\nQUYẾT ĐỊNH\nV/v: chấp thuận chủ trương đầu tư trang trại chăn nuôi",
+    ),
 ]
 
 
 def main() -> None:
     engine = RuleEngine(RULES)
-    harness = Harness(engine, MockInferenceClient(), mode="auto")
+    harness = Harness(engine, mode="off")
     for name, text in SAMPLES:
         r = harness.run(text)
         print("=" * 72)

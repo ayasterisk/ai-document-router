@@ -1,0 +1,266 @@
+{
+  "description": "Seed labels only; no business-approved accuracy claim. Excerpts are not full PDF evaluation.",
+  "cases": [
+    {
+      "id": "1",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/01-TB-TL.pdf",
+      "document": {
+        "so_hieu": "01/TB-TL",
+        "loai": "Thông báo",
+        "co_quan_ban_hanh": "Công ty TNHH Tân Long Granite",
+        "trich_yeu": "Thông báo thay đổi nhân sự, Người quản lý và Người quản lý kho VLNCN tại mỏ núi Đá Trãi xã Ngô Mây, tỉnh Gia Lai của Công ty TNHH Tân Long Granite",
+        "noi_dung": "Khai thác đá tại mỏ núi Đá Trãi; quản lý hoạt động vật liệu nổ công nghiệp và kho VLNCN."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "PGĐ Trần Đình Chương",
+          "Phòng Địa chất và Khoáng sản"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "2",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/1393-BC-TDAK.pdf",
+      "document": {
+        "so_hieu": "1393/BC-TĐAK",
+        "loai": "Báo cáo",
+        "co_quan_ban_hanh": "Công ty Thủy điện An Khê - Ka Nak",
+        "trich_yeu": "Vận hành hồ chứa thủy điện An Khê - Ka Nak (Từ ngày 20/08/2026 - 26/08/2026)",
+        "noi_dung": "Thực hiện văn bản số 437/STNMT-TNN ngày 09/3/2016 về việc báo cáo định kỳ vận hành xả nước."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "PGĐ Vũ Ngọc An"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "3",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/1521 QD-KTNN.pdf",
+      "document": {
+        "so_hieu": "1521/QĐ-KTNN",
+        "loai": "Quyết định",
+        "co_quan_ban_hanh": "Kiểm toán Nhà nước",
+        "trich_yeu": "Kiểm toán Chương trình mục tiêu quốc gia phát triển kinh tế - xã hội vùng đồng bào dân tộc thiểu số và miền núi giai đoạn 2021-2025 tại tỉnh Đắk Lắk, Gia Lai; Chuyên đề việc thực hiện đặt hàng, đấu thầu, cung cấp dịch vụ công ích giai đoạn 2023-2025 của tỉnh Đắk Lắk, Gia Lai",
+        "noi_dung": "Xác nhận báo cáo quyết toán, thông tin số liệu tài chính; đánh giá sử dụng nguồn lực tài chính công, tài sản công."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": null
+    },
+    {
+      "id": "4",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/28- CV- TT.pdf",
+      "document": {
+        "so_hieu": "28/CV-TT",
+        "loai": "Công văn",
+        "co_quan_ban_hanh": "Công ty TNHH Xây dựng Tấn Thành",
+        "trich_yeu": "Đề nghị phương án đóng cửa mỏ khoáng sản cát làm vật liệu xây dựng thông thường tại sông Hà Thanh, xã Canh Hiển, huyện Vân Canh, tỉnh Bình Định (nay là xã Canh Vinh, tỉnh Gia Lai)",
+        "noi_dung": "Đề nghị đóng cửa mỏ khoáng sản vì giấy phép khai thác khoáng sản đã hết hạn."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "PGĐ Trần Đình Chương",
+          "Phòng Địa chất và Khoáng sản"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "5",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/351_KH-UBND_04092026-signed.pdf",
+      "document": {
+        "so_hieu": "351/KH-UBND",
+        "loai": "Kế hoạch",
+        "co_quan_ban_hanh": "Ủy ban nhân dân tỉnh Gia Lai",
+        "trich_yeu": "Tổ chức các hoạt động giao lưu, xúc tiến đầu tư với doanh nghiệp Đài Loan",
+        "noi_dung": "Sở Nông nghiệp và Môi trường: Chuẩn bị thông tin, dự án và nhu cầu hợp tác trong các lĩnh vực nông nghiệp công nghệ cao, chế biến nông lâm sản, phát triển vùng nguyên liệu, bảo vệ môi trường và kinh tế tuần hoàn; đề xuất doanh nghiệp phù hợp để Sở Tài chính tổng hợp, kết nối. Phối hợp Sở Công Thương lựa chọn, giới thiệu sản phẩm OCOP và sản phẩm đặc trưng tiêu biểu của tỉnh phục vụ làm quà tặng đại biểu, khách mời phía Đài Loan."
+      },
+      "evidence_pages": [
+        1,
+        7
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "Giám đốc Cao Thanh Thương"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "6",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/402-04092026.pdf",
+      "document": {
+        "so_hieu": "402/TB-KTTL",
+        "loai": "Thông báo",
+        "co_quan_ban_hanh": "Công ty TNHH MTV KTCT Thủy lợi Gia Lai",
+        "trich_yeu": "Về việc tăng lưu lượng điều tiết nước qua tràn - hồ chứa nước Ayun Hạ",
+        "noi_dung": "Tăng lưu lượng điều tiết từ 90 đến 440 m3/s. Thời gian bắt đầu điều tiết: từ 07 giờ ngày 5 tháng 9 năm 2026. Thời gian kết thúc: lúc 17 giờ ngày 7 tháng 9 năm 2026. Yêu cầu di chuyển người và tài sản đến nơi an toàn."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "PGĐ Vũ Ngọc An"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "7",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/4326.pdf",
+      "document": {
+        "so_hieu": "4326/BCH-PNV",
+        "loai": "Công văn",
+        "co_quan_ban_hanh": "Ban Chỉ huy Bộ đội Biên phòng tỉnh Gia Lai",
+        "trich_yeu": "Phối hợp hoàn thành xác minh, xử lý hồ sơ liên quan đến mất kết nối thiết bị giám sát hành trình VMS",
+        "noi_dung": "Căn cứ Công văn số 9842/SNNMT-TS ngày 28/8/2026 của Sở Nông nghiệp và Môi trường. Ban Chỉ huy Bộ đội Biên phòng tỉnh trao đổi kết quả xử lý hồ sơ tàu cá để Sở nắm, tổng hợp."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "Chi cục Thủy sản"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "8",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/Bao muc nuoc 03092026.pdf",
+      "document": {
+        "so_hieu": "",
+        "loai": "Báo cáo",
+        "co_quan_ban_hanh": "Công ty TNHH MTV KTCT Thủy lợi Gia Lai",
+        "trich_yeu": "Báo cáo mực nước các công trình thủy lợi hồ chứa nước",
+        "noi_dung": "Gia Lai, 07h ngày 03 tháng 09 năm 2026. Bảng mực nước hiện nay, dung tích hiện có, lưu lượng đến và đi tại các hồ chứa."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "PGĐ Vũ Ngọc An"
+        ],
+        "phoi_hop_xu_ly": [],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    },
+    {
+      "id": "9",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/3025_STP-NV1_04092026-signed.pdf",
+      "document": {
+        "so_hieu": "3025/STP-NV1",
+        "loai": "Công văn",
+        "co_quan_ban_hanh": "Sở Tư pháp tỉnh Gia Lai",
+        "trich_yeu": "Triển khai thực hiện Báo cáo số 728/BC-BTP ngày 26/8/2026 của Bộ Tư pháp",
+        "noi_dung": "Rà soát hệ thống văn bản quy phạm pháp luật có liên quan đến Luật Tiếp cận thông tin. Tham mưu sửa đổi, bổ sung, thay thế, bãi bỏ, ban hành mới các văn bản quy phạm pháp luật."
+      },
+      "evidence_pages": [
+        1
+      ],
+      "expected": null
+    },
+    {
+      "id": "10",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/350_KH-UBND_04092026-signed_01.pdf",
+      "document": {
+        "so_hieu": "350/KH-UBND",
+        "loai": "Kế hoạch",
+        "co_quan_ban_hanh": "Ủy ban nhân dân tỉnh Gia Lai",
+        "trich_yeu": "Triển khai thu thập, tạo lập và cập nhật Cơ sở dữ liệu về tôn giáo trên địa bàn tỉnh Gia Lai",
+        "noi_dung": "Sở Nông nghiệp và Môi trường: Cung cấp, đối soát thông tin thuộc lĩnh vực đất đai, quyền sử dụng đất, quyền sở hữu tài sản hoặc tình trạng pháp lý đối với đất đai liên quan đến tổ chức tôn giáo, tổ chức tôn giáo trực thuộc, cơ sở tôn giáo,... trên địa bàn tỉnh."
+      },
+      "evidence_pages": [
+        1,
+        5
+      ],
+      "expected": null
+    },
+    {
+      "id": "11",
+      "label_status": "proposed",
+      "label_source": "Review 2026-09-08; requires department adjudication",
+      "received_on": "2026-09-08",
+      "file": "doc/SoNNMT/vbSoNNMT/685_BC-UBND_04092026-signed_01.pdf",
+      "document": {
+        "so_hieu": "685/BC-UBND",
+        "loai": "Báo cáo",
+        "co_quan_ban_hanh": "Ủy ban nhân dân phường Pleiku",
+        "trich_yeu": "Tình hình triển khai thực hiện và giải ngân các Chương trình mục tiêu quốc gia đến ngày 03/9/2026 trên địa bàn phường Pleiku",
+        "noi_dung": "Kế hoạch vốn, vốn đầu tư công, vốn sự nghiệp, dự toán, ngân sách, phân bổ kinh phí. Chương trình nông thôn mới, giảm nghèo bền vững, phát triển kinh tế - xã hội vùng đồng bào dân tộc thiểu số và miền núi; chương trình phát triển văn hóa. Chưa có vốn giải ngân; đề nghị cấp bổ sung 195 triệu đồng."
+      },
+      "evidence_pages": [
+        1,
+        2
+      ],
+      "expected": {
+        "don_vi_xu_ly_chinh": [
+          "Phòng Kế hoạch - Tài chính"
+        ],
+        "phoi_hop_xu_ly": [
+          "Chánh Văn phòng Sở"
+        ],
+        "lanh_dao_theo_doi": [],
+        "han_thuc_hien": null
+      }
+    }
+  ]
+}

@@ -1,205 +1,210 @@
-"""Trích metadata + hạn thực hiện từ nội dung văn bản (deterministic, regex).
+"""Metadata extraction with explicit provenance and separate urgency/deadline."""
 
-Vì đầu vào không còn payload JSON, toàn bộ thông tin nghiệp vụ (số hiệu, loại,
-cơ quan ban hành, người ký, ngày, trích yếu, hạn thực hiện) được trích từ text
-của file đính kèm. Phần không bắt được bằng regex sẽ do model (harness) bổ sung.
-"""
 from __future__ import annotations
 
 import re
 import unicodedata
-from dataclasses import dataclass, field
-from datetime import date
-from typing import Any, Dict, Optional
+from dataclasses import asdict, dataclass, field
+from datetime import date, timedelta
+from typing import Any
 
-MONTH_WORDS = {
-    "một": 1, "hai": 2, "ba": 3, "bốn": 4, "tư": 4, "năm": 5,
-    "sáu": 6, "bảy": 7, "tám": 8, "chín": 9, "mười": 10,
-    "mười một": 11, "mười hai": 12, "chạp": 12,
-}
+from app.extract.sections import routing_text
 
 DOC_TYPES = [
-    "quyết định", "công văn", "giấy mời", "thông báo", "báo cáo",
-    "tờ trình", "công điện", "chỉ thị", "kế hoạch", "phiếu chuyển",
-    "đề nghị", "quy định", "hướng dẫn", "chương trình",
+    "Quyết định",
+    "Công văn",
+    "Giấy mời",
+    "Thông báo",
+    "Báo cáo",
+    "Tờ trình",
+    "Công điện",
+    "Chỉ thị",
+    "Kế hoạch",
+    "Phiếu chuyển",
+    "Hướng dẫn",
+    "Chương trình",
 ]
+DATE_PATTERN = r"(?:\d{1,2}[/.-]\d{1,2}[/.-]\d{4}|(?:ngày\s+)?\d{1,2}\s+tháng\s+\d{1,2}\s+năm\s+\d{4})"
+DEADLINE_PATTERN = (
+    r"(?:trước ngày|chậm nhất(?: là)? ngày|hạn(?: là)? ngày|đến hết ngày|hạn chót)\s*[:.]?\s*("
+    + DATE_PATTERN
+    + r")"
+)
 
 
-def _parse_vn_date(text: str) -> Optional[date]:
-    """Parse ngày: DD/MM/YYYY, DD-MM-YYYY, 'ngày DD tháng M năm YYYY'."""
-    if not text:
-        return None
-    s = text.strip()
-
-    # DD/MM/YYYY hoặc DD-MM-YYYY
-    m = re.search(r"\b(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})\b", s)
+def _parse_vn_date(text: str) -> date | None:
+    m = re.search(r"\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b", text)
+    if not m:
+        m = re.search(
+            r"(?:ngày\s+)?(\d{1,2})\s+tháng\s+(\d{1,2})\s+năm\s+(\d{4})",
+            text,
+            re.IGNORECASE,
+        )
     if m:
-        d, mo, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
-        if 1 <= mo <= 12 and 1 <= d <= 31:
-            try:
-                return date(y, mo, d)
-            except ValueError:
-                return None
-
-    # 'ngày 15 tháng 8 năm 2026' / '15 tháng 8 năm 2026'
-    m = re.search(
-        r"(?:ngày\s+)?(\d{1,2})\s+tháng\s+([^\s,.;]+)\s*(?:năm\s+(\d{4}))?",
-        s,
-        re.IGNORECASE,
-    )
-    if m:
-        d = int(m.group(1))
-        mo_word = m.group(2).lower()
-        mo = MONTH_WORDS.get(mo_word) or (int(mo_word) if mo_word.isdigit() else None)
-        y = int(m.group(3)) if m.group(3) else date.today().year
-        if mo and 1 <= d <= 31:
-            try:
-                return date(y, mo, d)
-            except ValueError:
-                return None
+        try:
+            return date(int(m[3]), int(m[2]), int(m[1]))
+        except ValueError:
+            pass
     return None
 
 
 @dataclass
 class ExtractedMetadata:
-    so_hieu: Optional[str] = None
-    loai: Optional[str] = None
-    co_quan_ban_hanh: Optional[str] = None
-    nguoi_ky: Optional[str] = None
-    ngay_van_ban: Optional[date] = None
-    trich_yeu: Optional[str] = None
-    han_thuc_hien: Optional[str] = None  # "YYYY-MM-DD" hoặc "hỏa tốc"
+    so_hieu: str | None = None
+    loai: str | None = None
+    co_quan_ban_hanh: str | None = None
+    nguoi_ky: str | None = None
+    ngay_van_ban: date | None = None
+    trich_yeu: str | None = None
+    han_thuc_hien: str | None = None
     khan: bool = False
-    missing: List[str] = field(default_factory=list)
+    do_khan: str = "thuong"
+    missing: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    evidence: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "so_hieu": self.so_hieu,
-            "loai": self.loai,
-            "co_quan_ban_hanh": self.co_quan_ban_hanh,
-            "nguoi_ky": self.nguoi_ky,
-            "ngay_van_ban": self.ngay_van_ban.isoformat() if self.ngay_van_ban else None,
-            "trich_yeu": self.trich_yeu,
-            "han_thuc_hien": self.han_thuc_hien,
-            "khan": self.khan,
-        }
+    def to_dict(self) -> dict[str, Any]:
+        out = asdict(self)
+        out["ngay_van_ban"] = (
+            self.ngay_van_ban.isoformat() if self.ngay_van_ban else None
+        )
+        return out
 
 
 class MetadataExtractor:
-    """Tập các hàm regex trích metadata từ văn bản tiếng Việt."""
-
-    # ------------------------------------------------------------------ #
     @staticmethod
-    def extract_so_hieu(text: str) -> Optional[str]:
-        m = re.search(r"[Ss][oố][\s]*[:.]\s*([^\n]{1,40})", text)
-        if m:
-            return m.group(1).strip()
-        # fallback: dạng 123/SNNMT-XXX
-        m = re.search(r"\b(\d{1,5}/[A-ZĐÀ-Ỹ][A-ZĐÀ-Ỹ0-9/-]{2,24})", text)
-        if m:
-            return m.group(1).strip()
-        return None
-
-    @staticmethod
-    def extract_loai(text: str) -> Optional[str]:
-        head = text[:800]
-        for dt in DOC_TYPES:
-            if re.search(rf"\b{dt}\b", head, re.IGNORECASE):
-                return dt.capitalize()
-        return None
-
-    @staticmethod
-    def extract_co_quan_ban_hanh(text: str) -> Optional[str]:
-        # Letterhead: dòng trái = cơ quan, dòng phải = quốc hiệu/tiêu ngữ.
-        # PDF text layer dồn trái-phải + Unicode tổ hợp -> chuẩn hóa NFC, gộp khoảng trắng, bỏ slogan.
-        head = unicodedata.normalize("NFC", (text or "")[:800])
-        head = re.sub(r"\s+", " ", head)
-        head = re.sub(r"CỘNG\s+H\S*\s+XÃ\s+HỘI\s+CHỦ\s+NGHĨA\s+VIỆT\s+NAM", " ", head, flags=re.IGNORECASE)
-        head = re.sub(r"ĐỘC\s+LẬP\s*[-–—]\s*TỰ\s+DO\s*[-–—]\s*HẠNH\s+PHÚC", " ", head, flags=re.IGNORECASE)
-        # cắt bỏ phần sau "Số: ..." để không dính số hiệu/ngày vào tên cơ quan
-        head = re.split(r"\s+S[Ốố]+\s*:", head, maxsplit=1, flags=re.IGNORECASE)[0]
-
-        W = r"[A-ZÀ-ỸĐ][A-Za-zà-ỹđÀ-ỸĐ&.\-]*"   # từ bắt đầu viết hoa (title-case hoặc ALL-CAPS)
-        ORG = W + r"(?:\s+" + W + r"){0,9}"
-        patterns = [
-            r"SỞ\s+" + ORG,
-            r"CHI\s+CỤC\s+" + ORG,
-            r"CÔNG\s+TY\s+" + ORG,
-            r"KIỂM\s+TOÁN\s+NHÀ\s+NƯỚC" + ORG,
-            r"BAN\s+CHỈ\s+HUY\s+" + ORG,
-            r"BỘ\s+ĐỘI\s+BIÊN\s+PHÒNG\s+" + ORG,
-            r"CÔNG\s+AN\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN)?\s*" + ORG,
-            r"(?:ỦY|UỶ)\s+BAN\s+NHÂN\s+DÂN\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN|THỊ\s+XÃ|XÃ|PHƯỜNG)\s*" + ORG,
-            r"UBND\s+(?:TỈNH|THÀNH\s+PHỐ|HUYỆN|THỊ\s+XÃ|XÃ|PHƯỜNG)\s*" + ORG,
-            r"BỘ\s+" + ORG,
-            r"TRUNG\s+TÂM\s+" + ORG,
-            r"HỢP\s+TÁC\s+XÃ\s+" + ORG,
-            r"BAN\s+QUẢN\s+LÝ\s+" + ORG,
-            r"DOANH\s+NGHIỆP\s+" + ORG,
-            r"CỤC\s+THUẾ\s+" + ORG,
-            r"CHI\s+CỤC\s+THUẾ\s+" + ORG,
-            r"TỈNH\s+ỦY\s+" + ORG,
-            r"THÀNH\s+ỦY\s+" + ORG,
-            r"HUYỆN\s+ỦY\s+" + ORG,
-        ]
-        for p in patterns:
-            m = re.search(p, head, re.IGNORECASE)
-            if m:
-                return re.sub(r"\s+", " ", m.group(0)).strip()
-        return None
-
-    @staticmethod
-    def extract_nguoi_ky(text: str) -> Optional[str]:
-        # thường nằm gần cuối văn bản, kèm chức danh ký
-        tail = text[-600:]
+    def extract_so_hieu(text: str) -> str | None:
+        # Never borrow an identifier from a citation in the body.
         m = re.search(
-            r"(?:KT\.?\s*)?(?:GIÁM ĐỐC|PHÓ GIÁM ĐỐC|CHỦ TỊCH|PHÓ CHỦ TỊCH|TM\.?\s+)\s*\n"
-            r"([A-ZÀ-ỸĐ][a-zà-ỹđ]+\s+[A-ZÀ-ỸĐ][a-zà-ỹđ]+(?:\s+[A-ZÀ-ỸĐ][a-zà-ỹđ]+)?)",
-            tail,
+            r"(?im)^\s*S[ốo]\s*[:.]\s*(\d{1,7}/[\wĐđ-]+(?:[/-][\wĐđ-]+)*)", text[:1500]
         )
-        if m:
-            return m.group(1).strip()
+        return m[1] if m else None
+
+    @staticmethod
+    def extract_loai(text: str) -> str | None:
+        for line in text[:1500].splitlines():
+            for kind in DOC_TYPES:
+                if re.fullmatch(
+                    re.escape(kind) + r"(?:\s*[-–:]?\s*(?:KHẨN|HỎA TỐC))?",
+                    line.strip(),
+                    re.IGNORECASE,
+                ):
+                    return kind
+        return "Công văn" if re.search(r"(?im)^\s*V/v\b", text[:1500]) else None
+
+    @staticmethod
+    def extract_co_quan_ban_hanh(text: str) -> str | None:
+        head = unicodedata.normalize("NFC", text[:1500])
+        head = re.split(r"(?im)^\s*(?:Số\s*:|Kính gửi|V/v|Về việc|Căn cứ)", head)[0]
+        candidates = []
+        org = r"(?:SỞ\s+|CHI CỤC\s+|CỤC\s+|CÔNG TY\s+|KIỂM TOÁN NHÀ NƯỚC|BAN CHỈ HUY\s+|BỘ ĐỘI BIÊN PHÒNG\s+|CÔNG AN\s+|(?:ỦY|UỶ) BAN NHÂN DÂN\s+|UBND\s+|BỘ\s+|TRUNG TÂM\s+|HỢP TÁC XÃ\s+|BAN QUẢN LÝ\s+|TỈNH ỦY\s+)"
+        for line in head.splitlines():
+            line = re.split(
+                r"CỘNG H[ÒO]A|Độc lập|,\s*ngày|\s{3,}", line, flags=re.IGNORECASE
+            )[0].strip()
+            if re.match(org, line, re.IGNORECASE):
+                candidates.append(line)
+            elif candidates and re.fullmatch(
+                r"(?:TỈNH|XÃ|PHƯỜNG|HUYỆN|THÀNH PHỐ)\s+[^\d]+", line
+            ):
+                candidates[-1] += " " + line
+        # Letterhead normally lists the parent first and issuing entity below it.
+        return candidates[-1] if candidates else None
+
+    @staticmethod
+    def extract_nguoi_ky(text: str) -> str | None:
+        m = re.search(
+            r"(?:GIÁM ĐỐC|CHỦ TỊCH)\s*\n\s*([A-ZÀ-ỸĐ][a-zà-ỹđ]+(?:\s+[A-ZÀ-ỸĐ][a-zà-ỹđ]+){1,3})",
+            text[-800:],
+        )
+        return m[1] if m else None
+
+    @staticmethod
+    def extract_ngay_van_ban(text: str) -> date | None:
+        for line in text[:1200].splitlines():
+            if re.search(r",\s*ngày\s+\d", line, re.IGNORECASE) and not re.search(
+                r"trước|chậm nhất|hoàn thành|thời hạn", line, re.IGNORECASE
+            ):
+                return _parse_vn_date(line)
         return None
 
     @staticmethod
-    def extract_ngay_van_ban(text: str) -> Optional[date]:
-        # Ngày ban hành nằm ở phần đầu văn bản ("..., ngày ... tháng ... năm ..."),
-        # tránh bắt nhầm ngày sinh / ngày cấp giấy tờ trong nội dung.
-        head = (text or "")[:600]
-        m = re.search(r"ngày\s+(\d{1,2})\s+tháng\s+([^\s,.;]+)\s*(?:năm\s+(\d{4}))?", head, re.IGNORECASE)
-        if m:
-            return _parse_vn_date(m.group(0))
-        return _parse_vn_date(head) or _parse_vn_date(text)
-
-    @staticmethod
-    def extract_trich_yeu(text: str) -> Optional[str]:
-        m = re.search(r"(?:Trích yếu|V/v|Về việc)\s*[:.]\s*([^\n]+(?:\n[^\n]{1,120})?)", text, re.IGNORECASE)
-        if m:
-            return re.sub(r"\s+", " ", m.group(1)).strip()
+    def extract_trich_yeu(text: str) -> str | None:
+        lines = text[:2200].splitlines()
+        for i, line in enumerate(lines):
+            m = re.match(
+                r"\s*(?:Trích yếu|V/v|Về việc)\s*[:.]?\s*(.*)", line, re.IGNORECASE
+            )
+            is_title = any(
+                line.strip().casefold() == kind.casefold() for kind in DOC_TYPES
+            )
+            if m or is_title:
+                parts = [m[1]] if m else []
+                for extra in lines[i + 1 : i + 5]:
+                    if not extra.strip() or re.match(
+                        r"\s*(?:Kính gửi|Căn cứ|Số\s*:|Điều \d|Nơi nhận|Đề nghị|Trả lời|ỦY BAN)",
+                        extra,
+                        re.IGNORECASE,
+                    ):
+                        break
+                    if re.search(r",\s*ngày", extra, re.IGNORECASE):
+                        break
+                    parts.append(extra.strip())
+                if parts:
+                    return " ".join(parts).strip() or None
         return None
 
     @staticmethod
-    def extract_han_thuc_hien(text: str) -> Optional[str]:
-        # 1) ngày cụ thể
-        for pat in [r"trước ngày", r"chậm nhất(?: là)? ngày", r"hạn(?: là)? ngày", r"đến hết ngày", r"hạn chót"]:
-            m = re.search(pat + r"\s*[:.]?\s*([^\n,.;]{0,30})", text, re.IGNORECASE)
+    def urgency(text: str) -> str:
+        for line in text[:1200].splitlines():
+            m = re.fullmatch(
+                r"\s*(?:(?:Văn bản|Công điện|Độ khẩn)\s*:?\s*)?(KHẨN|HỎA TỐC|HOẢ TỐC|THƯỢNG KHẨN)\s*",
+                line,
+                re.IGNORECASE,
+            )
             if m:
-                d = _parse_vn_date(m.group(1))
-                if d:
-                    return d.isoformat()
-        # 'trong thời hạn N ngày' -> không có ngày tuyệt đối, bỏ qua (trả None)
-        # 2) dấu hiệu khẩn / hỏa tốc
-        if MetadataExtractor.detect_khan(text):
-            return "hỏa tốc"
-        return None
+                return {"khẩn": "khan", "thượng khẩn": "thuong_khan"}.get(
+                    m[1].lower(), "hoa_toc"
+                )
+        return "thuong"
+
+    @classmethod
+    def detect_khan(cls, text: str) -> bool:
+        return cls.urgency(text) != "thuong"
 
     @staticmethod
-    def detect_khan(text: str) -> bool:
-        return bool(re.search(r"\b(khẩn|hỏa tốc|thượng khẩn|khẩn cấp|hoả tốc)\b", text, re.IGNORECASE))
+    def deadline_candidates(text: str, received_on: date | None = None) -> list[dict]:
+        candidates = []
+        for m in re.finditer(DEADLINE_PATTERN, text, re.IGNORECASE):
+            d = _parse_vn_date(m[1])
+            if d:
+                candidates.append({"date": d.isoformat(), "text": m[0]})
+        if received_on:
+            for m in re.finditer(
+                r"trong (?:thời hạn\s+)?(\d{1,3}) ngày(?:\s+làm việc)?\s+kể từ (?:ngày )?nhận",
+                text,
+                re.IGNORECASE,
+            ):
+                # Business days require the department's holiday calendar.
+                if "làm việc" not in m[0].lower():
+                    candidates.append(
+                        {
+                            "date": (
+                                received_on + timedelta(days=int(m[1]))
+                            ).isoformat(),
+                            "text": m[0],
+                        }
+                    )
+        return candidates
 
-    # ------------------------------------------------------------------ #
     @classmethod
-    def extract(cls, text: str) -> ExtractedMetadata:
+    def extract_han_thuc_hien(cls, text: str) -> str | None:
+        candidates = cls.deadline_candidates(text)
+        values = {c["date"] for c in candidates}
+        return next(iter(values)) if len(values) == 1 else None
+
+    @classmethod
+    def extract(cls, text: str, received_on: date | None = None) -> ExtractedMetadata:
         text = unicodedata.normalize("NFC", text or "")
         meta = ExtractedMetadata(
             so_hieu=cls.extract_so_hieu(text),
@@ -208,8 +213,36 @@ class MetadataExtractor:
             nguoi_ky=cls.extract_nguoi_ky(text),
             ngay_van_ban=cls.extract_ngay_van_ban(text),
             trich_yeu=cls.extract_trich_yeu(text),
-            han_thuc_hien=cls.extract_han_thuc_hien(text),
             khan=cls.detect_khan(text),
+            do_khan=cls.urgency(text),
         )
-        meta.missing = [k for k, v in meta.to_dict().items() if v is None]
+        scoped = routing_text(text)
+        candidates = cls.deadline_candidates(scoped, received_on)
+        values = {c["date"] for c in candidates}
+        meta.han_thuc_hien = next(iter(values)) if len(values) == 1 else None
+        meta.evidence["deadline_candidates"] = candidates
+        meta.evidence["routing_text"] = scoped
+        if len(values) > 1:
+            meta.warnings.append("multiple_deadlines")
+        if (
+            re.search(r"(?:thời hạn|trong)\s+\d+\s+ngày", scoped, re.IGNORECASE)
+            and not candidates
+        ):
+            meta.warnings.append("unresolved_relative_deadline")
+        if (
+            re.search(r"trước ngày|chậm nhất|hạn chót", scoped, re.IGNORECASE)
+            and not candidates
+        ):
+            meta.warnings.append("unresolved_deadline")
+        meta.missing = [
+            k
+            for k in (
+                "so_hieu",
+                "loai",
+                "co_quan_ban_hanh",
+                "ngay_van_ban",
+                "trich_yeu",
+            )
+            if getattr(meta, k) is None
+        ]
         return meta

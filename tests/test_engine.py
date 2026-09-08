@@ -1,4 +1,5 @@
 """Unit test cho rule engine (output 4 trường) + harness (fallback T2->T1->T0)."""
+
 from __future__ import annotations
 
 import sys
@@ -10,24 +11,24 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.orchestrator.harness import Harness, MockInferenceClient  # noqa: E402
-from app.rules.engine import Document, RuleEngine, norm, strip_accents  # noqa: E402
+from app.orchestrator.harness import Harness, MockInferenceClient
+from app.rules.engine import Document, RuleEngine, norm, strip_accents
 
 RULES_PATH = ROOT / "app" / "rules" / "rules.yaml"
 
 
 def make_doc(**kwargs) -> Document:
-    defaults = dict(
-        so_hieu="",
-        loai="Công văn",
-        co_quan_ban_hanh="",
-        nguoi_ky="",
-        ngay_van_ban=date(2026, 8, 1),
-        trich_yeu="",
-        noi_dung="",
-        han_thuc_hien=None,
-        khan=False,
-    )
+    defaults = {
+        "so_hieu": "",
+        "loai": "Công văn",
+        "co_quan_ban_hanh": "",
+        "nguoi_ky": "",
+        "ngay_van_ban": date(2026, 8, 1),
+        "trich_yeu": "",
+        "noi_dung": "",
+        "han_thuc_hien": None,
+        "khan": False,
+    }
     defaults.update(kwargs)
     return Document(**defaults)
 
@@ -45,16 +46,30 @@ class TestSourceDetection(unittest.TestCase):
         cls.engine = RuleEngine(RULES_PATH)
 
     def test_cap_tren(self):
-        self.assertEqual(self.engine.detect_source(make_doc(co_quan_ban_hanh="UBND tỉnh Gia Lai")), "cap_tren")
+        self.assertEqual(
+            self.engine.detect_source(make_doc(co_quan_ban_hanh="UBND tỉnh Gia Lai")),
+            "cap_tren",
+        )
 
     def test_so_nganh(self):
-        self.assertEqual(self.engine.detect_source(make_doc(co_quan_ban_hanh="Sở Tài chính")), "so_nganh")
+        self.assertEqual(
+            self.engine.detect_source(make_doc(co_quan_ban_hanh="Sở Tài chính")),
+            "so_nganh",
+        )
 
     def test_cuc_thue_la_so_nganh(self):
-        self.assertEqual(self.engine.detect_source(make_doc(co_quan_ban_hanh="Cục Thuế tỉnh Gia Lai")), "so_nganh")
+        self.assertEqual(
+            self.engine.detect_source(
+                make_doc(co_quan_ban_hanh="Cục Thuế tỉnh Gia Lai")
+            ),
+            "so_nganh",
+        )
 
     def test_khac(self):
-        self.assertEqual(self.engine.detect_source(make_doc(co_quan_ban_hanh="Công ty TNHH ABC")), "khac")
+        self.assertEqual(
+            self.engine.detect_source(make_doc(co_quan_ban_hanh="Công ty TNHH ABC")),
+            "khac",
+        )
 
     def test_khong_ro(self):
         self.assertIsNone(self.engine.detect_source(make_doc(co_quan_ban_hanh="Xyz")))
@@ -66,13 +81,20 @@ class TestEngineRules(unittest.TestCase):
         cls.engine = RuleEngine(RULES_PATH)
 
     def test_ky_hieu_uu_tien_cao_nhat(self):
-        doc = make_doc(so_hieu="123/SNNMT-TS", trich_yeu="báo cáo nuôi trồng thủy sản")
+        doc = make_doc(
+            so_hieu="4326/BCH-PNV",
+            trich_yeu="Trả lời Công văn số 123/SNNMT-TS về nuôi trồng thủy sản",
+        )
         res = self.engine.run(doc)
         self.assertIn("IV", res.matched_rules)
         self.assertEqual(res.don_vi_xu_ly_chinh, ["Chi cục Thủy sản"])
 
     def test_ngoai_le_thue_thu_hoi_dat(self):
-        doc = make_doc(co_quan_ban_hanh="Cục Thuế tỉnh Gia Lai", trich_yeu="thu hồi đất do nợ thuế")
+        doc = make_doc(
+            loai="Thông báo",
+            co_quan_ban_hanh="Cục Thuế tỉnh Gia Lai",
+            trich_yeu="thu hồi đất do nợ thuế",
+        )
         res = self.engine.run(doc)
         self.assertIn("V.3", res.matched_rules)
         self.assertEqual(res.don_vi_xu_ly_chinh, ["Chi cục Quản lý đất đai"])
@@ -95,21 +117,32 @@ class TestEngineRules(unittest.TestCase):
         self.assertIn("II.4", res.matched_rules)
 
     def test_cap_tren_trong_trot_ve_pgd(self):
-        doc = make_doc(co_quan_ban_hanh="UBND tỉnh Gia Lai", trich_yeu="chương trình trồng trọt vụ đông xuân")
+        doc = make_doc(
+            co_quan_ban_hanh="UBND tỉnh Gia Lai",
+            trich_yeu="chương trình trồng trọt vụ đông xuân",
+        )
         res = self.engine.run(doc)
         self.assertIn("II.cap_tren.pgd", res.matched_rules)
         self.assertIn("PGĐ Nguyễn Thị Tố Trân", res.don_vi_xu_ly_chinh)
         self.assertIn("Giám đốc Cao Thanh Thương", res.lanh_dao_theo_doi)
 
     def test_ubnd_chap_thuan_chu_truong_dau_tu(self):
-        doc = make_doc(co_quan_ban_hanh="UBND tỉnh Gia Lai", trich_yeu="Quyết định chấp thuận chủ trương đầu tư dự án")
+        doc = make_doc(
+            loai="Quyết định",
+            co_quan_ban_hanh="UBND tỉnh Gia Lai",
+            trich_yeu="Quyết định chấp thuận chủ trương đầu tư dự án",
+        )
         res = self.engine.run(doc)
         self.assertIn("V.12", res.matched_rules)
         self.assertIn("Trưởng phòng KH-TC Châu Thái Quy", res.don_vi_xu_ly_chinh)
         self.assertIn("Lãnh đạo Sở", res.phoi_hop_xu_ly)
 
     def test_ubnd_tham_dinh_dtm(self):
-        doc = make_doc(co_quan_ban_hanh="UBND tỉnh Gia Lai", trich_yeu="Quyết định thẩm định báo cáo đánh giá tác động môi trường")
+        doc = make_doc(
+            loai="Quyết định",
+            co_quan_ban_hanh="UBND tỉnh Gia Lai",
+            trich_yeu="Quyết định thẩm định báo cáo đánh giá tác động môi trường",
+        )
         res = self.engine.run(doc)
         self.assertIn("V.13", res.matched_rules)
         self.assertIn("PGĐ Hà Thị Thanh Hương", res.don_vi_xu_ly_chinh)
@@ -163,23 +196,32 @@ class TestIuuRules(unittest.TestCase):
         cls.engine = RuleEngine(RULES_PATH)
 
     def test_iuu_tu_so_nganh(self):
-        doc = make_doc(co_quan_ban_hanh="Công an tỉnh Gia Lai", trich_yeu="báo cáo tàu cá vi phạm IUU")
+        doc = make_doc(
+            co_quan_ban_hanh="Công an tỉnh Gia Lai",
+            trich_yeu="báo cáo tàu cá vi phạm IUU",
+        )
         res = self.engine.run(doc)
         self.assertIn("V.14", res.matched_rules)
         self.assertIn("Chi cục Thủy sản", res.don_vi_xu_ly_chinh)
         self.assertIn("BQL cảng cá", res.don_vi_xu_ly_chinh)
 
     def test_iuu_xa_ven_bien(self):
-        doc = make_doc(co_quan_ban_hanh="UBND xã Cát Tiến", trich_yeu="thông tin tàu cá IUU")
+        doc = make_doc(
+            co_quan_ban_hanh="UBND xã Cát Tiến", trich_yeu="thông tin tàu cá IUU"
+        )
         res = self.engine.run(doc)
         self.assertIn("V.15", res.matched_rules)
         self.assertIn("BQL cảng cá Tam Quan", res.don_vi_xu_ly_chinh)
 
     def test_iuu_xa_khac(self):
-        doc = make_doc(co_quan_ban_hanh="UBND xã Ia Rsai", trich_yeu="phản ánh tàu cá IUU")
+        doc = make_doc(
+            co_quan_ban_hanh="UBND xã Ia Rsai", trich_yeu="phản ánh tàu cá IUU"
+        )
         res = self.engine.run(doc)
         self.assertIn("V.16", res.matched_rules)
-        self.assertEqual(res.don_vi_xu_ly_chinh, ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"])
+        self.assertEqual(
+            res.don_vi_xu_ly_chinh, ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"]
+        )
 
     def test_thuy_san_binh_thuong_song_song(self):
         doc = make_doc(trich_yeu="nuôi trồng thủy sản")

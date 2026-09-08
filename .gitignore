@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
+.venv-review/
+node_modules/
+.pytest_cache/
+*.db-shm
+*.db-wal
 venv/
 
 # Secrets / local config
@@ -16,3 +21,5 @@ app/storage/audit.db
 # OS
 .DS_Store
 Thumbs.db
+
+*.db.lock
