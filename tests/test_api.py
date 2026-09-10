@@ -146,6 +146,33 @@ class TestApi(unittest.TestCase):
         self.assertEqual(good.status_code, 201, good.text)
         self.assertFalse(good.json()["dispatch_performed"])
 
+    def test_feedback_idempotency(self):
+        result = self.complete(self.submit().json()["job_id"])["result"]
+        body = {k: result[k] for k in ("document_id", "input_sha256", "rules_sha256")}
+        body.update(
+            decision="accepted",
+            do_khan=result["do_khan"],
+            final={
+                **{
+                    role: [r["id"] for r in refs]
+                    for role, refs in result["recipients"].items()
+                },
+                "han_thuc_hien": result["han_thuc_hien"],
+            },
+        )
+        url = "/v1/jobs/" + result["job_id"] + "/feedback"
+        headers = {**self.auth, "Idempotency-Key": "feedback-1"}
+        first = self.client.post(url, headers=headers, json=body)
+        second = self.client.post(url, headers=headers, json=body)
+        self.assertEqual(first.status_code, 201)
+        self.assertEqual(second.status_code, 201)
+        self.assertEqual(first.json()["feedback_id"], second.json()["feedback_id"])
+        conflict = dict(body)
+        conflict["note"] = "changed"
+        self.assertEqual(
+            self.client.post(url, headers=headers, json=conflict).status_code, 409
+        )
+
     def test_inputs_and_limits(self):
         self.assertEqual(
             self.client.post(

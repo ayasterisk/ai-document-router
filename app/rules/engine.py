@@ -55,6 +55,31 @@ def _contains(hay_norm: str, keyword: str) -> bool:
     return bool(re.search(r"(?<![a-z0-9])" + re.escape(kw) + r"(?![a-z0-9])", hay_norm))
 
 
+def _source_matches(source_norm: str, pattern: str) -> bool:
+    """Match a source hint without treating a fragment of a larger word as a hit.
+
+    A few source hints are intentionally written as prefixes (for example
+    ``"bộ "`` and ``"sở "``).  ``norm(pattern) in source_norm`` turns those
+    into the fragments ``"bo"`` and ``"so"``, which can match words such as
+    ``"công bố"``.  Preserve the prefix intent: these hints must start the
+    issuing-organization value, and ``"bộ phận"`` is not an agency name.
+    """
+    raw_pattern = str(pattern)
+    keyword = norm(raw_pattern)
+    if not keyword:
+        return False
+    if raw_pattern[-1:].isspace():
+        return bool(
+            re.search(
+                r"^"
+                + re.escape(keyword)
+                + r"(?!\s+phan\b)\s",
+                source_norm,
+            )
+        )
+    return _contains(source_norm, keyword)
+
+
 # --------------------------------------------------------------------------- #
 # Model dữ liệu
 # --------------------------------------------------------------------------- #
@@ -159,16 +184,16 @@ class RuleEngine:
         ng = self.lookup["nguon_gui"]
 
         for pat in ng.get("specific_so_nganh", []):
-            if norm(pat) in text:
+            if _source_matches(text, pat):
                 return "so_nganh"
         for pat in ng.get("cap_tren", []):
-            if norm(pat) in text:
+            if _source_matches(text, pat):
                 return "cap_tren"
         for pat in ng.get("so_nganh", []):
-            if norm(pat) in text:
+            if _source_matches(text, pat):
                 return "so_nganh"
         for pat in ng.get("khac", []):
-            if norm(pat) in text:
+            if _source_matches(text, pat):
                 return "khac"
         return None
 

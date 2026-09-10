@@ -74,6 +74,22 @@ class TestSourceDetection(unittest.TestCase):
     def test_khong_ro(self):
         self.assertIsNone(self.engine.detect_source(make_doc(co_quan_ban_hanh="Xyz")))
 
+    def test_source_prefix_does_not_match_fragments_or_bo_phan(self):
+        self.assertEqual(
+            self.engine.detect_source(
+                make_doc(co_quan_ban_hanh="Bộ Tài nguyên và Môi trường")
+            ),
+            "cap_tren",
+        )
+        self.assertIsNone(
+            self.engine.detect_source(
+                make_doc(co_quan_ban_hanh="BỘ PHẬN TIẾP NHẬN")
+            )
+        )
+        self.assertIsNone(
+            self.engine.detect_source(make_doc(co_quan_ban_hanh="Công bố kết quả"))
+        )
+
 
 class TestEngineRules(unittest.TestCase):
     @classmethod

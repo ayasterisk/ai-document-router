@@ -87,12 +87,24 @@ class AuditStore:
               rules_text TEXT NOT NULL, directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS router_feedback (
               id TEXT PRIMARY KEY, job_id TEXT NOT NULL, owner TEXT NOT NULL,
-              created_at TEXT NOT NULL, payload TEXT NOT NULL);
+              created_at TEXT NOT NULL, payload TEXT NOT NULL, idempotency_key TEXT);
             CREATE INDEX IF NOT EXISTS router_feedback_job ON router_feedback(job_id);
             """)
             columns = {row[1] for row in conn.execute("PRAGMA table_info(router_jobs)")}
             if "audit_text" not in columns:
                 conn.execute("ALTER TABLE router_jobs ADD COLUMN audit_text TEXT")
+            feedback_columns = {
+                row[1] for row in conn.execute("PRAGMA table_info(router_feedback)")
+            }
+            if "idempotency_key" not in feedback_columns:
+                conn.execute(
+                    "ALTER TABLE router_feedback ADD COLUMN idempotency_key TEXT"
+                )
+            conn.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS router_feedback_owner_key "
+                "ON router_feedback(owner, idempotency_key) "
+                "WHERE idempotency_key IS NOT NULL"
+            )
             rule_columns = {
                 row[1] for row in conn.execute("PRAGMA table_info(router_rule_versions)")
             }
@@ -205,6 +217,16 @@ class AuditStore:
             ).fetchone()
             return dict(row) if row else None
 
+    def find_feedback(self, owner, idempotency_key):
+        if not idempotency_key:
+            return None
+        with self.connection() as conn:
+            row = conn.execute(
+                "SELECT * FROM router_feedback WHERE owner=? AND idempotency_key=?",
+                (owner, idempotency_key),
+            ).fetchone()
+            return dict(row) if row else None
+
     def finish(self, job_id, status, result=None, error=None, audit_text=None):
         with self.connection() as conn:
             conn.execute(
@@ -219,15 +241,20 @@ class AuditStore:
                 ),
             )
 
-    def feedback(self, feedback_id, job_id, owner, payload):
+    def feedback(
+        self, feedback_id, job_id, owner, payload, idempotency_key=None
+    ):
         with self.connection() as conn:
             conn.execute(
-                "INSERT INTO router_feedback VALUES (?,?,?,?,?)",
+                "INSERT INTO router_feedback "
+                "(id,job_id,owner,created_at,payload,idempotency_key) "
+                "VALUES (?,?,?,?,?,?)",
                 (
                     feedback_id,
                     job_id,
                     owner,
                     now(),
                     json.dumps(payload, ensure_ascii=False),
+                    idempotency_key,
                 ),
             )

@@ -193,7 +193,26 @@ async def classify(
 
 
 @router.post("/v1/jobs/{job_id}/feedback", status_code=201)
-def feedback(job_id: str, body: Feedback, request: Request, owner: Owner):
+def feedback(
+    job_id: str,
+    body: Feedback,
+    request: Request,
+    owner: Owner,
+    idempotency_key: Annotated[str | None, Header(min_length=1, max_length=128)] = None,
+):
+    payload = body.model_dump(mode="json")
+    if idempotency_key:
+        previous = request.app.state.store.find_feedback(owner, idempotency_key)
+        if previous:
+            if previous["job_id"] != job_id or json.loads(previous["payload"]) != payload:
+                raise HTTPException(409, "feedback_idempotency_key_conflict")
+            return {
+                "feedback_id": previous["id"],
+                "job_id": job_id,
+                "decision": body.decision,
+                "recorded": True,
+                "dispatch_performed": False,
+            }
     row = job_row(request, job_id, owner)
     if row["status"] != "completed":
         raise HTTPException(409, "job_not_completed")
@@ -232,9 +251,21 @@ def feedback(job_id: str, body: Feedback, request: Request, owner: Owner):
             ):
                 raise HTTPException(422, "use_edited_for_changed_decision")
     feedback_id = uuid.uuid4().hex
-    request.app.state.store.feedback(
-        feedback_id, job_id, owner, body.model_dump(mode="json")
-    )
+    try:
+        request.app.state.store.feedback(
+            feedback_id, job_id, owner, payload, idempotency_key
+        )
+    except sqlite3.IntegrityError:
+        # Another request may have won the same idempotency key between the
+        # lookup above and the insert. Reconcile with the durable row.
+        previous = request.app.state.store.find_feedback(owner, idempotency_key)
+        if (
+            not previous
+            or previous["job_id"] != job_id
+            or json.loads(previous["payload"]) != payload
+        ):
+            raise HTTPException(409, "feedback_idempotency_key_conflict")
+        feedback_id = previous["id"]
     return {
         "feedback_id": feedback_id,
         "job_id": job_id,

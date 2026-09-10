@@ -144,11 +144,16 @@ Ví dụ đầy đủ được sinh từ worker thật với đầu vào thử t
 }
 ```
 
+Có thể gửi thêm header `Idempotency-Key` (tối đa 128 ký tự). Với cùng owner,
+job và nội dung feedback, retry dùng lại khóa này sẽ trả lại `feedback_id` cũ
+và không tạo thêm bản ghi. Dùng cùng khóa cho job hoặc payload khác sẽ nhận
+`409 feedback_idempotency_key_conflict`.
+
 - `accepted`: cả 4 trường và độ khẩn giữ đúng đề xuất; backend kiểm tra.
 - `edited`: người dùng đã chỉnh; mọi ID cuối phải thuộc danh bạ, xử lý chính không rỗng. Ghi chú tối đa 2.000 ký tự.
 - `rejected`: `final=null`; ghi lý do nếu có.
 - Sai document_id/hash → 409. Tác vụ chưa completed → 409. ID không có trong danh bạ, ngày sai hoặc dùng accepted cho kết quả đã sửa → 422.
-- API phản hồi 201 với `feedback_id`, `recorded=true`, `dispatch_performed=false`. Feedback được ghi thêm, không ghi đè lịch sử. Retry POST feedback có thể tạo thêm bản ghi quyết định; client không retry mù sau một response không rõ trạng thái.
+- API phản hồi 201 với `feedback_id`, `recorded=true`, `dispatch_performed=false`. Feedback được ghi thêm, không ghi đè lịch sử. Client nên dùng `Idempotency-Key` khi cần retry sau lỗi mạng.
 
 Feedback chỉ ghi nhận quyết định của người dùng trên đề xuất, chưa xác nhận giao dịch chuyển văn bản thành công trong hệ thống Sở. Nếu cần theo dõi giao dịch chuyển thực tế, hai nhóm phải thống nhất thêm một sự kiện có ID giao dịch từ hệ thống Sở; hiện API không giả lập trạng thái đó.
 
