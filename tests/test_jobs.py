@@ -52,10 +52,9 @@ class JobTests(unittest.TestCase):
         self.fail("job never completed")
 
     def test_timeout_is_persisted_and_capacity_recovers(self):
-        with patch(
-            "app.jobs.subprocess.run",
-            side_effect=subprocess.TimeoutExpired("worker", 1),
-        ):
+        fake_process = Mock()
+        fake_process.communicate.side_effect = subprocess.TimeoutExpired("worker", 1)
+        with patch("app.jobs.subprocess.Popen", return_value=fake_process):
             job = self.manager.submit(self.payload, "alice")
             row = self.wait_done(job)
         self.assertEqual(row["error"], "job_timeout")
@@ -73,12 +72,16 @@ class JobTests(unittest.TestCase):
         entered = threading.Event()
         release = threading.Event()
 
-        def run(*args, **kwargs):
+        def communicate(*args, **kwargs):
             entered.set()
             release.wait(3)
-            return Mock(returncode=0, stdout=json.dumps({"error": "invalid_pdf"}))
+            return (json.dumps({"error": "invalid_pdf"}), "")
 
-        with patch("app.jobs.subprocess.run", side_effect=run):
+        fake_process = Mock()
+        fake_process.communicate.side_effect = communicate
+        fake_process.returncode = 0
+
+        with patch("app.jobs.subprocess.Popen", return_value=fake_process):
             job = self.manager.submit(self.payload, "alice")
             self.assertTrue(entered.wait(2))
             try:

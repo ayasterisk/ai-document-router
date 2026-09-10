@@ -2,6 +2,8 @@
 
 import hashlib
 import json
+import logging
+import os
 import subprocess
 import sys
 import threading
@@ -9,6 +11,23 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 
 from app.config import ROOT
+
+logger = logging.getLogger(__name__)
+
+
+def _kill_process_tree(process):
+    """Kill a process and its descendants (Tesseract/OCR children) on timeout."""
+    try:
+        if os.name == "nt":
+            subprocess.run(
+                ["taskkill", "/T", "/F", "/PID", str(process.pid)],
+                capture_output=True,
+                check=False,
+            )
+        else:
+            process.kill()
+    except Exception as exc:  # noqa: BLE001 - best-effort cleanup
+        logger.warning("kill_process_tree failed: %s", exc)
 
 
 class QueueFull(Exception):
@@ -88,19 +107,28 @@ class JobManager:
         job_id = payload["job_id"]
         try:
             self.store.finish(job_id, "running")
-            process = subprocess.run(
+            process = subprocess.Popen(
                 [sys.executable, "-m", "app.worker"],
-                input=json.dumps(payload, ensure_ascii=False),
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
                 encoding="utf-8",
-                capture_output=True,
-                check=False,
                 cwd=ROOT,
-                timeout=self.settings.job_timeout,
-                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
+                | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0),
             )
+            try:
+                stdout, _ = process.communicate(
+                    input=json.dumps(payload, ensure_ascii=False),
+                    timeout=self.settings.job_timeout,
+                )
+            except subprocess.TimeoutExpired:
+                _kill_process_tree(process)
+                self.store.finish(job_id, "failed", error="job_timeout")
+                return
             if process.returncode != 0:
                 raise RuntimeError("worker_failed")
-            output = json.loads(process.stdout)
+            output = json.loads(stdout)
             if "error" in output:
                 self.store.finish(job_id, "failed", error=output["error"])
             else:
@@ -110,8 +138,6 @@ class JobManager:
                     result=output["result"],
                     audit_text=output.get("audit_text"),
                 )
-        except subprocess.TimeoutExpired:
-            self.store.finish(job_id, "failed", error="job_timeout")
         except Exception:  # noqa: BLE001 - isolate provider/job failures and record status
             self.store.finish(job_id, "failed", error="processing_failed")
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import sqlite3
@@ -82,8 +83,8 @@ class AuditStore:
               updated_at TEXT NOT NULL, request_meta TEXT NOT NULL, result TEXT, error TEXT,
               UNIQUE(owner,idempotency_key));
             CREATE TABLE IF NOT EXISTS router_rule_versions (
-              rules_sha256 TEXT PRIMARY KEY, rules_version TEXT NOT NULL, rules_text TEXT NOT NULL,
-              directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL);
+              configuration_fingerprint TEXT PRIMARY KEY, rules_sha256 TEXT NOT NULL, rules_version TEXT NOT NULL,
+              rules_text TEXT NOT NULL, directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS router_feedback (
               id TEXT PRIMARY KEY, job_id TEXT NOT NULL, owner TEXT NOT NULL,
               created_at TEXT NOT NULL, payload TEXT NOT NULL);
@@ -92,12 +93,29 @@ class AuditStore:
             columns = {row[1] for row in conn.execute("PRAGMA table_info(router_jobs)")}
             if "audit_text" not in columns:
                 conn.execute("ALTER TABLE router_jobs ADD COLUMN audit_text TEXT")
+            rule_columns = {
+                row[1] for row in conn.execute("PRAGMA table_info(router_rule_versions)")
+            }
+            if "configuration_fingerprint" not in rule_columns:
+                # Migrate: old PK was rules_sha256 only, which dropped directory-only changes.
+                conn.execute("DROP TABLE router_rule_versions")
+                conn.execute(
+                    """
+                    CREATE TABLE router_rule_versions (
+                      configuration_fingerprint TEXT PRIMARY KEY, rules_sha256 TEXT NOT NULL, rules_version TEXT NOT NULL,
+                      rules_text TEXT NOT NULL, directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL);
+                    """
+                )
 
     def save_configuration(self, engine, directory_path, directory):
+        fingerprint = hashlib.sha256(
+            (engine.fingerprint + directory.version).encode()
+        ).hexdigest()
         with self.connection() as conn:
             conn.execute(
-                "INSERT OR IGNORE INTO router_rule_versions VALUES (?,?,?,?,?)",
+                "INSERT OR IGNORE INTO router_rule_versions VALUES (?,?,?,?,?,?)",
                 (
+                    fingerprint,
                     engine.fingerprint,
                     engine.version,
                     engine.rules_path.read_text(encoding="utf-8"),

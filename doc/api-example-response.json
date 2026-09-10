@@ -1,6 +1,6 @@
 {
   "don_vi_xu_ly_chinh": [
-    "PGĐ Vũ Ngọc An",
+    "Phó giám đốc (Vũ Ngọc An)",
     "Chi cục Thủy lợi"
   ],
   "phoi_hop_xu_ly": [],
@@ -10,8 +10,8 @@
   "document_id": "9634",
   "input_sha256": "a16bd14efdb2ad2270758fecd1acc2c69097e75cdada59dbfe80fdbf87aae1f1",
   "rules_version": "2.0",
-  "rules_sha256": "eb9eaf2a5c3eaac0776ce048f2dd9c5e5be5f22a6924d6d01aa496106c99135e",
-  "directory_version": "5bed893381ffd4bae021f18ef913c6829321687dfee496e69863ac29c4771461",
+  "rules_sha256": "f543476ae4af1661ff4be7700a1c675803b5fc55cb00abe4222c62f2308807e3",
+  "directory_version": "ba8eb5f62e42106d38a97e9e9674e4ecacfa638286e1a8ab291bb15423d1756d",
   "received_on": "2026-09-08",
   "confidence": 0.85,
   "confidence_kind": "heuristic_uncalibrated",
@@ -80,7 +80,7 @@
     "don_vi_xu_ly_chinh": [
       {
         "id": "snnmt_c6882eed4dc5",
-        "name": "PGĐ Vũ Ngọc An"
+        "name": "Phó giám đốc (Vũ Ngọc An)"
       },
       {
         "id": "snnmt_4b707a520639",

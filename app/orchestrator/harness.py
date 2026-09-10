@@ -292,7 +292,9 @@ class Harness:
             names = set(self.engine.recipient_names())
             values = data.model_dump()
             for role in ROLES:
-                values[role] = [self.engine.normalize_person(n) for n in values[role]]
+                normalized = [self.engine.normalize_person(n) for n in values[role]]
+                # Dedupe after normalize: two raw names may map to one recipient.
+                values[role] = list(dict.fromkeys(normalized))
                 if any(n not in names for n in values[role]):
                     return None
             values["needs_review"] = True
