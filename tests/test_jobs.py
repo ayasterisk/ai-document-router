@@ -54,10 +54,14 @@ class JobTests(unittest.TestCase):
     def test_timeout_is_persisted_and_capacity_recovers(self):
         fake_process = Mock()
         fake_process.communicate.side_effect = subprocess.TimeoutExpired("worker", 1)
-        with patch("app.jobs.subprocess.Popen", return_value=fake_process):
+        with patch("app.jobs.subprocess.Popen", return_value=fake_process), patch(
+            "app.jobs._kill_process_tree"
+        ) as kill_mock, patch("app.jobs._reap_process") as reap_mock:
             job = self.manager.submit(self.payload, "alice")
             row = self.wait_done(job)
         self.assertEqual(row["error"], "job_timeout")
+        kill_mock.assert_called_once_with(fake_process)
+        reap_mock.assert_called_once_with(fake_process)
         until = time.monotonic() + 1
         while self.manager.futures and time.monotonic() < until:
             time.sleep(0.01)
@@ -103,6 +107,37 @@ class JobTests(unittest.TestCase):
         self.assertEqual(
             self.store.get("completed", "alice")["audit_text"], "full document"
         )
+
+    def test_migration_preserves_config_history(self):
+        import sqlite3
+
+        # Recreate an OLD-schema table (PK = rules_sha256) with legacy rows.
+        conn = sqlite3.connect(self.settings.db_path)
+        conn.execute("DROP TABLE router_rule_versions")
+        conn.execute(
+            "CREATE TABLE router_rule_versions ("
+            "rules_sha256 TEXT PRIMARY KEY, rules_version TEXT NOT NULL, rules_text TEXT NOT NULL,"
+            "directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL)"
+        )
+        conn.execute(
+            "INSERT INTO router_rule_versions VALUES (?,?,?,?,?)",
+            ("rules_a", "1.0", "rules text a", "dir_a", "directory text a"),
+        )
+        conn.execute(
+            "INSERT INTO router_rule_versions VALUES (?,?,?,?,?)",
+            ("rules_b", "1.0", "rules text b", "dir_b", "directory text b"),
+        )
+        conn.commit()
+        conn.close()
+        self.store.init()
+        with self.store.connection() as c:
+            rows = c.execute(
+                "SELECT rules_sha256, directory_sha256, configuration_fingerprint "
+                "FROM router_rule_versions ORDER BY rules_sha256"
+            ).fetchall()
+        self.assertEqual([r["rules_sha256"] for r in rows], ["rules_a", "rules_b"])
+        self.assertEqual([r["directory_sha256"] for r in rows], ["dir_a", "dir_b"])
+        self.assertTrue(all(r["configuration_fingerprint"] for r in rows))
 
 
 if __name__ == "__main__":

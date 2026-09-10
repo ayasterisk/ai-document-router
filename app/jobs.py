@@ -4,6 +4,7 @@ import hashlib
 import json
 import logging
 import os
+import signal
 import subprocess
 import sys
 import threading
@@ -25,9 +26,30 @@ def _kill_process_tree(process):
                 check=False,
             )
         else:
-            process.kill()
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except (ProcessLookupError, PermissionError):
+                process.kill()
     except Exception as exc:  # noqa: BLE001 - best-effort cleanup
         logger.warning("kill_process_tree failed: %s", exc)
+
+
+def _reap_process(process):
+    """Wait for a killed process to terminate and close its pipes (best-effort)."""
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        try:
+            process.kill()
+            process.wait(timeout=5)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("reap process failed: %s", exc)
+    for stream in (process.stdin, process.stdout, process.stderr):
+        if stream is not None and stream is not subprocess.DEVNULL:
+            try:
+                stream.close()
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("close stream failed: %s", exc)
 
 
 class QueueFull(Exception):
@@ -116,6 +138,7 @@ class JobManager:
                 cwd=ROOT,
                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)
                 | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0),
+                start_new_session=(os.name != "nt"),
             )
             try:
                 stdout, _ = process.communicate(
@@ -124,6 +147,7 @@ class JobManager:
                 )
             except subprocess.TimeoutExpired:
                 _kill_process_tree(process)
+                _reap_process(process)
                 self.store.finish(job_id, "failed", error="job_timeout")
                 return
             if process.returncode != 0:

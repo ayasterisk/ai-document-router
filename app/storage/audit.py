@@ -98,7 +98,10 @@ class AuditStore:
             }
             if "configuration_fingerprint" not in rule_columns:
                 # Migrate: old PK was rules_sha256 only, which dropped directory-only changes.
-                conn.execute("DROP TABLE router_rule_versions")
+                # Preserve history: rename, recreate, copy with new fingerprint, then drop legacy.
+                conn.execute(
+                    "ALTER TABLE router_rule_versions RENAME TO router_rule_versions_legacy"
+                )
                 conn.execute(
                     """
                     CREATE TABLE router_rule_versions (
@@ -106,6 +109,26 @@ class AuditStore:
                       rules_text TEXT NOT NULL, directory_sha256 TEXT NOT NULL, directory_text TEXT NOT NULL);
                     """
                 )
+                legacy = conn.execute(
+                    "SELECT rules_sha256, rules_version, rules_text, directory_sha256, directory_text "
+                    "FROM router_rule_versions_legacy"
+                ).fetchall()
+                for row in legacy:
+                    fingerprint = hashlib.sha256(
+                        (row["rules_sha256"] + row["directory_sha256"]).encode()
+                    ).hexdigest()
+                    conn.execute(
+                        "INSERT OR IGNORE INTO router_rule_versions VALUES (?,?,?,?,?,?)",
+                        (
+                            fingerprint,
+                            row["rules_sha256"],
+                            row["rules_version"],
+                            row["rules_text"],
+                            row["directory_sha256"],
+                            row["directory_text"],
+                        ),
+                    )
+                conn.execute("DROP TABLE router_rule_versions_legacy")
 
     def save_configuration(self, engine, directory_path, directory):
         fingerprint = hashlib.sha256(
