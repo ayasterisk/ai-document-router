@@ -24,5 +24,9 @@ Thumbs.db
 
 *.db.lock
 
-# Ignore doc NNMT
-doc/SoNNMT/vbSoNNMT/
+# Ignore doc
+doc/SoNNMT/
+doc/SoTC/
+doc/SoYT/
+output/
+tmp/
