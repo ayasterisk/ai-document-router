@@ -391,18 +391,37 @@ lookup:
       don_vi: Văn phòng Điều phối xây dựng nông thôn mới
       kem_lanh_dao: PGĐ Nguyễn Thị Thế Vy
 personnel:
-  Quý Phương: Phạm Quý Phương
-  Bảo Chi: Trần Thị Bảo Chi
-  PGĐ An: PGĐ Vũ Ngọc An
-  PGĐ Khánh: PGĐ Trần Quốc Khánh
-  PGĐ Chương: PGĐ Trần Đình Chương
-  PGĐ Trân: PGĐ Nguyễn Thị Tố Trân
-  PGĐ Có: PGĐ Đoàn Ngọc Có
-  PGĐ Hương: PGĐ Hà Thị Thanh Hương
-  PGĐ Hoan: PGĐ Nguyễn Văn Hoan
-  PGĐ Vy: PGĐ Nguyễn Thị Thế Vy
-  GĐ Sở: Giám đốc Cao Thanh Thương
-  CVP Sở: Chánh Văn phòng Sở
+  # Người: "Chức danh (Họ tên)" theo payload (fbyvsphere.cpx)
+  Quý Phương: Phó chánh văn phòng (Phạm Quý Phương)
+  Bảo Chi: Chuyên viên (Trần Thị Bảo Chi)
+  PGĐ An: Phó giám đốc (Vũ Ngọc An)
+  PGĐ Khánh: Phó giám đốc (Trần Quốc Khánh)
+  PGĐ Chương: Phó giám đốc (Trần Đình Chương)
+  PGĐ Trân: Phó giám đốc (Nguyễn Thị Tố Trân)
+  PGĐ Có: Phó giám đốc (Đoàn Ngọc Có)
+  PGĐ Hương: Phó giám đốc (Hà Thị Thanh Hương)
+  PGĐ Hoan: Phó giám đốc (Nguyễn Văn Hoan)
+  PGĐ Vy: Phó giám đốc (Nguyễn Thị Thế Vy)
+  GĐ Sở: Giám đốc (Cao Thanh Thương)
+  CVP Sở: Chánh văn phòng (Hồ Đình Phương)
+  # Tên đầy đủ dùng trong action/lĩnh vực -> display
+  PGĐ Vũ Ngọc An: Phó giám đốc (Vũ Ngọc An)
+  PGĐ Trần Quốc Khánh: Phó giám đốc (Trần Quốc Khánh)
+  PGĐ Trần Đình Chương: Phó giám đốc (Trần Đình Chương)
+  PGĐ Hà Thị Thanh Hương: Phó giám đốc (Hà Thị Thanh Hương)
+  PGĐ Nguyễn Văn Hoan: Phó giám đốc (Nguyễn Văn Hoan)
+  PGĐ Nguyễn Thị Thế Vy: Phó giám đốc (Nguyễn Thị Thế Vy)
+  PGĐ Nguyễn Thị Tố Trân: Phó giám đốc (Nguyễn Thị Tố Trân)
+  PGĐ Đoàn Ngọc Có: Phó giám đốc (Đoàn Ngọc Có)
+  Giám đốc Cao Thanh Thương: Giám đốc (Cao Thanh Thương)
+  Chánh Văn phòng Sở: Chánh văn phòng (Hồ Đình Phương)
+  Trần Thị Bảo Chi: Chuyên viên (Trần Thị Bảo Chi)
+  Hồ Đắc Khánh: Phó chánh văn phòng (Hồ Đắc Khánh)
+  Phạm Quý Phương: Phó chánh văn phòng (Phạm Quý Phương)
+  Đặng Phi Trường: Chuyên viên chính (Đặng Phi Trường)
+  Trưởng phòng KH-TC Châu Thái Quy: Trưởng phòng (Châu Thái Quy)
+  Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh: Trưởng phòng (Trương Bá Vinh)
+  # Chuẩn hóa tên đơn vị (không đổi format)
   Phòng Tổ chức cán bộ Sở: Phòng Tổ chức cán bộ
   Phòng Địa chất khoáng sản Sở: Phòng Địa chất và Khoáng sản
   Phòng Kế hoạch - Tài chính Sở: Phòng Kế hoạch - Tài chính

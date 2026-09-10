@@ -53,11 +53,11 @@ class RegressionTests(unittest.TestCase):
         self.assertFalse(_contains(norm("công nghệ cao"), "nghề cá"))
         self.assertTrue(_contains(norm("công trình\n thủy lợi"), "công trình thủy lợi"))
         r = self.run_doc("nông nghiệp công nghệ cao")
-        self.assertNotIn("PGĐ Trần Quốc Khánh", r.don_vi_xu_ly_chinh)
+        self.assertNotIn("Phó giám đốc (Trần Quốc Khánh)", r.don_vi_xu_ly_chinh)
 
     def test_domain_and_units(self):
         self.assertIn(
-            "PGĐ Trần Quốc Khánh",
+            "Phó giám đốc (Trần Quốc Khánh)",
             self.run_doc("Ứng phó biến đổi khí hậu").don_vi_xu_ly_chinh,
         )
         self.assertIn(
@@ -74,7 +74,7 @@ class RegressionTests(unittest.TestCase):
             "Trồng trọt, bảo vệ thực vật, giống cây trồng; chăn nuôi, thú y"
         )
         self.assertEqual(r.matched_rules, ["II.cap_tren.tong_hop"])
-        self.assertEqual(r.don_vi_xu_ly_chinh, ["Giám đốc Cao Thanh Thương"])
+        self.assertEqual(r.don_vi_xu_ly_chinh, ["Giám đốc (Cao Thanh Thương)"])
 
     def test_finance_and_personnel(self):
         for text, rule, unit in [
@@ -84,7 +84,7 @@ class RegressionTests(unittest.TestCase):
             r = self.run_doc(text)
             self.assertEqual(r.matched_rules, [rule])
             self.assertEqual(r.don_vi_xu_ly_chinh, [unit])
-            self.assertEqual(r.phoi_hop_xu_ly, ["Giám đốc Cao Thanh Thương"])
+            self.assertEqual(r.phoi_hop_xu_ly, ["Giám đốc (Cao Thanh Thương)"])
 
     def test_v6_requires_real_context(self):
         r = self.run_doc(

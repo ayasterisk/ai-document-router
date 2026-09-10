@@ -23,3 +23,6 @@ app/storage/audit.db
 Thumbs.db
 
 *.db.lock
+
+# Ignore doc NNMT
+doc/SoNNMT/vbSoNNMT/

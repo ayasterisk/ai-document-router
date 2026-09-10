@@ -103,13 +103,13 @@ class TestEngineRules(unittest.TestCase):
         doc = make_doc(trich_yeu="xây dựng công trình thủy lợi")
         res = self.engine.run(doc)
         self.assertIn("V.9", res.matched_rules)
-        self.assertEqual(res.don_vi_xu_ly_chinh, ["PGĐ Vũ Ngọc An"])
+        self.assertEqual(res.don_vi_xu_ly_chinh, ["Phó giám đốc (Vũ Ngọc An)"])
 
     def test_thuy_loi_khan_dung_muc_VI(self):
         doc = make_doc(trich_yeu="phòng chống lụt bão công trình thủy lợi", khan=True)
         res = self.engine.run(doc)
         self.assertIn("VI.1", res.matched_rules)
-        self.assertEqual(res.don_vi_xu_ly_chinh, ["PGĐ Vũ Ngọc An", "Chi cục Thủy lợi"])
+        self.assertEqual(res.don_vi_xu_ly_chinh, ["Phó giám đốc (Vũ Ngọc An)", "Chi cục Thủy lợi"])
 
     def test_giay_moi(self):
         doc = make_doc(loai="Giấy mời", trich_yeu="kính mời dự họp")
@@ -123,8 +123,8 @@ class TestEngineRules(unittest.TestCase):
         )
         res = self.engine.run(doc)
         self.assertIn("II.cap_tren.pgd", res.matched_rules)
-        self.assertIn("PGĐ Nguyễn Thị Tố Trân", res.don_vi_xu_ly_chinh)
-        self.assertIn("Giám đốc Cao Thanh Thương", res.lanh_dao_theo_doi)
+        self.assertIn("Phó giám đốc (Nguyễn Thị Tố Trân)", res.don_vi_xu_ly_chinh)
+        self.assertIn("Giám đốc (Cao Thanh Thương)", res.lanh_dao_theo_doi)
 
     def test_ubnd_chap_thuan_chu_truong_dau_tu(self):
         doc = make_doc(
@@ -134,7 +134,7 @@ class TestEngineRules(unittest.TestCase):
         )
         res = self.engine.run(doc)
         self.assertIn("V.12", res.matched_rules)
-        self.assertIn("Trưởng phòng KH-TC Châu Thái Quy", res.don_vi_xu_ly_chinh)
+        self.assertIn("Trưởng phòng (Châu Thái Quy)", res.don_vi_xu_ly_chinh)
         self.assertIn("Lãnh đạo Sở", res.phoi_hop_xu_ly)
 
     def test_ubnd_tham_dinh_dtm(self):
@@ -145,9 +145,9 @@ class TestEngineRules(unittest.TestCase):
         )
         res = self.engine.run(doc)
         self.assertIn("V.13", res.matched_rules)
-        self.assertIn("PGĐ Hà Thị Thanh Hương", res.don_vi_xu_ly_chinh)
+        self.assertIn("Phó giám đốc (Hà Thị Thanh Hương)", res.don_vi_xu_ly_chinh)
         self.assertIn("Chi cục Bảo vệ môi trường", res.don_vi_xu_ly_chinh)
-        self.assertIn("Giám đốc Cao Thanh Thương", res.lanh_dao_theo_doi)
+        self.assertIn("Giám đốc (Cao Thanh Thương)", res.lanh_dao_theo_doi)
 
     def test_khong_khop_flag_review(self):
         doc = make_doc(co_quan_ban_hanh="Xyz", trich_yeu="nội dung không rõ ràng")
@@ -156,8 +156,8 @@ class TestEngineRules(unittest.TestCase):
         self.assertEqual(res.don_vi_xu_ly_chinh, [])
 
     def test_chuan_hoa_ten(self):
-        self.assertEqual(self.engine.normalize_person("Bảo Chi"), "Trần Thị Bảo Chi")
-        self.assertEqual(self.engine.normalize_person("PGĐ An"), "PGĐ Vũ Ngọc An")
+        self.assertEqual(self.engine.normalize_person("Bảo Chi"), "Chuyên viên (Trần Thị Bảo Chi)")
+        self.assertEqual(self.engine.normalize_person("PGĐ An"), "Phó giám đốc (Vũ Ngọc An)")
 
 
 class TestHarnessFallback(unittest.TestCase):
@@ -220,7 +220,7 @@ class TestIuuRules(unittest.TestCase):
         res = self.engine.run(doc)
         self.assertIn("V.16", res.matched_rules)
         self.assertEqual(
-            res.don_vi_xu_ly_chinh, ["PGĐ Trần Quốc Khánh", "Chi cục Thủy sản"]
+            res.don_vi_xu_ly_chinh, ["Phó giám đốc (Trần Quốc Khánh)", "Chi cục Thủy sản"]
         )
 
     def test_thuy_san_binh_thuong_song_song(self):

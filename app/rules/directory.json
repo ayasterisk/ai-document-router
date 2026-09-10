@@ -45,15 +45,15 @@
   },
   {
     "id": "snnmt_53172f2d4040",
-    "name": "Chánh Văn phòng Sở"
+    "name": "Chánh văn phòng (Hồ Đình Phương)"
   },
   {
     "id": "snnmt_a5148fc063b5",
-    "name": "Giám đốc Cao Thanh Thương"
+    "name": "Giám đốc (Cao Thanh Thương)"
   },
   {
     "id": "snnmt_f140920591ff",
-    "name": "Hồ Đắc Khánh"
+    "name": "Phó chánh văn phòng (Hồ Đắc Khánh)"
   },
   {
     "id": "snnmt_c46f706815d8",
@@ -61,35 +61,35 @@
   },
   {
     "id": "snnmt_b3865c561adc",
-    "name": "PGĐ Hà Thị Thanh Hương"
+    "name": "Phó giám đốc (Hà Thị Thanh Hương)"
   },
   {
     "id": "snnmt_d5df0f8c8183",
-    "name": "PGĐ Nguyễn Thị Thế Vy"
+    "name": "Phó giám đốc (Nguyễn Thị Thế Vy)"
   },
   {
     "id": "snnmt_10c856741fac",
-    "name": "PGĐ Nguyễn Thị Tố Trân"
+    "name": "Phó giám đốc (Nguyễn Thị Tố Trân)"
   },
   {
     "id": "snnmt_0f410b202ea9",
-    "name": "PGĐ Nguyễn Văn Hoan"
+    "name": "Phó giám đốc (Nguyễn Văn Hoan)"
   },
   {
     "id": "snnmt_5848bbf95286",
-    "name": "PGĐ Trần Quốc Khánh"
+    "name": "Phó giám đốc (Trần Quốc Khánh)"
   },
   {
     "id": "snnmt_ad6e5c2da8d3",
-    "name": "PGĐ Trần Đình Chương"
+    "name": "Phó giám đốc (Trần Đình Chương)"
   },
   {
     "id": "snnmt_c6882eed4dc5",
-    "name": "PGĐ Vũ Ngọc An"
+    "name": "Phó giám đốc (Vũ Ngọc An)"
   },
   {
     "id": "snnmt_8f5cd49f0f88",
-    "name": "PGĐ Đoàn Ngọc Có"
+    "name": "Phó giám đốc (Đoàn Ngọc Có)"
   },
   {
     "id": "snnmt_465850ca43e5",
@@ -109,7 +109,7 @@
   },
   {
     "id": "snnmt_5eef682da1d5",
-    "name": "Phạm Quý Phương"
+    "name": "Phó chánh văn phòng (Phạm Quý Phương)"
   },
   {
     "id": "snnmt_a41d9839be40",
@@ -125,15 +125,15 @@
   },
   {
     "id": "snnmt_ed6eaf39b744",
-    "name": "Trưởng phòng KH-TC Châu Thái Quy"
+    "name": "Trưởng phòng (Châu Thái Quy)"
   },
   {
     "id": "snnmt_ac334ad6ad63",
-    "name": "Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh"
+    "name": "Trưởng phòng (Trương Bá Vinh)"
   },
   {
     "id": "snnmt_822f2775d41a",
-    "name": "Trần Thị Bảo Chi"
+    "name": "Chuyên viên (Trần Thị Bảo Chi)"
   },
   {
     "id": "snnmt_5a0c492d59ee",
@@ -153,6 +153,6 @@
   },
   {
     "id": "snnmt_c0ece7ecdc01",
-    "name": "Đặng Phi Trường"
+    "name": "Chuyên viên chính (Đặng Phi Trường)"
   }
 ]

@@ -19,7 +19,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "PGĐ Trần Đình Chương",
+          "Phó giám đốc (Trần Đình Chương)",
           "Phòng Địa chất và Khoáng sản"
         ],
         "phoi_hop_xu_ly": [],
@@ -45,7 +45,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "PGĐ Vũ Ngọc An"
+          "Phó giám đốc (Vũ Ngọc An)"
         ],
         "phoi_hop_xu_ly": [],
         "lanh_dao_theo_doi": [],
@@ -88,7 +88,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "PGĐ Trần Đình Chương",
+          "Phó giám đốc (Trần Đình Chương)",
           "Phòng Địa chất và Khoáng sản"
         ],
         "phoi_hop_xu_ly": [],
@@ -115,7 +115,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "Giám đốc Cao Thanh Thương"
+          "Giám đốc (Cao Thanh Thương)"
         ],
         "phoi_hop_xu_ly": [],
         "lanh_dao_theo_doi": [],
@@ -140,7 +140,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "PGĐ Vũ Ngọc An"
+          "Phó giám đốc (Vũ Ngọc An)"
         ],
         "phoi_hop_xu_ly": [],
         "lanh_dao_theo_doi": [],
@@ -190,7 +190,7 @@
       ],
       "expected": {
         "don_vi_xu_ly_chinh": [
-          "PGĐ Vũ Ngọc An"
+          "Phó giám đốc (Vũ Ngọc An)"
         ],
         "phoi_hop_xu_ly": [],
         "lanh_dao_theo_doi": [],
@@ -256,7 +256,7 @@
           "Phòng Kế hoạch - Tài chính"
         ],
         "phoi_hop_xu_ly": [
-          "Chánh Văn phòng Sở"
+          "Chánh văn phòng (Hồ Đình Phương)"
         ],
         "lanh_dao_theo_doi": [],
         "han_thuc_hien": null

@@ -484,7 +484,7 @@ class RuleEngine:
             for values in rule.get("action", {}).values():
                 names.update(self.normalize_person(v) for v in values if "{" not in v)
         for entry in self.lookup["linh_vuc_phu_trach"]:
-            names.add(entry["lanh_dao"])
+            names.add(self.normalize_person(entry["lanh_dao"]))
             names.update(entry["don_vi"])
         for entry in self.lookup["ky_hieu"].values():
             if entry.get("don_vi"):
