@@ -63,6 +63,8 @@ def classify_payload(payload, include_audit=False):
     )
     harness = Harness(engine, client, mode=os.getenv("HARNESS_TOOL_MODE", "auto"))
     result = harness.run(text, today=date.fromisoformat(payload["received_on"]))
+    # Tóm tắt: model nếu có, ngược lại fallback trích yếu đã trích (không bao giờ trống).
+    result.summary = harness.summarize(text) or (result.extracted_metadata.get("trich_yeu") or "")
     if extraction["needs_review"]:
         result.needs_review = True
         result.review_reasons.append("incomplete_or_unverified_extraction")

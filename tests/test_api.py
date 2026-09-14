@@ -85,6 +85,13 @@ class TestApi(unittest.TestCase):
             all(e["id"] in ids for e in result["recipients"]["don_vi_xu_ly_chinh"])
         )
 
+    def test_summary_fallback_to_trich_yeu(self):
+        result = self.complete(self.submit().json()["job_id"])["result"]
+        # Không có model (mode=off) -> summary fallback về trích yếu, không phải reason.
+        self.assertTrue(result.get("summary"))
+        self.assertIn("thủy lợi", result["summary"])
+        self.assertNotEqual(result["summary"], result["reason"])
+
     def test_owner_isolation(self):
         r = self.submit()
         job_id = r.json()["job_id"]

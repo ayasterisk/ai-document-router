@@ -57,6 +57,7 @@ class ClassifyResponse(RoutingFields):
     confidence: float = Field(0, ge=0, le=1, allow_inf_nan=False)
     confidence_kind: Literal["heuristic_uncalibrated"] = "heuristic_uncalibrated"
     reason: str = ""
+    summary: str = ""
     matched_rules: list[str] = Field(default_factory=list)
     needs_review: bool = True
     requires_confirmation: bool = True

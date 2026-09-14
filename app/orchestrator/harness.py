@@ -115,6 +115,7 @@ class HarnessResult:
     han_thuc_hien: str | None = None
     confidence: float = 0.0
     reason: str = ""
+    summary: str = ""
     matched_rules: list[str] = field(default_factory=list)
     needs_review: bool = True
     degraded: bool = False
@@ -304,6 +305,37 @@ class Harness:
                 degraded=tier != "T2" or isinstance(self.client, MockInferenceClient),
             )
         except (ValidationError, ValueError, TypeError):
+            return None
+
+    def summarize(self, text):
+        """Sinh tóm tắt bằng model; trả None khi không có model hoặc lỗi (để fallback trích yếu)."""
+        if self.client is None or self.mode == "off":
+            return None
+        try:
+            raw = self.client.generate(
+                [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Tóm tắt văn bản hành chính tiếng Việt trong 2-3 câu, "
+                            "nêu rõ mục đích và yêu cầu chính gửi Sở Nông nghiệp và Môi trường. "
+                            "Trả lời trực tiếp bằng tiếng Việt, không giải thích, không lặp lại đề bài, "
+                            "không trả JSON."
+                        ),
+                    },
+                    {"role": "user", "content": text[:6000]},
+                ]
+            )
+            content = (raw or {}).get("content")
+            if not isinstance(content, str) or not content.strip():
+                return None
+            content = content.strip()
+            # Loại nội dung trông như quyết định định tuyến (test double / model trả nhầm JSON).
+            if content.startswith("{") or "don_vi_xu_ly_chinh" in content:
+                return None
+            return content[:2000]
+        except Exception:  # noqa: BLE001 - isolate provider/job failures and record status
+            logger.warning("summarize failed; falling back", exc_info=False)
             return None
 
     @staticmethod
