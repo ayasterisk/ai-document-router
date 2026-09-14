@@ -30,3 +30,6 @@ doc/SoTC/
 doc/SoYT/
 output/
 tmp/
+
+# Independent integration sandbox (contains a second copy of both repositories)
+integration-demo/
