@@ -12,6 +12,7 @@ venv/
 
 # Secrets / local config
 .env
+.envs
 
 # Runtime artifacts
 app/storage/audit.db
@@ -33,3 +34,4 @@ tmp/
 
 # Independent integration sandbox (contains a second copy of both repositories)
 integration-demo/
+
