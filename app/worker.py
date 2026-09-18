@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 from app.config import ROOT
 from app.models.directory import Directory
 from app.models.schema import ROLES, ClassifyResponse
-from app.orchestrator.harness import Harness, HttpInferenceClient
+from app.orchestrator.harness import Harness, HarnessResult, HttpInferenceClient
 from app.pdf.extractor import PdfInputError, extract_pdf_result_bytes
 from app.rules.engine import RuleEngine
 
@@ -46,8 +46,6 @@ def classify_payload(payload, include_audit=False):
             )
             extraction["needs_review"] |= result.needs_review
         text = "\n\f\n".join(sections)
-    if not text.strip():
-        raise PdfInputError("no_document_content")
     if len(text) > payload["max_text_chars"]:
         raise PdfInputError("extracted_text_limit_exceeded")
     url = os.getenv("INFERENCE_SERVER_URL")
@@ -62,9 +60,20 @@ def classify_payload(payload, include_audit=False):
         else None
     )
     harness = Harness(engine, client, mode=os.getenv("HARNESS_TOOL_MODE", "auto"))
-    result = harness.run(text, today=date.fromisoformat(payload["received_on"]))
-    # Tóm tắt: model nếu có, ngược lại fallback trích yếu đã trích (không bao giờ trống).
-    result.summary = harness.summarize(text) or (result.extracted_metadata.get("trich_yeu") or "")
+    if not text.strip():
+        # PDF không có lớp text (bản scan) và OCR chưa bật -> không trích được nội dung.
+        # Thay vì fail cả job (frontend báo "ai_error" và bỏ qua văn bản), trả kết quả
+        # degraded để frontend vẫn hiển thị văn bản chờ người duyệt thủ công.
+        result = HarnessResult(
+            needs_review=True,
+            degraded=True,
+            confidence=0.0,
+            reason="Không trích được nội dung văn bản (bản scan; OCR chưa bật).",
+        )
+    else:
+        result = harness.run(text, today=date.fromisoformat(payload["received_on"]))
+        # Tóm tắt: model nếu có, ngược lại fallback trích yếu đã trích (không bao giờ trống).
+        result.summary = harness.summarize(text) or (result.extracted_metadata.get("trich_yeu") or "")
     if extraction["needs_review"]:
         result.needs_review = True
         result.review_reasons.append("incomplete_or_unverified_extraction")
