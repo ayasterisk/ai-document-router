@@ -6,12 +6,13 @@ import sys
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.orchestrator.harness import Harness, MockInferenceClient
+from app.orchestrator.harness import Harness, HttpInferenceClient, MockInferenceClient
 from app.rules.engine import Document, RuleEngine, norm, strip_accents
 
 RULES_PATH = ROOT / "app" / "rules" / "rules.yaml"
@@ -204,6 +205,42 @@ class TestHarnessFallback(unittest.TestCase):
         self.assertEqual(res.tier, "T0")
         self.assertTrue(res.degraded)
         self.assertTrue(res.needs_review)
+
+    def test_model_duplicate_recipients_are_deduplicated(self):
+        result = Harness(self.engine)._parse_final(
+            '{"don_vi_xu_ly_chinh":["Chi cục Thủy lợi","Chi cục Thủy lợi"],'
+            '"confidence":0.5,"reason":"Cần người dùng kiểm tra lại."}',
+            "T1",
+        )
+        self.assertEqual(result.don_vi_xu_ly_chinh, ["Chi cục Thủy lợi"])
+
+
+class TestHttpInferenceClient(unittest.TestCase):
+    @patch("httpx.post")
+    def test_json_mode_only_for_structured_output(self, post):
+        response = Mock()
+        response.json.return_value = {
+            "choices": [{"finish_reason": "stop", "message": {"content": "{}"}}]
+        }
+        post.return_value = response
+        client = HttpInferenceClient("http://127.0.0.1:11434", model="qwen2.5vl:7b")
+
+        schema = {"type": "object", "properties": {"route": {"type": "string"}}}
+        client.generate_json([{"role": "user", "content": "route"}], schema)
+        self.assertEqual(
+            post.call_args.kwargs["json"]["response_format"],
+            {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "routing_decision",
+                    "strict": True,
+                    "schema": schema,
+                },
+            },
+        )
+
+        client.generate([{"role": "user", "content": "summarize"}])
+        self.assertNotIn("response_format", post.call_args.kwargs["json"])
 
 
 class TestIuuRules(unittest.TestCase):

@@ -58,6 +58,9 @@ class InferenceClient:
     def generate(self, messages, tools=None):
         raise NotImplementedError
 
+    def generate_json(self, messages, schema=None):
+        return self.generate(messages)
+
 
 class MockInferenceClient(InferenceClient):
     """Explicit test double; unavailable from application configuration."""
@@ -106,7 +109,7 @@ class HttpInferenceClient(InferenceClient):
         self.model = model
         self.timeout = timeout
 
-    def generate(self, messages, tools=None):
+    def generate(self, messages, tools=None, json_schema=None):
         import httpx
 
         payload = {
@@ -117,6 +120,15 @@ class HttpInferenceClient(InferenceClient):
         }
         if tools:
             payload.update(tools=tools, tool_choice="auto")
+        if json_schema:
+            payload["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "routing_decision",
+                    "strict": True,
+                    "schema": json_schema,
+                },
+            }
         response = httpx.post(
             f"{self.base_url}/v1/chat/completions",
             json=payload,
@@ -128,6 +140,9 @@ class HttpInferenceClient(InferenceClient):
         if choice.get("finish_reason") not in ("stop", "tool_calls"):
             raise ValueError("Incomplete inference response")
         return choice["message"]
+
+    def generate_json(self, messages, schema=None):
+        return self.generate(messages, json_schema=schema or {"type": "object"})
 
 
 @dataclass
@@ -251,6 +266,7 @@ class Harness:
                 "Trả một JSON gồm don_vi_xu_ly_chinh, phoi_hop_xu_ly, lanh_dao_theo_doi (danh sách tên), "
                 "han_thuc_hien (YYYY-MM-DD hoặc null), confidence (0..1), reason (tiếng Việt). "
                 "Mọi trường văn bản, đặc biệt là reason, PHẢI viết bằng tiếng Việt — không tiếng Anh, không tiếng Trung. "
+                "Chỉ trả object kết quả, không chép lại input và không lặp tên trong mỗi danh sách. "
                 "Không đủ căn cứ thì không đoán. "
                 + json.dumps(
                     {
@@ -299,9 +315,12 @@ class Harness:
 
     def _run_t1(self, text, meta):
         messages = self._messages(text, meta)
+        schema = ModelDecision.model_json_schema()
+        for role in ROLES:
+            schema["properties"][role]["uniqueItems"] = True
         for _ in range(self.retry + 1):
             try:
-                raw = self.client.generate(messages)
+                raw = self.client.generate_json(messages, schema)
                 result = self._parse_final(raw.get("content"), "T1")
                 if result:
                     return result
@@ -318,7 +337,12 @@ class Harness:
 
     def _parse_final(self, content, tier):
         try:
-            data = ModelDecision.model_validate_json(content)
+            payload = json.loads(content)
+            if isinstance(payload, dict):
+                for role in ROLES:
+                    if isinstance(payload.get(role), list):
+                        payload[role] = list(dict.fromkeys(payload[role]))
+            data = ModelDecision.model_validate(payload)
             names = set(self.engine.recipient_names())
             values = data.model_dump()
             for role in ROLES:
