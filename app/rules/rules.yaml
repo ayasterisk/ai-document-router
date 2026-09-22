@@ -153,10 +153,12 @@ lookup:
     - khu neo đậu
     - nghề cá
     - ngư dân
+  # Từ 15/9/2026: QĐ 3927/QĐ-UBND không còn nhiệm vụ/đơn vị địa chất - khoáng sản; NQ 66.25/2026/NQ-CP chuyển
+  # chức năng này sang Bộ Công Thương / Sở Công Thương. Văn phòng Sở tiếp nhận, trình lãnh đạo rồi chuyển Sở Công Thương.
   - linh_vuc: địa chất khoáng sản
-    lanh_dao: PGĐ Trần Đình Chương
+    lanh_dao: Giám đốc Cao Thanh Thương
     don_vi:
-    - Phòng Địa chất và Khoáng sản
+    - Văn phòng Sở
     keywords:
     - địa chất
     - khoáng sản
@@ -170,6 +172,7 @@ lookup:
     - vlncn
     - thuế tài nguyên
     - phí bảo vệ môi trường
+    requires_review: true
   - linh_vuc: trồng trọt - bảo vệ thực vật
     lanh_dao: PGĐ Nguyễn Thị Tố Trân
     don_vi:
@@ -269,7 +272,6 @@ lookup:
     lanh_dao: PGĐ Nguyễn Thị Thế Vy
     don_vi:
     - Chi cục Phát triển nông thôn
-    - Văn phòng Điều phối xây dựng nông thôn mới
     keywords:
     - phát triển nông thôn
     - giảm nghèo
@@ -278,7 +280,6 @@ lookup:
     - ocop
     - định canh định cư
     - hạ tầng nông thôn
-    unit_mode: all
   - linh_vuc: tổ chức cán bộ
     lanh_dao: Giám đốc Cao Thanh Thương
     don_vi:
@@ -344,8 +345,10 @@ lookup:
       don_vi: Văn phòng Sở
       kem_lanh_dao: null
     SNNMT-ĐCKS:
-      don_vi: Phòng Địa chất khoáng sản Sở
+      don_vi: Văn phòng Sở
       kem_lanh_dao: null
+      note: 'Phòng Địa chất khoáng sản không còn (QĐ 3927/QĐ-UBND; NQ 66.25/2026/NQ-CP). Văn bản trả lời hồ sơ địa chất - khoáng sản đã chuyển Sở Công Thương: Văn phòng Sở chuyển tiếp. CẦN KIỂM CHỨNG'
+      requires_review: true
     SNNMT-KHTC:
       don_vi: Phòng Kế hoạch - Tài chính Sở
       kem_lanh_dao: null
@@ -388,8 +391,9 @@ lookup:
       don_vi: Chi cục Phát triển nông thôn
       kem_lanh_dao: PGĐ Nguyễn Thị Thế Vy
     SNNMT-NTM:
-      don_vi: Văn phòng Điều phối xây dựng nông thôn mới
+      don_vi: Chi cục Phát triển nông thôn
       kem_lanh_dao: PGĐ Nguyễn Thị Thế Vy
+      note: 'Văn phòng Điều phối xây dựng nông thôn mới không còn (QĐ 3927/QĐ-UBND, Điều 3): chỉ gửi Chi cục Phát triển nông thôn'
 personnel:
   # Người: "Chức danh (Họ tên)" theo payload (fbyvsphere.cpx)
   Quý Phương: Phó chánh văn phòng (Phạm Quý Phương)
@@ -420,12 +424,16 @@ personnel:
   Phạm Quý Phương: Phó chánh văn phòng (Phạm Quý Phương)
   Đặng Phi Trường: Chuyên viên chính (Đặng Phi Trường)
   Trưởng phòng KH-TC Châu Thái Quy: Trưởng phòng (Châu Thái Quy)
-  Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh: Trưởng phòng (Trương Bá Vinh)
   # Chuẩn hóa tên đơn vị (không đổi format)
   Phòng Tổ chức cán bộ Sở: Phòng Tổ chức cán bộ
-  Phòng Địa chất khoáng sản Sở: Phòng Địa chất và Khoáng sản
   Phòng Kế hoạch - Tài chính Sở: Phòng Kế hoạch - Tài chính
   Phòng Tài nguyên nước và KTTV Sở: Phòng Tài nguyên nước và KTTV
+  # Tên cũ của Văn phòng Điều phối xây dựng NTM: không còn là nơi nhận, chuẩn hóa về Chi cục Phát triển nông thôn
+  Văn phòng Nông thôn mới: Chi cục Phát triển nông thôn
+  Chi bộ Văn phòng Nông thôn mới tỉnh: Chi cục Phát triển nông thôn
+  Văn phòng Điều Phối Xây Dựng Nông Thôn Mới: Chi cục Phát triển nông thôn
+  Văn phòng điều phối xây dựng Nông thôn mới - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai: Chi cục Phát triển nông thôn
+  Văn phòng Điều phối xây dựng nông thôn mới: Chi cục Phát triển nông thôn
 rules:
 - id: IV
   priority: 1
@@ -508,10 +516,11 @@ rules:
     - Thông báo
   action:
     primary:
-    - PGĐ Trần Đình Chương
-    - Phòng Địa chất và Khoáng sản
+    - Chánh Văn phòng Sở
     coordinator: []
     monitor: []
+  note: 'Địa chất - khoáng sản đã chuyển Sở Công Thương từ 15/9/2026 (NQ 66.25/2026/NQ-CP): Văn phòng Sở chuyển tiếp. Riêng phí bảo vệ môi trường chưa rõ có chuyển hay vẫn thuộc Chi cục Bảo vệ môi trường: CẦN KIỂM CHỨNG'
+  requires_review: true
 - id: V.5
   priority: 2
   name: Sở NN&MT tỉnh khác thông báo mất phôi GCN QSDĐ
@@ -604,7 +613,6 @@ rules:
     - Chi cục Kiểm lâm
     - Trung tâm Quan trắc tài nguyên và môi trường
     - Trưởng phòng KH-TC Châu Thái Quy
-    - Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh
     coordinator: []
     monitor: []
   order: 10
@@ -630,7 +638,6 @@ rules:
     - Chi cục Kiểm lâm
     - Trung tâm Quan trắc tài nguyên và môi trường
     - Trưởng phòng KH-TC Châu Thái Quy
-    - Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh
     - Chi cục Chăn nuôi và Thú y
     coordinator:
     - Lãnh đạo Sở
@@ -657,7 +664,6 @@ rules:
     - Chi cục Kiểm lâm
     - Trung tâm Quan trắc tài nguyên và môi trường
     - Trưởng phòng KH-TC Châu Thái Quy
-    - Trưởng phòng Địa chất Khoáng sản Trương Bá Vinh
     coordinator:
     - Lãnh đạo Sở
     monitor: []
