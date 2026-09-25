@@ -249,16 +249,3 @@ def extract_pdf_content(path: Path, ocr_fallback=True):
 
 def extract_pdf_content_bytes(data: bytes, ocr_fallback=True):
     return extract_pdf_result_bytes(data, ocr_fallback).text
-
-
-def extract_text_pdfplumber(path: Path):
-    import pdfplumber
-
-    with pdfplumber.open(path) as pdf:
-        return "\n".join(page.extract_text() or "" for page in pdf.pages)
-
-
-def extract_text_pypdf(path: Path):
-    from pypdf import PdfReader
-
-    return "\n".join(page.extract_text() or "" for page in PdfReader(path).pages)

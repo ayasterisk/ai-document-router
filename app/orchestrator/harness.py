@@ -18,11 +18,13 @@ from app.rules.engine import Document, RuleEngine
 logger = logging.getLogger(__name__)
 
 # Bộ ký tự CJK (tiếng Trung/Nhật/Hàn) — dùng để loại bản tóm tắt không phải tiếng Việt.
-_CJK_RE = re.compile(r"[\u3000-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uffef]")
+_CJK_RE = re.compile(
+    r"[\u3000-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uffef]"
+)
 
 # Ký tự tiếng Việt có dấu (chữ thường + chữ hoa).
 _VI_DIACRITICS = "áàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ"
-_VI_DIACRITICS += _VI_DIACRITICS.upper()
+_VI_DIACRITICS = frozenset(_VI_DIACRITICS + _VI_DIACRITICS.upper())
 
 
 def _is_vietnamese_text(text: str) -> bool:

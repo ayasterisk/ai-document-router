@@ -106,7 +106,8 @@ class AuditStore:
                 "WHERE idempotency_key IS NOT NULL"
             )
             rule_columns = {
-                row[1] for row in conn.execute("PRAGMA table_info(router_rule_versions)")
+                row[1]
+                for row in conn.execute("PRAGMA table_info(router_rule_versions)")
             }
             if "configuration_fingerprint" not in rule_columns:
                 # Migrate: old PK was rules_sha256 only, which dropped directory-only changes.
@@ -241,9 +242,7 @@ class AuditStore:
                 ),
             )
 
-    def feedback(
-        self, feedback_id, job_id, owner, payload, idempotency_key=None
-    ):
+    def feedback(self, feedback_id, job_id, owner, payload, idempotency_key=None):
         with self.connection() as conn:
             conn.execute(
                 "INSERT INTO router_feedback "

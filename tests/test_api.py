@@ -254,7 +254,10 @@ class TestApi(unittest.TestCase):
         self.assertEqual(r.json()["matched_rules"], ["VI.1"])
 
     def test_real_pdf_worker(self):
-        from test_pdf import VALID, pdf_bytes
+        try:
+            from test_pdf import VALID, pdf_bytes
+        except ModuleNotFoundError:
+            from tests.test_pdf import VALID, pdf_bytes
 
         r = self.client.post(
             "/v1/jobs",

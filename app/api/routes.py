@@ -204,7 +204,10 @@ def feedback(
     if idempotency_key:
         previous = request.app.state.store.find_feedback(owner, idempotency_key)
         if previous:
-            if previous["job_id"] != job_id or json.loads(previous["payload"]) != payload:
+            if (
+                previous["job_id"] != job_id
+                or json.loads(previous["payload"]) != payload
+            ):
                 raise HTTPException(409, "feedback_idempotency_key_conflict")
             return {
                 "feedback_id": previous["id"],

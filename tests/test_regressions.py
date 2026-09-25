@@ -114,8 +114,11 @@ class RegressionTests(unittest.TestCase):
         )
 
     def test_reviewed_samples_351_and_4326(self):
+        sample = Path("output/sonnmt_ocr_audit/verified_metadata.json")
+        if not sample.exists():
+            self.skipTest("Audit samples not found")
         cases = json.loads(
-            Path("output/sonnmt_ocr_audit/verified_metadata.json").read_text(
+            sample.read_text(
                 encoding="utf-8"
             )
         )

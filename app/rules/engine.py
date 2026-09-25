@@ -41,9 +41,6 @@ def norm(text: str) -> str:
     return re.sub(r"\s+", " ", strip_accents(text)).strip()
 
 
-_TOKEN_SPLIT = re.compile(r"[^a-z0-9]+")
-
-
 def _contains(hay_norm: str, keyword: str) -> bool:
     """Khớp keyword trong haystack đã chuẩn hóa.
 
@@ -71,9 +68,7 @@ def _source_matches(source_norm: str, pattern: str) -> bool:
     if raw_pattern[-1:].isspace():
         return bool(
             re.search(
-                r"^"
-                + re.escape(keyword)
-                + r"(?!\s+phan\b)\s",
+                r"^" + re.escape(keyword) + r"(?!\s+phan\b)\s",
                 source_norm,
             )
         )

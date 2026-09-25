@@ -9,6 +9,17 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[1]
 
+_NUMERIC_SETTINGS = (
+    "max_upload_bytes",
+    "max_text_chars",
+    "max_pages",
+    "max_files",
+    "max_workers",
+    "max_pending",
+    "job_timeout",
+    "retention_days",
+)
+
 
 @dataclass
 class Settings:
@@ -41,16 +52,7 @@ class Settings:
             raise ValueError("Each principal must have a distinct API token")
         if "*" in self.allowed_origins:
             raise ValueError("Use explicit allowed origins")
-        for name in (
-            "max_upload_bytes",
-            "max_text_chars",
-            "max_pages",
-            "max_files",
-            "max_workers",
-            "max_pending",
-            "job_timeout",
-            "retention_days",
-        ):
+        for name in _NUMERIC_SETTINGS:
             if getattr(self, name) <= 0:
                 raise ValueError(f"{name} must be positive")
 
@@ -64,19 +66,8 @@ class Settings:
                 os.getenv("ROUTER_DB_PATH", str(ROOT / "app/storage/audit.db"))
             ),
         )
-        for name in (
-            "max_upload_bytes",
-            "max_text_chars",
-            "max_pages",
-            "max_files",
-            "max_workers",
-            "max_pending",
-            "job_timeout",
-            "retention_days",
-        ):
-            setattr(
-                result,
-                name,
-                int(os.getenv("ROUTER_" + name.upper(), str(getattr(result, name)))),
-            )
+        for name in _NUMERIC_SETTINGS:
+            val = os.getenv("ROUTER_" + name.upper())
+            if val is not None:
+                setattr(result, name, int(val))
         return result
