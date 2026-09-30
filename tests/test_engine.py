@@ -280,7 +280,9 @@ class TestIuuRules(unittest.TestCase):
         doc = make_doc(trich_yeu="nuôi trồng thủy sản")
         res = self.engine.run(doc)
         self.assertIn("V.10", res.matched_rules)
-        self.assertIn("VP Điều phối về BĐKH", res.don_vi_xu_ly_chinh)
+        self.assertIn("Phó giám đốc (Trần Quốc Khánh)", res.don_vi_xu_ly_chinh)
+        self.assertIn("BQL cảng cá Tam Quan", res.don_vi_xu_ly_chinh)
+        self.assertNotIn("VP Điều phối về BĐKH", res.don_vi_xu_ly_chinh)
 
 
 if __name__ == "__main__":

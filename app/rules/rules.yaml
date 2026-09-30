@@ -1,9 +1,9 @@
 meta:
-  version: '2.0'
+  version: '2.1'
   department: SoNNMT
   department_name: Sở Nông nghiệp và Môi trường tỉnh Gia Lai
   source: doc/SoNNMT/rulebaseSoNNMT.md
-  effective_from: '2026-09-08'
+  effective_from: '2026-09-29'
 lookup:
   nguon_gui:
     specific_so_nganh:
@@ -58,42 +58,42 @@ lookup:
     - hộ gia đình
     - cá nhân
   linh_vuc_phu_trach:
+  # Từ 29/9/2026: đăng ký đất đai / cấp GCN / đo đạc bản đồ địa chính tách về
+  # PGĐ Trần Đình Chương (Văn phòng Đăng ký đất đai); quản lý đất đai vẫn Giám đốc.
+  - linh_vuc: đăng ký đất đai
+    lanh_dao: PGĐ Trần Đình Chương
+    don_vi:
+    - Văn phòng Đăng ký đất đai
+    keywords:
+    - giấy chứng nhận quyền sử dụng đất
+    - đăng ký đất đai
+    - sổ đỏ
+    - cấp giấy chứng nhận
+    - đo đạc
+    - bản đồ địa chính
+    - hồ sơ địa chính
+    - hệ thống thông tin đất đai
+    - dịch vụ công về đất đai
+    - chỉnh lý biến động
   - linh_vuc: đất đai
     lanh_dao: Giám đốc Cao Thanh Thương
     don_vi:
     - Chi cục Quản lý đất đai
-    - Văn phòng Đăng ký đất đai
     keywords:
     - đất đai
-    - quyền sử dụng đất
-    - giấy chứng nhận quyền sử dụng đất
     - thu hồi đất
     - bồi thường
     - tái định cư
     - đấu giá quyền sử dụng đất
     - chuyển nhượng
-    - đăng ký đất đai
-    - sổ đỏ
     - địa chính
-    unit_rules:
-    - keywords:
-      - giấy chứng nhận quyền sử dụng đất
-      - đăng ký đất đai
-      - sổ đỏ
-      units:
-      - Văn phòng Đăng ký đất đai
-    - keywords:
-      - thu hồi đất
-      - bồi thường
-      - tái định cư
-      - địa chính
-      units:
-      - Chi cục Quản lý đất đai
+    - quản lý đất đai
   - linh_vuc: thủy lợi - nước
     lanh_dao: PGĐ Vũ Ngọc An
     don_vi:
     - Chi cục Thủy lợi
     - Phòng Tài nguyên nước và KTTV
+    - Trung tâm Nước sạch nông thôn
     keywords:
     - thủy lợi
     - ao hồ
@@ -104,6 +104,7 @@ lookup:
     - công trình thủy lợi
     - thiên tai
     - phòng chống lụt bão
+    - phòng chống thiên tai
     - tài nguyên nước
     - nước dưới đất
     - nước mặt
@@ -118,6 +119,10 @@ lookup:
     - nước sạch nông thôn
     - khí tượng thủy văn
     unit_rules:
+    - keywords:
+      - nước sạch nông thôn
+      units:
+      - Trung tâm Nước sạch nông thôn
     - keywords:
       - tài nguyên nước
       - nước dưới đất
@@ -138,7 +143,6 @@ lookup:
     - Chi cục Thủy sản
     - BQL cảng cá
     - BQL cảng cá Tam Quan
-    - VP Điều phối về BĐKH
     keywords:
     - thủy sản
     - tàu cá
@@ -153,10 +157,13 @@ lookup:
     - khu neo đậu
     - nghề cá
     - ngư dân
+    - môi trường biển và hải đảo
+    - hải đảo
   # Từ 15/9/2026: QĐ 3927/QĐ-UBND không còn nhiệm vụ/đơn vị địa chất - khoáng sản; NQ 66.25/2026/NQ-CP chuyển
-  # chức năng này sang Bộ Công Thương / Sở Công Thương. Văn phòng Sở tiếp nhận, trình lãnh đạo rồi chuyển Sở Công Thương.
+  # chức năng này sang Bộ Công Thương / Sở Công Thương. Văn phòng Sở (nay thuộc PGĐ Trần Đình Chương) tiếp nhận,
+  # trình lãnh đạo rồi chuyển Sở Công Thương.
   - linh_vuc: địa chất khoáng sản
-    lanh_dao: Giám đốc Cao Thanh Thương
+    lanh_dao: PGĐ Trần Đình Chương
     don_vi:
     - Văn phòng Sở
     keywords:
@@ -202,10 +209,20 @@ lookup:
       - cây trồng
       units:
       - Chi cục Trồng trọt và Bảo vệ thực vật
+  - linh_vuc: quản lý chất lượng nông lâm sản và thủy sản
+    lanh_dao: PGĐ Nguyễn Thị Tố Trân
+    don_vi:
+    - Chi cục Quản lý chất lượng nông lâm sản và thủy sản
+    keywords:
+    - quản lý chất lượng nông lâm sản
+    - chất lượng nông lâm sản
+    - an toàn thực phẩm
+    - kiểm định chất lượng
   - linh_vuc: chăn nuôi - thú y
     lanh_dao: PGĐ Đoàn Ngọc Có
     don_vi:
     - Chi cục Chăn nuôi và Thú y
+    - Trung tâm Quy hoạch Nông nghiệp và Môi trường
     - Trung tâm Giống Nông nghiệp
     keywords:
     - chăn nuôi
@@ -215,12 +232,18 @@ lookup:
     - giống vật nuôi
     - giống nông nghiệp
     - quy hoạch nông nghiệp
+    - quy hoạch nông nghiệp và môi trường
     unit_rules:
     - keywords:
       - giống vật nuôi
       - giống nông nghiệp
       units:
       - Trung tâm Giống Nông nghiệp
+    - keywords:
+      - quy hoạch nông nghiệp
+      - quy hoạch nông nghiệp và môi trường
+      units:
+      - Trung tâm Quy hoạch Nông nghiệp và Môi trường
     - keywords:
       - chăn nuôi
       - thú y
@@ -232,15 +255,30 @@ lookup:
     lanh_dao: PGĐ Nguyễn Văn Hoan
     don_vi:
     - Chi cục Kiểm lâm
+    - Ban Quản lý rừng phòng hộ
     keywords:
     - lâm nghiệp
     - kiểm lâm
     - rừng
     - phòng hộ
+    - rừng phòng hộ
     - rừng đặc dụng
     - bảo tồn thiên nhiên
     - phá rừng
     - quản lý rừng
+    unit_rules:
+    - keywords:
+      - rừng phòng hộ
+      units:
+      - Ban Quản lý rừng phòng hộ
+    - keywords:
+      - lâm nghiệp
+      - kiểm lâm
+      - phá rừng
+      - rừng đặc dụng
+      - bảo tồn thiên nhiên
+      units:
+      - Chi cục Kiểm lâm
   - linh_vuc: bảo vệ môi trường
     lanh_dao: PGĐ Hà Thị Thanh Hương
     don_vi:
@@ -272,6 +310,7 @@ lookup:
     lanh_dao: PGĐ Nguyễn Thị Thế Vy
     don_vi:
     - Chi cục Phát triển nông thôn
+    - Văn phòng Điều phối các Chương trình mục tiêu quốc gia
     keywords:
     - phát triển nông thôn
     - giảm nghèo
@@ -280,6 +319,20 @@ lookup:
     - ocop
     - định canh định cư
     - hạ tầng nông thôn
+    - chương trình mục tiêu quốc gia
+    unit_rules:
+    - keywords:
+      - chương trình mục tiêu quốc gia
+      units:
+      - Văn phòng Điều phối các Chương trình mục tiêu quốc gia
+    - keywords:
+      - phát triển nông thôn
+      - giảm nghèo
+      - nông thôn mới
+      - ntm
+      - ocop
+      units:
+      - Chi cục Phát triển nông thôn
   - linh_vuc: tổ chức cán bộ
     lanh_dao: Giám đốc Cao Thanh Thương
     don_vi:
@@ -293,7 +346,7 @@ lookup:
     - thi đua khen thưởng
     - kỷ luật
   - linh_vuc: pháp chế - rà soát văn bản
-    lanh_dao: Giám đốc Cao Thanh Thương
+    lanh_dao: PGĐ Trần Đình Chương
     don_vi:
     - Văn phòng Sở
     keywords:
@@ -302,6 +355,7 @@ lookup:
     - rà soát văn bản
     - tiếp cận thông tin
     - pháp chế
+    note: 'QĐ phân công 29/9/2026 không nêu rõ pháp chế; Văn phòng Sở nay thuộc PGĐ Trần Đình Chương. CẦN KIỂM CHỨNG'
     requires_review: true
   - linh_vuc: kế hoạch - tài chính
     lanh_dao: Giám đốc Cao Thanh Thương
@@ -332,11 +386,12 @@ lookup:
     - đơn thư
     - tố cáo
   - linh_vuc: biến đổi khí hậu
-    lanh_dao: PGĐ Trần Quốc Khánh
+    lanh_dao: PGĐ Vũ Ngọc An
     don_vi:
     - VP Điều phối về BĐKH
     keywords:
     - biến đổi khí hậu
+    - ứng phó biến đổi khí hậu
   ky_hieu:
     SNNMT-TCCB:
       don_vi: Phòng Tổ chức cán bộ Sở
@@ -380,10 +435,9 @@ lookup:
       don_vi: Chi cục Thủy lợi
       kem_lanh_dao: null
     SNNMT-VPĐK:
-      don_vi: ''
+      don_vi: Văn phòng Đăng ký đất đai
       kem_lanh_dao: null
-      note: 'CẦN KIỂM CHỨNG: VPĐK có thể là Văn phòng Đăng ký đất đai'
-      requires_review: true
+      note: 'VPĐK = Văn phòng Đăng ký đất đai (QĐ phân công 29/9/2026, thuộc PGĐ Trần Đình Chương)'
     SNNMT-KN:
       don_vi: Trung tâm Khuyến nông
       kem_lanh_dao: null
@@ -836,7 +890,6 @@ rules:
     - Chi cục Thủy sản
     - BQL cảng cá
     - BQL cảng cá Tam Quan
-    - VP Điều phối về BĐKH
     coordinator: []
     monitor: []
   note: PGĐ Khánh không xử lý riêng lẻ — chuyển song song cùng đơn vị. V.14–V.16 xử lý IUU trước. Nếu còn 1-2 ngày
@@ -988,24 +1041,8 @@ rules:
     - '{don_vi}'
     coordinator: []
     monitor: []
-- id: II.so_nganh.gcn
-  priority: 5
-  name: Sở/ngành khác — Giấy chứng nhận quyền sử dụng đất
-  condition:
-    type: source
-    source: so_nganh
-    linh_vuc: đất đai
-    any_of:
-    - giấy chứng nhận quyền sử dụng đất
-    - đăng ký đất đai
-    - gcn qsdđ
-    tong_hop: false
-  action:
-    primary:
-    - Văn phòng Đăng ký đất đai
-    coordinator: []
-    monitor:
-    - Giám đốc Cao Thanh Thương
+# II.so_nganh.gcn (sở/ngành + GCN QSDĐ) đã gộp vào II.so_nganh.pgd: đăng ký đất đai
+# nay do PGĐ Trần Đình Chương phụ trách nên nhánh pgd định tuyến đúng (Chương + VP ĐKĐĐ).
 - id: II.so_nganh.dat_dai
   priority: 5
   name: Sở/ngành khác — lĩnh vực đất đai

@@ -8,6 +8,10 @@
     "name": "BQL cảng cá Tam Quan"
   },
   {
+    "id": "snnmt_6f0bd2e977c3",
+    "name": "Ban Quản lý rừng phòng hộ"
+  },
+  {
     "id": "snnmt_7d8bbf7da7b1",
     "name": "Chi cục Bảo vệ môi trường"
   },
@@ -120,8 +124,16 @@
     "name": "Trung tâm Khuyến nông"
   },
   {
+    "id": "snnmt_3d8aa1ce54f2",
+    "name": "Trung tâm Nước sạch nông thôn"
+  },
+  {
     "id": "snnmt_b092bfc15c1b",
     "name": "Trung tâm Quan trắc tài nguyên và môi trường"
+  },
+  {
+    "id": "snnmt_9c2f41ab7d10",
+    "name": "Trung tâm Quy hoạch Nông nghiệp và Môi trường"
   },
   {
     "id": "snnmt_ed6eaf39b744",
@@ -146,6 +158,10 @@
   {
     "id": "snnmt_c817fb17798a",
     "name": "Văn phòng Điều phối xây dựng nông thôn mới"
+  },
+  {
+    "id": "snnmt_1c5e8f3a2b94",
+    "name": "Văn phòng Điều phối các Chương trình mục tiêu quốc gia"
   },
   {
     "id": "snnmt_7e730f5e65d0",

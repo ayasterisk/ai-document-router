@@ -57,7 +57,7 @@ class RegressionTests(unittest.TestCase):
 
     def test_domain_and_units(self):
         self.assertIn(
-            "Phó giám đốc (Trần Quốc Khánh)",
+            "Phó giám đốc (Vũ Ngọc An)",
             self.run_doc("Ứng phó biến đổi khí hậu").don_vi_xu_ly_chinh,
         )
         self.assertIn(
@@ -92,11 +92,16 @@ class RegressionTests(unittest.TestCase):
         )
         self.assertNotIn("V.6", r.matched_rules)
 
-    def test_unverified_mapping(self):
+    def test_vpdk_now_resolves(self):
         r = self.run_doc("Trả lời Công văn số 123/SNNMT-VPĐK")
         self.assertEqual(r.matched_rules, ["IV"])
+        self.assertFalse(r.needs_review)
+        self.assertEqual(r.don_vi_xu_ly_chinh, ["Văn phòng Đăng ký đất đai"])
+
+    def test_unverified_mapping_still_flagged(self):
+        r = self.run_doc("Trả lời Công văn số 123/SNNMT-ĐCKS")
+        self.assertEqual(r.matched_rules, ["IV"])
         self.assertTrue(r.needs_review)
-        self.assertEqual(r.don_vi_xu_ly_chinh, [])
 
     def test_reply_relation(self):
         r = self.run_doc(
