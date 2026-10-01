@@ -69,6 +69,48 @@ class RegressionTests(unittest.TestCase):
             self.run_doc("Giống nông nghiệp").don_vi_xu_ly_chinh,
         )
 
+    def test_qlcl_not_routed_to_thuy_san(self):
+        # A1: "chất lượng nông lâm sản và thủy sản" phải về QLCL (PGĐ Trân), không về thủy sản.
+        for khan, rule in [(False, "V.10a"), (True, "VI.5")]:
+            r = self.run_doc("quản lý chất lượng nông lâm sản và thủy sản", khan=khan)
+            self.assertEqual(r.matched_rules, [rule])
+            self.assertIn(
+                "Chi cục Quản lý chất lượng nông lâm sản và thủy sản",
+                r.don_vi_xu_ly_chinh,
+            )
+            self.assertNotIn("Chi cục Thủy sản", r.don_vi_xu_ly_chinh)
+
+    def test_quy_pctt_to_giam_doc(self):
+        # A2: Quỹ phòng chống thiên tai -> Giám đốc (kể cả khẩn), không rơi V.9/VI.1.
+        for khan in (False, True):
+            r = self.run_doc("Quỹ phòng chống thiên tai", khan=khan)
+            self.assertEqual(r.matched_rules, ["V.9a"])
+            self.assertEqual(r.don_vi_xu_ly_chinh, ["Giám đốc (Cao Thanh Thương)"])
+            self.assertIn("Phó giám đốc (Vũ Ngọc An)", r.phoi_hop_xu_ly)
+
+    def test_dang_ky_dat_dai_no_ambiguous_flag(self):
+        # A3: từ khóa lồng nhau ("đất đai"/"địa chính") không gây hòa điểm cũng như needs_review giả.
+        for text in ("đăng ký đất đai", "chỉnh lý bản đồ địa chính"):
+            r = self.run_doc(text, "Sở Tài nguyên và Môi trường")
+            self.assertEqual(r.matched_rules, ["II.so_nganh.pgd"])
+            self.assertIn("Văn phòng Đăng ký đất đai", r.don_vi_xu_ly_chinh)
+            self.assertFalse(r.needs_review)
+
+    def test_cchc_to_chuong(self):
+        # C1: cải cách hành chính -> PGĐ Chương + Văn phòng Sở.
+        r = self.run_doc("cải cách hành chính")
+        self.assertEqual(r.matched_rules, ["II.cap_tren.pgd"])
+        self.assertIn("Phó giám đốc (Trần Đình Chương)", r.don_vi_xu_ly_chinh)
+        self.assertIn("Văn phòng Sở", r.don_vi_xu_ly_chinh)
+
+    def test_bdkh_no_unit_needs_review(self):
+        # B1: BĐKH chưa có đơn vị đầu mối -> needs_review.
+        r = self.run_doc("biến đổi khí hậu")
+        self.assertEqual(r.matched_rules, ["II.cap_tren.pgd"])
+        self.assertIn("Phó giám đốc (Vũ Ngọc An)", r.don_vi_xu_ly_chinh)
+        self.assertTrue(r.needs_review)
+        self.assertIn("unverified_domain_mapping", r.review_reasons)
+
     def test_composite(self):
         r = self.run_doc(
             "Trồng trọt, bảo vệ thực vật, giống cây trồng; chăn nuôi, thú y"

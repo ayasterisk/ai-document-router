@@ -238,13 +238,42 @@ class RuleEngine:
                 pass
         return False
 
+    def _domain_matches(self, hay: str) -> dict[str, set[str]]:
+        """Khớp từ khóa lĩnh vực theo cụm dài nhất trước (span masking).
+
+        Một từ khóa ngắn nằm lọt trong cụm dài hơn đã khớp sẽ không được đếm lại,
+        tránh "đất đai" khớp nhầm bên trong "đăng ký đất đai" gây hòa điểm.
+        """
+        candidates = [
+            (norm(kw), entry["linh_vuc"], kw)
+            for entry in self.lookup["linh_vuc_phu_trach"]
+            for kw in entry.get("keywords", [])
+        ]
+        matches: list[tuple[int, int, str, str]] = []
+        for nkw, linh_vuc, kw in candidates:
+            for m in re.finditer(
+                r"(?<![a-z0-9])" + re.escape(nkw) + r"(?![a-z0-9])", hay
+            ):
+                matches.append((m.start(), m.end(), linh_vuc, kw))
+        # Ưu tiên cụm dài hơn; cùng độ dài thì theo vị trí xuất hiện.
+        matches.sort(key=lambda t: (-(t[1] - t[0]), t[0]))
+        masked: list[tuple[int, int]] = []
+        result: dict[str, set[str]] = {}
+        for start, end, linh_vuc, kw in matches:
+            if any(not (end <= ms or start >= me) for ms, me in masked):
+                continue
+            masked.append((start, end))
+            result.setdefault(linh_vuc, set()).add(kw)
+        return result
+
     def detect_linh_vuc(self, doc: Document) -> dict[str, Any] | None:
-        """Nhận diện lĩnh vực theo từ khóa; trả entry có nhiều keyword khớp nhất."""
+        """Nhận diện lĩnh vực theo từ khóa (span masking); trả entry nhiều keyword nhất."""
         hay = norm(doc.haystack())
+        matches = self._domain_matches(hay)
         best: dict[str, Any] | None = None
         best_score = 0
         for entry in self.lookup["linh_vuc_phu_trach"]:
-            score = sum(1 for kw in entry.get("keywords", []) if _contains(hay, kw))
+            score = len(matches.get(entry["linh_vuc"], ()))
             if score > best_score:
                 best_score = score
                 best = entry
@@ -252,10 +281,15 @@ class RuleEngine:
 
     def domain_evidence(self, doc: Document) -> list[dict[str, Any]]:
         hay = norm(doc.haystack())
+        matches = self._domain_matches(hay)
         return [
-            {"linh_vuc": entry["linh_vuc"], "keywords": hits, "score": len(hits)}
+            {
+                "linh_vuc": entry["linh_vuc"],
+                "keywords": sorted(matches.get(entry["linh_vuc"], ())),
+                "score": len(matches.get(entry["linh_vuc"], ())),
+            }
             for entry in self.lookup["linh_vuc_phu_trach"]
-            if (hits := [kw for kw in entry.get("keywords", []) if _contains(hay, kw)])
+            if matches.get(entry["linh_vuc"])
         ]
 
     def count_linh_vuc(self, doc: Document, min_score: int = 2) -> int:

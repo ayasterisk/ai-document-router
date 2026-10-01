@@ -3,7 +3,10 @@ meta:
   department: SoNNMT
   department_name: Sở Nông nghiệp và Môi trường tỉnh Gia Lai
   source: doc/SoNNMT/rulebaseSoNNMT.md
-  effective_from: '2026-09-29'
+  effective_from: '2026-09-29'   # CHƯA XÁC NHẬN - theo tên file; QĐ phân công chưa có số/ngày/chữ ký
+  source_documents:
+  - QĐ 3927/QĐ-UBND ngày 14/9/2026 (hiệu lực 15/9/2026)
+  - QĐ phân công nhiệm vụ lãnh đạo Sở NN&MT (dự thảo, thay thế QĐ 899/QĐ-SNNMT)
 lookup:
   nguon_gui:
     specific_so_nganh:
@@ -159,9 +162,9 @@ lookup:
     - ngư dân
     - môi trường biển và hải đảo
     - hải đảo
-  # Từ 15/9/2026: QĐ 3927/QĐ-UBND không còn nhiệm vụ/đơn vị địa chất - khoáng sản; NQ 66.25/2026/NQ-CP chuyển
-  # chức năng này sang Bộ Công Thương / Sở Công Thương. Văn phòng Sở (nay thuộc PGĐ Trần Đình Chương) tiếp nhận,
-  # trình lãnh đạo rồi chuyển Sở Công Thương.
+  # Từ 15/9/2026: QĐ 3927/QĐ-UBND không còn nhiệm vụ/đơn vị địa chất - khoáng sản;
+  # NQ 66.25/2026/NQ-CP chuyển chức năng này sang Bộ Công Thương / Sở Công Thương.
+  # Văn phòng Sở (nay thuộc PGĐ Trần Đình Chương) tiếp nhận, trình lãnh đạo rồi chuyển Sở Công Thương.
   - linh_vuc: địa chất khoáng sản
     lanh_dao: PGĐ Trần Đình Chương
     don_vi:
@@ -178,7 +181,6 @@ lookup:
     - vật liệu nổ công nghiệp
     - vlncn
     - thuế tài nguyên
-    - phí bảo vệ môi trường
     requires_review: true
   - linh_vuc: trồng trọt - bảo vệ thực vật
     lanh_dao: PGĐ Nguyễn Thị Tố Trân
@@ -194,7 +196,6 @@ lookup:
     - cây trồng
     - nông sản
     - nông nghiệp công nghệ cao
-    - chế biến nông lâm sản
     unit_rules:
     - keywords:
       - khuyến nông
@@ -274,7 +275,9 @@ lookup:
     - keywords:
       - lâm nghiệp
       - kiểm lâm
+      - rừng
       - phá rừng
+      - quản lý rừng
       - rừng đặc dụng
       - bảo tồn thiên nhiên
       units:
@@ -355,8 +358,19 @@ lookup:
     - rà soát văn bản
     - tiếp cận thông tin
     - pháp chế
-    note: 'QĐ phân công 29/9/2026 không nêu rõ pháp chế; Văn phòng Sở nay thuộc PGĐ Trần Đình Chương. CẦN KIỂM CHỨNG'
+    note: 'QĐ phân công 29/9/2026 không nêu rõ pháp chế; đã xác nhận gán Văn phòng Sở (PGĐ Trần Đình Chương), giữ cờ duyệt.'
     requires_review: true
+  - linh_vuc: cải cách hành chính - khoa học công nghệ - chuyển đổi số
+    lanh_dao: PGĐ Trần Đình Chương
+    don_vi:
+    - Văn phòng Sở
+    keywords:
+    - cải cách hành chính
+    - khoa học và công nghệ
+    - khoa học công nghệ
+    - đổi mới sáng tạo
+    - chuyển đổi số
+    - sáng kiến
   - linh_vuc: kế hoạch - tài chính
     lanh_dao: Giám đốc Cao Thanh Thương
     don_vi:
@@ -387,11 +401,12 @@ lookup:
     - tố cáo
   - linh_vuc: biến đổi khí hậu
     lanh_dao: PGĐ Vũ Ngọc An
-    don_vi:
-    - VP Điều phối về BĐKH
+    don_vi: []
     keywords:
     - biến đổi khí hậu
     - ứng phó biến đổi khí hậu
+    requires_review: true
+    note: 'QĐ 3927 / QĐ phân công không nêu đơn vị đầu mối BĐKH; CẦN SỞ XÁC NHẬN'
   ky_hieu:
     SNNMT-TCCB:
       don_vi: Phòng Tổ chức cán bộ Sở
@@ -402,7 +417,7 @@ lookup:
     SNNMT-ĐCKS:
       don_vi: Văn phòng Sở
       kem_lanh_dao: null
-      note: 'Phòng Địa chất khoáng sản không còn (QĐ 3927/QĐ-UBND; NQ 66.25/2026/NQ-CP). Văn bản trả lời hồ sơ địa chất - khoáng sản đã chuyển Sở Công Thương: Văn phòng Sở chuyển tiếp. CẦN KIỂM CHỨNG'
+      note: 'Phòng Địa chất khoáng sản không còn (QĐ 3927/QĐ-UBND; NQ 66.25/2026/NQ-CP); đã chuyển Sở Công Thương - Văn phòng Sở chuyển tiếp.'
       requires_review: true
     SNNMT-KHTC:
       don_vi: Phòng Kế hoạch - Tài chính Sở
@@ -556,7 +571,7 @@ rules:
     monitor: []
 - id: V.4
   priority: 2
-  name: 'TB cơ quan Thuế: cấp quyền khai thác khoáng sản / thuế tài nguyên / phí BVMT'
+  name: 'TB cơ quan Thuế: cấp quyền khai thác khoáng sản / thuế tài nguyên'
   condition:
     type: keywords
     source:
@@ -564,7 +579,6 @@ rules:
     any_of:
     - cấp quyền khai thác khoáng sản
     - thuế tài nguyên
-    - phí bảo vệ môi trường
     - kê khai và nộp thuế tài nguyên
     document_types:
     - Thông báo
@@ -573,7 +587,7 @@ rules:
     - Chánh Văn phòng Sở
     coordinator: []
     monitor: []
-  note: 'Địa chất - khoáng sản đã chuyển Sở Công Thương từ 15/9/2026 (NQ 66.25/2026/NQ-CP): Văn phòng Sở chuyển tiếp. Riêng phí bảo vệ môi trường chưa rõ có chuyển hay vẫn thuộc Chi cục Bảo vệ môi trường: CẦN KIỂM CHỨNG'
+  note: 'Địa chất - khoáng sản đã chuyển Sở Công Thương (QĐ 3927/QĐ-UBND; NQ 66.25/2026/NQ-CP): Văn phòng Sở chuyển tiếp.'
   requires_review: true
 - id: V.5
   priority: 2
@@ -742,6 +756,21 @@ rules:
     coordinator: []
     monitor:
     - Giám đốc Cao Thanh Thương
+- id: V.9a
+  priority: 2
+  name: Quỹ Phòng chống thiên tai tỉnh
+  condition:
+    type: keywords
+    any_of:
+    - quỹ phòng chống thiên tai
+    - quỹ phòng, chống thiên tai
+  action:
+    primary:
+    - Giám đốc Cao Thanh Thương
+    coordinator:
+    - PGĐ Vũ Ngọc An
+    monitor: []
+  note: 'QĐ phân công 29/9/2026 - Giám đốc phụ trách Quỹ; PGĐ An tham gia Hội đồng quản lý Quỹ. CẦN SỞ XÁC NHẬN vai trò PGĐ An.'
 - id: V.9
   priority: 2
   name: Thủy lợi / tài nguyên nước (bình thường)
@@ -865,6 +894,21 @@ rules:
     - Chi cục Thủy sản
     coordinator: []
     monitor: []
+- id: V.10a
+  priority: 2
+  name: Quản lý chất lượng nông lâm sản và thủy sản (bình thường)
+  condition:
+    type: keywords
+    unless_khan: true
+    any_of:
+    - quản lý chất lượng nông lâm sản
+    - chất lượng nông lâm sản và thủy sản
+  action:
+    primary:
+    - PGĐ Nguyễn Thị Tố Trân
+    - Chi cục Quản lý chất lượng nông lâm sản và thủy sản
+    coordinator: []
+    monitor: []
 - id: V.10
   priority: 2
   name: Thủy sản / tàu cá / IUU (bình thường) — chuyển song song
@@ -884,6 +928,9 @@ rules:
     - cảng cá
     - bến cá
     - khu neo đậu
+    none_of:
+    - quản lý chất lượng nông lâm sản
+    - chất lượng nông lâm sản và thủy sản
   action:
     primary:
     - PGĐ Trần Quốc Khánh
@@ -932,6 +979,20 @@ rules:
     - Phòng Tài nguyên nước và KTTV
     coordinator: []
     monitor: []
+- id: VI.5
+  priority: 3
+  name: 'Khẩn: quản lý chất lượng nông lâm sản và thủy sản'
+  condition:
+    type: khan
+    any_of:
+    - quản lý chất lượng nông lâm sản
+    - chất lượng nông lâm sản và thủy sản
+  action:
+    primary:
+    - PGĐ Nguyễn Thị Tố Trân
+    - Chi cục Quản lý chất lượng nông lâm sản và thủy sản
+    coordinator: []
+    monitor: []
 - id: VI.3
   priority: 3
   name: 'Khẩn: thủy sản, tàu cá, tràn dầu, nuôi trồng/khai thác thủy sản, IUU'
@@ -950,6 +1011,8 @@ rules:
     - cảng cá
     - bến cá
     - khu neo đậu
+    - quản lý chất lượng nông lâm sản
+    - chất lượng nông lâm sản và thủy sản
   action:
     primary:
     - PGĐ Trần Quốc Khánh
