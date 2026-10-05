@@ -1,0 +1,15 @@
+[Unit]
+Description=SoNNMT Document Router API
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/document-ai
+EnvironmentFile=/opt/document-ai/.env
+# BẮT BUỘC --workers 1: SQLite dùng khóa tiến trình, nhiều worker sẽ từ chối.
+ExecStart=/opt/document-ai/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

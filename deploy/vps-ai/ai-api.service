@@ -1,0 +1,17 @@
+# LƯU Ý: file systemd này chỉ dùng khi VPS AI là máy ảo CÓ systemd.
+# Máy hiện tại là container (PID 1 = sshd) -> KHÔNG dùng được; thay bằng deploy/vps-ai/tunnel.sh.
+
+[Unit]
+Description=Ollama auth proxy (AI API)
+After=network.target ollama.service
+
+[Service]
+User=admin
+WorkingDirectory=/opt/ai-api
+EnvironmentFile=/opt/ai-api/.env
+ExecStart=/opt/ai-api/venv/bin/uvicorn app:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
