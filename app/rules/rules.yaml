@@ -144,8 +144,8 @@ lookup:
     lanh_dao: PGĐ Trần Quốc Khánh
     don_vi:
     - Chi cục Thủy sản
-    - BQL cảng cá
-    - BQL cảng cá Tam Quan
+    - Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
+    - Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
     keywords:
     - thủy sản
     - tàu cá
@@ -815,8 +815,8 @@ rules:
     primary:
     - PGĐ Trần Quốc Khánh
     - Chi cục Thủy sản
-    - BQL cảng cá
-    - BQL cảng cá Tam Quan
+    - Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
+    - Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
     coordinator: []
     monitor: []
 - id: V.15
@@ -866,8 +866,8 @@ rules:
     primary:
     - PGĐ Trần Quốc Khánh
     - Chi cục Thủy sản
-    - BQL cảng cá
-    - BQL cảng cá Tam Quan
+    - Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
+    - Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
     coordinator: []
     monitor: []
 - id: V.16
@@ -935,8 +935,8 @@ rules:
     primary:
     - PGĐ Trần Quốc Khánh
     - Chi cục Thủy sản
-    - BQL cảng cá
-    - BQL cảng cá Tam Quan
+    - Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
+    - Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
     coordinator: []
     monitor: []
   note: PGĐ Khánh không xử lý riêng lẻ — chuyển song song cùng đơn vị. V.14–V.16 xử lý IUU trước. Nếu còn 1-2 ngày
@@ -1031,8 +1031,8 @@ rules:
   action:
     primary:
     - PGĐ Trần Quốc Khánh
-    - BQL cảng cá
-    - BQL cảng cá Tam Quan
+    - Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
+    - Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai
     coordinator: []
     monitor: []
   order: 10

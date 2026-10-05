@@ -47,7 +47,7 @@ class RegressionTests(unittest.TestCase):
     def test_harbor_urgent(self):
         r = self.run_doc("Khu neo đậu tránh trú bão cho tàu cá", khan=True)
         self.assertEqual(r.matched_rules, ["VI.4"])
-        self.assertIn("BQL cảng cá", r.don_vi_xu_ly_chinh)
+        self.assertIn("Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai", r.don_vi_xu_ly_chinh)
 
     def test_phrase_boundaries(self):
         self.assertFalse(_contains(norm("công nghệ cao"), "nghề cá"))

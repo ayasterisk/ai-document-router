@@ -55,11 +55,18 @@ def classify_payload(payload, include_audit=False):
             api_key=os.getenv("INFERENCE_API_KEY", "EMPTY"),
             model=os.getenv("INFERENCE_MODEL", "default"),
             supports_tool_calling=os.getenv("INFERENCE_TOOL_CALLING", "true") == "true",
+            timeout=float(os.getenv("INFERENCE_TIMEOUT", "60")),
         )
         if url
         else None
     )
-    harness = Harness(engine, client, mode=os.getenv("HARNESS_TOOL_MODE", "auto"))
+    harness = Harness(
+        engine,
+        client,
+        mode=os.getenv("HARNESS_TOOL_MODE", "auto"),
+        retry=int(os.getenv("INFERENCE_RETRY", "1")),
+        max_tool_steps=int(os.getenv("INFERENCE_MAX_TOOL_STEPS", "3")),
+    )
     if not text.strip():
         # PDF không có lớp text (bản scan) và OCR chưa bật -> không trích được nội dung.
         # Thay vì fail cả job (frontend báo "ai_error" và bỏ qua văn bản), trả kết quả
@@ -72,10 +79,10 @@ def classify_payload(payload, include_audit=False):
         )
     else:
         result = harness.run(text, today=date.fromisoformat(payload["received_on"]))
-        # Tóm tắt: model nếu có, ngược lại fallback trích yếu đã trích (không bao giờ trống).
-        result.summary = harness.summarize(text) or (
-            result.extracted_metadata.get("trich_yeu") or ""
-        )
+        # Tóm tắt: dùng trích yếu đã trích sạch, KHÔNG gọi model tóm tắt.
+        # Model hay trả nhầm header ("CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM...") hoặc lặp lại
+        # trích yếu — vừa chậm vừa kém thẩm mỹ, nên tắt hẳn.
+        result.summary = result.extracted_metadata.get("trich_yeu") or ""
     if extraction["needs_review"]:
         result.needs_review = True
         result.review_reasons.append("incomplete_or_unverified_extraction")

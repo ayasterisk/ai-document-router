@@ -256,7 +256,7 @@ class TestIuuRules(unittest.TestCase):
         res = self.engine.run(doc)
         self.assertIn("V.14", res.matched_rules)
         self.assertIn("Chi cục Thủy sản", res.don_vi_xu_ly_chinh)
-        self.assertIn("BQL cảng cá", res.don_vi_xu_ly_chinh)
+        self.assertIn("Ban Quản lý Cảng cá - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai", res.don_vi_xu_ly_chinh)
 
     def test_iuu_xa_ven_bien(self):
         doc = make_doc(
@@ -264,7 +264,7 @@ class TestIuuRules(unittest.TestCase):
         )
         res = self.engine.run(doc)
         self.assertIn("V.15", res.matched_rules)
-        self.assertIn("BQL cảng cá Tam Quan", res.don_vi_xu_ly_chinh)
+        self.assertIn("Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai", res.don_vi_xu_ly_chinh)
 
     def test_iuu_xa_khac(self):
         doc = make_doc(
@@ -281,7 +281,7 @@ class TestIuuRules(unittest.TestCase):
         res = self.engine.run(doc)
         self.assertIn("V.10", res.matched_rules)
         self.assertIn("Phó giám đốc (Trần Quốc Khánh)", res.don_vi_xu_ly_chinh)
-        self.assertIn("BQL cảng cá Tam Quan", res.don_vi_xu_ly_chinh)
+        self.assertIn("Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai", res.don_vi_xu_ly_chinh)
         self.assertNotIn("VP Điều phối về BĐKH", res.don_vi_xu_ly_chinh)
 
 
