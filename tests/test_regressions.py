@@ -103,6 +103,20 @@ class RegressionTests(unittest.TestCase):
         self.assertIn("Phó giám đốc (Trần Đình Chương)", r.don_vi_xu_ly_chinh)
         self.assertIn("Văn phòng Sở", r.don_vi_xu_ly_chinh)
 
+    def test_dan_toc_thieu_so_to_ptnt(self):
+        # giảm nghèo / dân tộc thiểu số / nông thôn mới -> PGĐ Vy + Chi cục Phát triển nông thôn.
+        for text in (
+            "giảm nghèo",
+            "dân tộc thiểu số",
+            "công tác dân tộc",
+            "chính sách dân tộc",
+            "nông thôn mới",
+        ):
+            r = self.run_doc(text)
+            self.assertEqual(r.matched_rules, ["II.cap_tren.pgd"])
+            self.assertIn("Phó giám đốc (Nguyễn Thị Thế Vy)", r.don_vi_xu_ly_chinh)
+            self.assertIn("Chi cục Phát triển nông thôn", r.don_vi_xu_ly_chinh)
+
     def test_bdkh_no_unit_needs_review(self):
         # B1: BĐKH chưa có đơn vị đầu mối -> needs_review.
         r = self.run_doc("biến đổi khí hậu")

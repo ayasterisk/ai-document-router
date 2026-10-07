@@ -317,6 +317,9 @@ lookup:
     keywords:
     - phát triển nông thôn
     - giảm nghèo
+    - dân tộc thiểu số
+    - công tác dân tộc
+    - chính sách dân tộc
     - nông thôn mới
     - ntm
     - ocop
@@ -331,6 +334,9 @@ lookup:
     - keywords:
       - phát triển nông thôn
       - giảm nghèo
+      - dân tộc thiểu số
+      - công tác dân tộc
+      - chính sách dân tộc
       - nông thôn mới
       - ntm
       - ocop
@@ -909,6 +915,21 @@ rules:
     - Chi cục Quản lý chất lượng nông lâm sản và thủy sản
     coordinator: []
     monitor: []
+- id: V.10b
+  priority: 2
+  name: Nuôi trồng thủy sản (bình thường)
+  condition:
+    type: keywords
+    unless_khan: true
+    any_of:
+    - nuôi trồng thủy sản
+  action:
+    primary:
+    - PGĐ Trần Quốc Khánh
+    - Chi cục Thủy sản
+    coordinator: []
+    monitor: []
+  note: Chỉ chuyển Chi cục Thủy sản + PGĐ Khánh, không chuyển Ban Quản lý Cảng cá.
 - id: V.10
   priority: 2
   name: Thủy sản / tàu cá / IUU (bình thường) — chuyển song song
@@ -921,7 +942,6 @@ rules:
     - giải bản tàu cá
     - sự cố tràn dầu
     - nhận chìm vật chất
-    - nuôi trồng thủy sản
     - khai thác thủy sản
     - iuu
     - nghề cá trên biển
@@ -931,6 +951,7 @@ rules:
     none_of:
     - quản lý chất lượng nông lâm sản
     - chất lượng nông lâm sản và thủy sản
+    - nuôi trồng thủy sản
   action:
     primary:
     - PGĐ Trần Quốc Khánh

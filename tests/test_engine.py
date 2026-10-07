@@ -277,12 +277,22 @@ class TestIuuRules(unittest.TestCase):
         )
 
     def test_thuy_san_binh_thuong_song_song(self):
-        doc = make_doc(trich_yeu="nuôi trồng thủy sản")
+        doc = make_doc(trich_yeu="khai thác thủy sản")
         res = self.engine.run(doc)
         self.assertIn("V.10", res.matched_rules)
         self.assertIn("Phó giám đốc (Trần Quốc Khánh)", res.don_vi_xu_ly_chinh)
         self.assertIn("Ban Quản lý Cảng cá Tam Quan - Sở Nông nghiệp và Môi trường - tỉnh Gia Lai", res.don_vi_xu_ly_chinh)
         self.assertNotIn("VP Điều phối về BĐKH", res.don_vi_xu_ly_chinh)
+
+    def test_nuoi_trong_thuy_san_only_thuy_san(self):
+        # Nuôi trồng thủy sản chỉ chuyển Chi cục Thủy sản + PGĐ Khánh, không BQL cảng cá.
+        for khan, rule in [(False, "V.10b"), (True, "VI.3")]:
+            doc = make_doc(trich_yeu="nuôi trồng thủy sản", khan=khan)
+            res = self.engine.run(doc)
+            self.assertEqual(res.matched_rules, [rule])
+            self.assertIn("Phó giám đốc (Trần Quốc Khánh)", res.don_vi_xu_ly_chinh)
+            self.assertIn("Chi cục Thủy sản", res.don_vi_xu_ly_chinh)
+            self.assertFalse(any("Cảng cá" in x for x in res.don_vi_xu_ly_chinh))
 
 
 if __name__ == "__main__":
